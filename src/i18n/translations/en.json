@@ -1,0 +1,125 @@
+{
+  "app": {
+    "title": "WoW Gearing Guide",
+    "description": "Interactive guide to optimize item level progression in World of Warcraft"
+  },
+  "nav": {
+    "tracks": "Tracks",
+    "raid": "Raid",
+    "dungeons": "Dungeons",
+    "delves": "Delves",
+    "pvp": "PvP",
+    "info": "Info"
+  },
+  "table": {
+    "bosses": "Bosses",
+    "loot": "Loot",
+    "vault": "Vault",
+    "crests": "Crests",
+    "level": "Level",
+    "type": "Type",
+    "tier": "Tier",
+    "rank": "Rank",
+    "ilvl": "ilvl"
+  },
+  "sections": {
+    "upgradeTracks": "Upgrade Tracks",
+    "raid": "Raid: {name}",
+    "dungeons": "Dungeons (Mythic+)",
+    "delves": "Delves",
+    "pvp": "PvP",
+    "info": "Information"
+  },
+  "tabs": {
+    "all": "All",
+    "bountifulDelves": "Bountiful Delves",
+    "bountyMaps": "Bounty Maps"
+  },
+  "info": {
+    "source": "Source:",
+    "version": "Version:",
+    "lastUpdated": "Last Updated:",
+    "season": "Season:",
+    "disclaimer": "Data may change with Blizzard hotfixes. This guide is not affiliated with Blizzard Entertainment."
+  },
+  "aria": {
+    "prevSection": "Previous section",
+    "nextSection": "Next section",
+    "toggleTheme": "Toggle theme",
+    "selectLanguage": "Select language"
+  },
+  "ilvlFilter": {
+    "label": "ilvl:",
+    "all": "All"
+  },
+  "game": {
+    "season": {
+      "full": "The War Within - Season 3",
+      "short": "TWW S3 - Turbo Boost"
+    },
+    "tracks": {
+      "explorer": "Explorer",
+      "adventurer": "Adventurer",
+      "veteran": "Veteran",
+      "champion": "Champion",
+      "hero": "Hero",
+      "myth": "Myth"
+    },
+    "crests": {
+      "weathered": "Weathered",
+      "carved": "Carved",
+      "runed": "Runed",
+      "gilded": "Gilded"
+    },
+    "raids": {
+      "manaforge-omega": "Manaforge Omega"
+    },
+    "difficulties": {
+      "lfr": "LFR",
+      "normal": "Normal",
+      "heroic": "Heroic",
+      "mythic": "Mythic"
+    },
+    "dungeonLabels": {
+      "heroic": "Heroic",
+      "mythic0": "Mythic 0",
+      "+2": "+2",
+      "+3": "+3",
+      "+4": "+4",
+      "+5": "+5",
+      "+6": "+6",
+      "+7": "+7",
+      "+8": "+8",
+      "+9": "+9",
+      "+10": "+10",
+      "+11": "+11",
+      "+12+": "+12+"
+    },
+    "pvpTypes": {
+      "honor": "Honor Gear",
+      "warmode": "War Mode Gear",
+      "conquest": "Conquest Gear",
+      "combatant": "Crafted (Combatant)",
+      "aspirant": "Crafted (Aspirant)",
+      "gladiator": "Crafted (Gladiator)"
+    },
+    "notes": {
+      "raid": {
+        "very-rare-boss": "Very Rare gear drops from boss 7 - Nexus-King Salhadaar (2H Agi/Str Mace)",
+        "dual-crests": "On LFR, Normal, and Heroic, bosses 7 & 8 drop both types of Crests listed",
+        "vault-scaling": "Great Vault rewards from raids scale in ilvl based on the hardest boss killed that week per difficulty"
+      },
+      "dungeons": {
+        "weekly-lockout": "M0 dungeons are on a weekly lockout",
+        "expired-key": "Completing an expired keystone will deduct 4 Crests from the values above",
+        "affix-changes": "Affix changes indicated by * on key level"
+      },
+      "delves": {
+        "bounty-maps-unlock": "Delver's Bounty maps unlock at level 2 of the Delver's Journey",
+        "one-map-weekly": "You can get 1 map per week",
+        "no-keys-needed": "Hidden Troves don't need keys",
+        "gilded-stash": "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week"
+      }
+    }
+  }
+}

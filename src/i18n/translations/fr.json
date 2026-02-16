@@ -1,0 +1,125 @@
+{
+  "app": {
+    "title": "Guide d'équipement WoW",
+    "description": "Guide interactif pour optimiser la montée en niveau d'objet dans World of Warcraft"
+  },
+  "nav": {
+    "tracks": "Pistes",
+    "raid": "Raid",
+    "dungeons": "Donjons",
+    "delves": "Gouffres",
+    "pvp": "JcJ",
+    "info": "Info"
+  },
+  "table": {
+    "bosses": "Boss",
+    "loot": "Butin",
+    "vault": "Coffre",
+    "crests": "Écus",
+    "level": "Niveau",
+    "type": "Type",
+    "tier": "Palier",
+    "rank": "Rang",
+    "ilvl": "niv"
+  },
+  "sections": {
+    "upgradeTracks": "Pistes d'amélioration",
+    "raid": "Raid : {name}",
+    "dungeons": "Donjons (Mythique+)",
+    "delves": "Gouffres",
+    "pvp": "JcJ",
+    "info": "Informations"
+  },
+  "tabs": {
+    "all": "Tous",
+    "bountifulDelves": "Gouffres abondants",
+    "bountyMaps": "Cartes aux trésors"
+  },
+  "info": {
+    "source": "Source :",
+    "version": "Version :",
+    "lastUpdated": "Dernière mise à jour :",
+    "season": "Saison :",
+    "disclaimer": "Les données peuvent changer avec les correctifs Blizzard. Ce guide n'est pas affilié à Blizzard Entertainment."
+  },
+  "aria": {
+    "prevSection": "Section précédente",
+    "nextSection": "Section suivante",
+    "toggleTheme": "Basculer le thème",
+    "selectLanguage": "Sélectionner la langue"
+  },
+  "ilvlFilter": {
+    "label": "niv :",
+    "all": "Tous"
+  },
+  "game": {
+    "season": {
+      "full": "The War Within - Saison 3",
+      "short": "TWW S3 - Turbo Boost"
+    },
+    "tracks": {
+      "explorer": "Explorateur",
+      "adventurer": "Aventurier",
+      "veteran": "Vétéran",
+      "champion": "Champion",
+      "hero": "Héros",
+      "myth": "Mythe"
+    },
+    "crests": {
+      "weathered": "Abîmé",
+      "carved": "Gravé",
+      "runed": "Runique",
+      "gilded": "Doré"
+    },
+    "raids": {
+      "manaforge-omega": "Manaforge Oméga"
+    },
+    "difficulties": {
+      "lfr": "LFR",
+      "normal": "Normal",
+      "heroic": "Héroïque",
+      "mythic": "Mythique"
+    },
+    "dungeonLabels": {
+      "heroic": "Héroïque",
+      "mythic0": "Mythique",
+      "+2": "+2",
+      "+3": "+3",
+      "+4": "+4",
+      "+5": "+5",
+      "+6": "+6",
+      "+7": "+7",
+      "+8": "+8",
+      "+9": "+9",
+      "+10": "+10",
+      "+11": "+11",
+      "+12+": "+12+"
+    },
+    "pvpTypes": {
+      "honor": "Équipement d'honneur",
+      "warmode": "Équipement mode Guerre",
+      "conquest": "Équipement de conquête",
+      "combatant": "Fabriqué (Combattant)",
+      "aspirant": "Fabriqué (Aspirant)",
+      "gladiator": "Fabriqué (Gladiateur)"
+    },
+    "notes": {
+      "raid": {
+        "very-rare-boss": "L'équipement très rare provient du boss 7 - Roi-nexus Salhadaar (Masse Agi/For 2M)",
+        "dual-crests": "En LFR, Normal et Héroïque, les boss 7 et 8 donnent les deux types d'écussons listés",
+        "vault-scaling": "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
+      },
+      "dungeons": {
+        "weekly-lockout": "Les donjons M0 ont un verrouillage hebdomadaire",
+        "expired-key": "Terminer une clé expirée déduit 4 écussons des valeurs ci-dessus",
+        "affix-changes": "Les changements d'affixes sont indiqués par * sur le niveau de clé"
+      },
+      "delves": {
+        "bounty-maps-unlock": "Les cartes de butin d'archéologue se débloquent au niveau 2 du Périple de gouffre",
+        "one-map-weekly": "Vous pouvez obtenir 1 carte par semaine",
+        "no-keys-needed": "Les trésors cachés ne nécessitent pas de clés",
+        "gilded-stash": "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
+      }
+    }
+  }
+}
