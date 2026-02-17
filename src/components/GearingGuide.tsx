@@ -49,8 +49,14 @@ function GearingGuideContent() {
   const scrollToSection = useCallback((index: number) => {
     const container = scrollRef.current;
     if (!container) return;
+    setActiveSection(index);
     container.scrollTo({ left: index * container.offsetWidth, behavior: "smooth" });
   }, []);
+
+  // Sync activeSection with scroll container: it remounts at position 0 on language change
+  useEffect(() => {
+    if (!data) setActiveSection(0);
+  }, [data]);
 
   useEffect(() => {
     const container = scrollRef.current;
