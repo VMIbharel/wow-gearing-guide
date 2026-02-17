@@ -125,24 +125,18 @@ export function useGearingData() {
               ...diff,
               name: t(`game.difficulties.${diff.difficultyId}` as TranslationKey),
             })),
-            notes: rawData.raid.noteIds.map((id: string) =>
-              t(`game.notes.raid.${id}` as TranslationKey)
-            ),
+            notes: t("game.notes.raid" as TranslationKey) as unknown as string[],
           },
 
           dungeons: rawData.dungeons.map((dungeon: any) => ({
             ...dungeon,
             label: t(`game.dungeonLabels.${dungeon.levelId}` as TranslationKey),
           })),
-          dungeonNotes: rawData.dungeonNoteIds.map((id: string) =>
-            t(`game.notes.dungeons.${id}` as TranslationKey)
-          ),
+          dungeonNotes: t("game.notes.dungeons" as TranslationKey) as unknown as string[],
 
           bountifulDelves: rawData.bountifulDelves,
           delversBountyMaps: rawData.delversBountyMaps,
-          delveNotes: rawData.delveNoteIds.map((id: string) =>
-            t(`game.notes.delves.${id}` as TranslationKey)
-          ),
+          delveNotes: t("game.notes.delves" as TranslationKey) as unknown as string[],
 
           pvp: rawData.pvp.map((item: any) => ({
             ...item,

@@ -86,8 +86,7 @@
           { "bosses": "Very Rare", "lootIlvl": 723, "crest": null, "crestAmount": null }
         ]
       }
-    ],
-    "noteIds": ["very-rare-boss", "dual-crests", "vault-scaling"]
+    ]
   },
   "dungeons": [
     { "levelId": "heroic", "lootIlvl": 665, "vaultIlvl": 678, "crest": "weathered", "crestAmount": 10, "affix": false },
@@ -104,7 +103,6 @@
     { "levelId": "+11", "lootIlvl": 701, "vaultIlvl": 707, "crest": "gilded", "crestAmount": 18, "affix": false },
     { "levelId": "+12+", "lootIlvl": 701, "vaultIlvl": 707, "crest": "gilded", "crestAmount": 20, "affix": true }
   ],
-  "dungeonNoteIds": ["weekly-lockout", "expired-key", "affix-changes"],
   "bountifulDelves": [
     { "tier": 1, "lootIlvl": 655, "vaultIlvl": 668, "crest": "weathered", "crestAmount": 4 },
     { "tier": 2, "lootIlvl": 658, "vaultIlvl": 671, "crest": "weathered", "crestAmount": 6 },
@@ -118,7 +116,6 @@
     { "tier": 10, "lootIlvl": 684, "vaultIlvl": 694, "crest": "runed", "crestAmount": 7, "bonusCrest": "runed", "bonusAmount": 5 },
     { "tier": 11, "lootIlvl": 684, "vaultIlvl": 694, "crest": "runed", "crestAmount": 10, "bonusCrest": "runed", "bonusAmount": 5, "secondaryCrest": "gilded", "secondaryAmount": 7 }
   ],
-  "delveNoteIds": ["bounty-maps-unlock", "one-map-weekly", "no-keys-needed", "gilded-stash"],
   "delversBountyMaps": [
     { "tier": 4, "lootIlvl": 671, "crest": "carved", "crestAmount": 10 },
     { "tier": 5, "lootIlvl": 678, "crest": "carved", "crestAmount": 20 },

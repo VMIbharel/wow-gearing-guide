@@ -104,22 +104,22 @@
       "gladiator": "Fabriqué (Gladiateur)"
     },
     "notes": {
-      "raid": {
-        "very-rare-boss": "L'équipement très rare provient du boss 7 - Roi-nexus Salhadaar (Masse Agi/For 2M)",
-        "dual-crests": "En LFR, Normal et Héroïque, les boss 7 et 8 donnent les deux types d'écussons listés",
-        "vault-scaling": "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
-      },
-      "dungeons": {
-        "weekly-lockout": "Les donjons M0 ont un verrouillage hebdomadaire",
-        "expired-key": "Terminer une clé expirée déduit 4 écussons des valeurs ci-dessus",
-        "affix-changes": "Les changements d'affixes sont indiqués par * sur le niveau de clé"
-      },
-      "delves": {
-        "bounty-maps-unlock": "Les cartes de butin d'archéologue se débloquent au niveau 2 du Périple de gouffre",
-        "one-map-weekly": "Vous pouvez obtenir 1 carte par semaine",
-        "no-keys-needed": "Les trésors cachés ne nécessitent pas de clés",
-        "gilded-stash": "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
-      }
+      "raid": [
+        "L'équipement très rare provient du boss 7 - Roi-nexus Salhadaar (Masse Agi/For 2M)",
+        "En LFR, Normal et Héroïque, les boss 7 et 8 donnent les deux types d'écussons listés",
+        "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
+      ],
+      "dungeons": [
+        "Les donjons M0 ont un verrouillage hebdomadaire",
+        "Terminer une clé expirée déduit 4 écussons des valeurs ci-dessus",
+        "Les changements d'affixes sont indiqués par * sur le niveau de clé"
+      ],
+      "delves": [
+        "Les cartes de butin d'archéologue se débloquent au niveau 2 du Périple de gouffre",
+        "Vous pouvez obtenir 1 carte par semaine",
+        "Les trésors cachés ne nécessitent pas de clés",
+        "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
+      ]
     }
   }
 }
