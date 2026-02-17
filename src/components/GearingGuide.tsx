@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
@@ -36,6 +36,8 @@ function GearingGuideContent() {
   const [currentIlvl, setCurrentIlvl] = useState<number | null>(null);
   const [activeSection, setActiveSection] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const activeSectionRef = useRef(activeSection);
+  activeSectionRef.current = activeSection;
 
   const sections = useMemo(() => [
     { id: "tracks", label: t("nav.tracks"), icon: Map },
@@ -53,9 +55,12 @@ function GearingGuideContent() {
     container.scrollTo({ left: index * container.offsetWidth, behavior: "smooth" });
   }, []);
 
-  // Sync activeSection with scroll container: it remounts at position 0 on language change
-  useEffect(() => {
-    if (!data) setActiveSection(0);
+  // Restore scroll position before paint when data reloads (language change remounts the container at 0)
+  useLayoutEffect(() => {
+    if (!data) return;
+    const container = scrollRef.current;
+    if (!container) return;
+    container.scrollLeft = activeSectionRef.current * container.offsetWidth;
   }, [data]);
 
   useEffect(() => {
@@ -130,8 +135,8 @@ function GearingGuideContent() {
         >
           {/* Panel: Upgrade Tracks */}
           <section className="w-full shrink-0 snap-center flex flex-col">
-            <div className="mx-auto w-full max-w-4xl px-4 flex flex-col flex-1 min-h-0">
-              <h2 className="text-xl font-semibold py-3 mb-3 border-b">{t("sections.upgradeTracks")}</h2>
+            <div className="mx-auto w-full max-w-4xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
               <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
             </div>
           </section>
