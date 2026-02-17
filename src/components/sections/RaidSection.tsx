@@ -3,8 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { CrestBadge } from "./CrestBadge";
-import { IlvlText } from "./IlvlText";
+import { CrestBadge } from "../shared/CrestBadge";
+import { IlvlText } from "../shared/IlvlText";
 import { cn } from "@/lib/utils";
 
 interface BossGroup {

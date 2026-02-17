@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
-import { UpgradeTracksSection } from "./UpgradeTracksSection";
-import { RaidSection } from "./RaidSection";
-import { DungeonTable } from "./DungeonTable";
-import { DelvesSection } from "./DelvesSection";
-import { PvpTable } from "./PvpTable";
-import { AppHeader } from "./AppHeader";
-import { SectionNav } from "./SectionNav";
-import { SectionDots } from "./SectionDots";
-import { LoadingScreen } from "./LoadingScreen";
-import { InfoSection } from "./InfoSection";
+import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
+import { RaidSection } from "./sections/RaidSection";
+import { DungeonTable } from "./sections/DungeonTable";
+import { DelvesSection } from "./sections/DelvesSection";
+import { PvpTable } from "./sections/PvpTable";
+import { AppHeader } from "./layout/AppHeader";
+import { SectionNav } from "./layout/SectionNav";
+import { SectionDots } from "./layout/SectionDots";
+import { LoadingScreen } from "./layout/LoadingScreen";
+import { InfoSection } from "./sections/InfoSection";
 
 export interface UpgradeTrack {
   name: string;

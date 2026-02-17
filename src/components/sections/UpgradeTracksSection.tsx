@@ -11,10 +11,10 @@ import {
 import {
   TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { CrestBadge } from "./CrestBadge";
-import { IlvlText } from "./IlvlText";
+import { CrestBadge } from "../shared/CrestBadge";
+import { IlvlText } from "../shared/IlvlText";
 import { cn, getIlvlTier } from "@/lib/utils";
-import type { UpgradeTrack } from "./GearingGuide";
+import type { UpgradeTrack } from "../GearingGuide";
 
 interface Props {
   tracks: UpgradeTrack[];

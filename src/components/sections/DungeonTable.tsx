@@ -2,8 +2,8 @@ import { useI18n } from "@/i18n";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { CrestBadge } from "./CrestBadge";
-import { IlvlText } from "./IlvlText";
+import { CrestBadge } from "../shared/CrestBadge";
+import { IlvlText } from "../shared/IlvlText";
 import { cn } from "@/lib/utils";
 
 interface Dungeon {

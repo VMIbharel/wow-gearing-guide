@@ -2,7 +2,7 @@ import { useI18n } from "@/i18n";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { IlvlText } from "./IlvlText";
+import { IlvlText } from "../shared/IlvlText";
 import { cn } from "@/lib/utils";
 
 interface PvpGear {
