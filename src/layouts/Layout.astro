@@ -31,6 +31,33 @@ const { title = "WoW Gearing Guide" } = Astro.props;
       const lang = storedLang ?? (browserLang.startsWith("fr") ? "fr" : "en");
       document.documentElement.lang = lang;
     </script>
+    <script is:inline>
+      // Wallpaper — appliqué uniquement si le fichier existe (dark et light)
+      (function () {
+        var isDark = document.documentElement.classList.contains("dark");
+        var isMobile = window.innerWidth < 768;
+
+        function tryLoad(src, cssVar, isActive) {
+          var img = new Image();
+          img.onload = function () {
+            document.documentElement.style.setProperty(cssVar, "url('" + src + "')");
+            if (isActive) document.documentElement.classList.add("has-bg");
+          };
+          img.src = src;
+        }
+
+        tryLoad(
+          isMobile ? "/bg_dark_mobile.webp" : "/bg_dark_desktop.webp",
+          "--bg-dark-image",
+          isDark
+        );
+        tryLoad(
+          isMobile ? "/bg_light_mobile.webp" : "/bg_light_desktop.webp",
+          "--bg-light-image",
+          !isDark
+        );
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

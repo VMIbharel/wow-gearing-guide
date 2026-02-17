@@ -210,3 +210,42 @@
   height: 1px;
   background: var(--border);
 }
+
+/* ── Background wallpaper ────────────────────────────────────── */
+/* Valeurs injectées par JS si les fichiers existent, sinon `none` = pas de background */
+
+:root {
+  --bg-dark-image: none;
+  --bg-light-image: none;
+}
+
+.dark body {
+  background-image: var(--bg-dark-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+html:not(.dark) body {
+  background-image: var(--bg-light-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* ── Glassmorphism panel ─────────────────────────────────────── */
+/* Actif uniquement quand un wallpaper est présent (classe has-bg ajoutée par JS) */
+
+html.dark.has-bg .glass-panel {
+  background-color: oklch(0.18 0.04 285 / 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px oklch(0.92 0.02 280 / 0.08);
+}
+
+html:not(.dark).has-bg .glass-panel {
+  background-color: oklch(0.98 0.015 85 / 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px oklch(0.20 0.02 60 / 0.08);
+}

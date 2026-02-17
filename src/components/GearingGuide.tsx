@@ -135,7 +135,7 @@ function GearingGuideContent() {
         >
           {/* Panel: Upgrade Tracks */}
           <section className="w-full shrink-0 snap-center flex flex-col">
-            <div className="mx-auto w-full max-w-4xl px-4 py-4 flex flex-col flex-1 min-h-0">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
               <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
               <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
             </div>
@@ -143,7 +143,7 @@ function GearingGuideContent() {
 
           {/* Panel: Raid */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="mx-auto max-w-4xl px-4 py-4">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.raid").replace("{name}", data.raid.name)}</h2>
               <RaidSection
                 difficulties={data.raid.difficulties}
@@ -155,7 +155,7 @@ function GearingGuideContent() {
 
           {/* Panel: Dungeons */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="mx-auto max-w-4xl px-4 py-4">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.dungeons")}</h2>
               <DungeonTable
                 dungeons={data.dungeons}
@@ -167,7 +167,7 @@ function GearingGuideContent() {
 
           {/* Panel: Delves */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="mx-auto max-w-4xl px-4 py-4">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.delves")}</h2>
               <DelvesSection
                 bountifulDelves={data.bountifulDelves}
@@ -180,7 +180,7 @@ function GearingGuideContent() {
 
           {/* Panel: PvP */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="mx-auto max-w-4xl px-4 py-4">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.pvp")}</h2>
               <PvpTable pvp={data.pvp} currentIlvl={currentIlvl} />
             </div>
@@ -188,7 +188,7 @@ function GearingGuideContent() {
 
           {/* Panel: Info */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="mx-auto max-w-4xl px-4 py-4">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.info")}</h2>
               <InfoSection version={data.version} lastUpdated={data.lastUpdated} season={data.season} />
             </div>
