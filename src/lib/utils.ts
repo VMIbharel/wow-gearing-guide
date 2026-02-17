@@ -8,10 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 export type IlvlTier = 'grey' | 'green' | 'blue' | 'purple' | 'orange' | 'gold';
 
 export function getIlvlTier(ilvl: number): IlvlTier {
-  if (ilvl <= 652) return 'grey';
-  if (ilvl <= 665) return 'green';
-  if (ilvl <= 678) return 'blue';
-  if (ilvl <= 691) return 'purple';
-  if (ilvl <= 704) return 'orange';
+  if (ilvl <= 217) return 'grey';
+  if (ilvl <= 230) return 'green';
+  if (ilvl <= 243) return 'blue';
+  if (ilvl <= 256) return 'purple';
+  if (ilvl <= 269) return 'orange';
   return 'gold';
 }

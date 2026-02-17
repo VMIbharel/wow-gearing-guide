@@ -144,10 +144,10 @@ function GearingGuideContent() {
           {/* Panel: Raid */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.raid").replace("{name}", data.raid.name)}</h2>
+              <h2 className="text-xl font-semibold mb-3">{t("sections.raid")}</h2>
               <RaidSection
-                difficulties={data.raid.difficulties}
-                notes={data.raid.notes}
+                raids={data.raids}
+                notes={data.raids[0]?.notes ?? []}
                 currentIlvl={currentIlvl}
               />
             </div>

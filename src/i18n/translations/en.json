@@ -24,7 +24,7 @@
   },
   "sections": {
     "upgradeTracks": "Upgrade Tracks",
-    "raid": "Raid: {name}",
+    "raid": "Raid",
     "dungeons": "Dungeons (Mythic+)",
     "delves": "Delves",
     "pvp": "PvP",
@@ -54,8 +54,8 @@
   },
   "game": {
     "season": {
-      "full": "The War Within - Season 3",
-      "short": "TWW S3 - Turbo Boost"
+      "full": "Midnight - Pre-season",
+      "short": "Mid PS"
     },
     "tracks": {
       "explorer": "Explorer",
@@ -72,7 +72,9 @@
       "gilded": "Gilded"
     },
     "raids": {
-      "manaforge-omega": "Manaforge Omega"
+      "voidspire": "The Voidspire",
+      "dreamrift": "The Dreamrift",
+      "quel'danas": "March on Quel'Danas"
     },
     "difficulties": {
       "lfr": "LFR",
@@ -81,6 +83,8 @@
       "mythic": "Mythic"
     },
     "dungeonLabels": {
+      "normal": "Normal",
+      "timewalking": "Timewalking",
       "heroic": "Heroic",
       "mythic0": "Mythic 0",
       "+2": "+2",

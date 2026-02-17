@@ -24,7 +24,7 @@
   },
   "sections": {
     "upgradeTracks": "Pistes d'amélioration",
-    "raid": "Raid : {name}",
+    "raid": "Raid",
     "dungeons": "Donjons (Mythique+)",
     "delves": "Gouffres",
     "pvp": "JcJ",
@@ -49,13 +49,13 @@
     "selectLanguage": "Sélectionner la langue"
   },
   "ilvlFilter": {
-    "label": "niv :",
+    "label": "ilvl :",
     "all": "Tous"
   },
   "game": {
     "season": {
-      "full": "The War Within - Saison 3",
-      "short": "TWW S3 - Turbo Boost"
+      "full": "Midnight - Pré-saison",
+      "short": "Mid PS"
     },
     "tracks": {
       "explorer": "Explorateur",
@@ -72,7 +72,9 @@
       "gilded": "Doré"
     },
     "raids": {
-      "manaforge-omega": "Manaforge Oméga"
+      "voidspire": "The Voidspire",
+      "dreamrift": "The Dreamrift",
+      "quel'danas": "March on Quel'Danas"
     },
     "difficulties": {
       "lfr": "LFR",
@@ -81,6 +83,8 @@
       "mythic": "Mythique"
     },
     "dungeonLabels": {
+      "normal": "Normal",
+      "timewalking": "Voix temporel",
       "heroic": "Héroïque",
       "mythic0": "Mythique",
       "+2": "+2",
