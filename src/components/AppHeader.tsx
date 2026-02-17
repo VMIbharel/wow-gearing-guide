@@ -1,0 +1,38 @@
+import { useI18n } from "@/i18n";
+import { IlvlFilter } from "./IlvlFilter";
+import { LanguageSelector } from "./LanguageSelector";
+import { ThemeToggle } from "./ThemeToggle";
+import { Logo } from "./Logo";
+
+interface AppHeaderProps {
+  season?: string;
+  currentIlvl: number | null;
+  onIlvlChange: (val: number | null) => void;
+}
+
+export function AppHeader({ season, currentIlvl, onIlvlChange }: AppHeaderProps) {
+  const { t } = useI18n();
+
+  return (
+    <header className="shrink-0 bg-background/95 backdrop-blur border-b z-10">
+      <div className="mx-auto max-w-5xl px-4 py-3">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 min-w-0">
+            <Logo />
+            <div className="hidden sm:block">
+              <h1 className="text-sm font-semibold truncate">{t("app.title")}</h1>
+              {season && (
+                <p className="text-xs text-muted-foreground truncate">{season}</p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <IlvlFilter value={currentIlvl} onChange={onIlvlChange} />
+            <LanguageSelector />
+            <ThemeToggle />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}

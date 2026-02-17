@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
-import { IlvlFilter } from "./IlvlFilter";
 import { UpgradeTracksSection } from "./UpgradeTracksSection";
 import { RaidSection } from "./RaidSection";
 import { DungeonTable } from "./DungeonTable";
 import { DelvesSection } from "./DelvesSection";
 import { PvpTable } from "./PvpTable";
-import { ThemeToggle } from "./ThemeToggle";
-import { LanguageSelector } from "./LanguageSelector";
-import { Logo } from "./Logo";
-import { cn } from "@/lib/utils";
+import { AppHeader } from "./AppHeader";
+import { SectionNav } from "./SectionNav";
+import { SectionDots } from "./SectionDots";
+import { LoadingScreen } from "./LoadingScreen";
+import { InfoSection } from "./InfoSection";
 
 export interface UpgradeTrack {
   name: string;
@@ -77,64 +77,21 @@ function GearingGuideContent() {
     [activeSection, scrollToSection, sections.length]
   );
 
-  // Early return while data loads
+  // Keep header visible during language change
   if (!data) {
     return (
-      <div className="flex items-center justify-center h-dvh">
-        <div className="text-muted-foreground">Loading...</div>
+      <div className="flex flex-col h-dvh overflow-hidden">
+        <AppHeader currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+        <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
+        <LoadingScreen />
       </div>
     );
   }
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
-      {/* Sticky header */}
-      <header className="shrink-0 bg-background/95 backdrop-blur border-b z-10">
-        <div className="mx-auto max-w-5xl px-4 py-3">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 min-w-0">
-              <Logo />
-              <div className="hidden sm:block">
-                <h1 className="text-sm font-semibold truncate">{t("app.title")}</h1>
-                <p className="text-xs text-muted-foreground truncate">
-                  {data.season}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <IlvlFilter value={currentIlvl} onChange={setCurrentIlvl} />
-              <LanguageSelector />
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Section nav bar */}
-      <nav className="shrink-0 bg-background/95 backdrop-blur border-b z-10">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="flex">
-            {sections.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => scrollToSection(i)}
-                  className={cn(
-                    "flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors flex-1 justify-center",
-                    activeSection === i
-                      ? "border-primary text-primary"
-                      : "border-transparent text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">{s.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </nav>
+      <AppHeader season={data.season} currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+      <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
 
       {/* Horizontal scroll container */}
       <div className="relative flex-1 min-h-0">
@@ -222,57 +179,13 @@ function GearingGuideContent() {
           <section className="w-full shrink-0 snap-center overflow-y-auto">
             <div className="mx-auto max-w-4xl px-4 py-4">
               <h2 className="text-xl font-semibold mb-3">{t("sections.info")}</h2>
-              <div className="space-y-4 text-sm text-muted-foreground">
-                <div className="rounded-lg border bg-card p-4 space-y-2">
-                  <p>
-                    <span className="font-medium text-foreground">{t("info.source")}</span>{" "}
-                    <a
-                      href="https://linktr.ee/GandalinGaming"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline hover:text-foreground"
-                    >
-                      Gandalin's Gearing Guide
-                    </a>
-                  </p>
-                  <p>
-                    <span className="font-medium text-foreground">{t("info.version")}</span>{" "}
-                    {data.version}
-                  </p>
-                  <p>
-                    <span className="font-medium text-foreground">{t("info.lastUpdated")}</span>{" "}
-                    {data.lastUpdated}
-                  </p>
-                  <p>
-                    <span className="font-medium text-foreground">{t("info.season")}</span>{" "}
-                    {data.season}
-                  </p>
-                </div>
-                <p className="text-xs">
-                  {t("info.disclaimer")}
-                </p>
-              </div>
+              <InfoSection version={data.version} lastUpdated={data.lastUpdated} season={data.season} />
             </div>
           </section>
         </div>
       </div>
 
-      {/* Dot indicators */}
-      <div className="shrink-0 flex justify-center gap-2 py-2 bg-background border-t">
-        {sections.map((s, i) => (
-          <button
-            key={s.id}
-            onClick={() => scrollToSection(i)}
-            className={cn(
-              "h-2 rounded-full transition-all duration-200",
-              activeSection === i
-                ? "w-6 bg-primary"
-                : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-            )}
-            aria-label={s.label}
-          />
-        ))}
-      </div>
+      <SectionDots sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
     </div>
   );
 }
