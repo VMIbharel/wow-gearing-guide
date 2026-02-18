@@ -150,89 +150,105 @@ function GearingGuideContent() {
           onKeyDown={handleKeyDown}
         >
           {/* Panel: Dashboard */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.dashboard")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.dashboard")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <DashboardSection
                 currentIlvl={currentIlvl}
                 data={data}
                 onNavigate={navigateToSection}
               />
+              </div>
             </div>
           </section>
 
           {/* Panel: Weekly Guide */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.weekly")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.weekly")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <WeeklyGuideSection />
+              </div>
             </div>
           </section>
 
           {/* Panel: Raid */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.raid")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.raid")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <RaidSection
                 raids={data.raids}
                 notes={data.raids[0]?.notes ?? []}
                 currentIlvl={currentIlvl}
               />
+              </div>
             </div>
           </section>
 
           {/* Panel: Dungeons */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.dungeons")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.dungeons")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <DungeonTable
                 dungeons={data.dungeons}
                 notes={data.dungeonNotes}
                 currentIlvl={currentIlvl}
               />
+              </div>
             </div>
           </section>
 
           {/* Panel: Delves */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.delves")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.delves")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <DelvesSection
                 bountifulDelves={data.bountifulDelves}
                 bountyMaps={data.delversBountyMaps}
                 notes={data.delveNotes}
                 currentIlvl={currentIlvl}
               />
+              </div>
             </div>
           </section>
 
           {/* Panel: Traque */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.traque")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.traque")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <TraqueSection
                 traque={data.traque}
                 currentIlvl={currentIlvl}
               />
+              </div>
             </div>
           </section>
 
           {/* Panel: PvP */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.pvp")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.pvp")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <PvpTable pvp={data.pvp} currentIlvl={currentIlvl} />
+              </div>
             </div>
           </section>
 
           {/* Panel: Craft */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.craft")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.craft")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <CraftSection
                 craft={data.craft}
                 currentIlvl={currentIlvl}
               />
+              </div>
             </div>
           </section>
 
@@ -245,10 +261,12 @@ function GearingGuideContent() {
           </section>
 
           {/* Panel: Info */}
-          <section className="w-full shrink-0 snap-center overflow-y-auto">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.info")}</h2>
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.info")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
               <InfoSection version={data.version} lastUpdated={data.lastUpdated} season={data.season} />
+              </div>
             </div>
           </section>
         </div>

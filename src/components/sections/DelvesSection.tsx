@@ -45,66 +45,70 @@ export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl 
         </TabsList>
 
         <TabsContent value="bountiful">
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t("table.tier")}</TableHead>
-                  <TableHead>{t("table.loot")}</TableHead>
-                  <TableHead>{t("table.vault")}</TableHead>
-                  <TableHead>{t("table.crests")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {bountifulDelves.map((d) => (
-                  <TableRow
-                    key={d.tier}
-                    className={cn(
-                      currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
-                      currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
-                    )}
-                  >
-                    <TableCell className="font-medium">T{d.tier}</TableCell>
-                    <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
-                    <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
-                    <TableCell>
-                      {d.crest ? <CrestBadge name={d.crest} /> : "—"}
-                    </TableCell>
+          <div className="h-full overflow-auto">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("table.tier")}</TableHead>
+                    <TableHead>{t("table.loot")}</TableHead>
+                    <TableHead>{t("table.vault")}</TableHead>
+                    <TableHead>{t("table.crests")}</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {bountifulDelves.map((d) => (
+                    <TableRow
+                      key={d.tier}
+                      className={cn(
+                        currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+                        currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
+                      )}
+                    >
+                      <TableCell className="font-medium">T{d.tier}</TableCell>
+                      <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
+                      <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
+                      <TableCell>
+                        {d.crest ? <CrestBadge name={d.crest} /> : "—"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </TabsContent>
 
         <TabsContent value="maps">
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t("table.tier")}</TableHead>
-                  <TableHead>{t("table.loot")}</TableHead>
-                  <TableHead>{t("table.crests")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {bountyMaps.map((m) => (
-                  <TableRow
-                    key={m.tier}
-                    className={cn(
-                      currentIlvl != null && m.lootIlvl < currentIlvl && "opacity-30",
-                      currentIlvl != null && m.lootIlvl >= currentIlvl && "bg-accent/50"
-                    )}
-                  >
-                    <TableCell className="font-medium">T{m.tier}</TableCell>
-                    <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
-                    <TableCell>
-                      <CrestBadge name={m.crest} />
-                    </TableCell>
+          <div className="h-full overflow-auto">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("table.tier")}</TableHead>
+                    <TableHead>{t("table.loot")}</TableHead>
+                    <TableHead>{t("table.crests")}</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {bountyMaps.map((m) => (
+                    <TableRow
+                      key={m.tier}
+                      className={cn(
+                        currentIlvl != null && m.lootIlvl < currentIlvl && "opacity-30",
+                        currentIlvl != null && m.lootIlvl >= currentIlvl && "bg-accent/50"
+                      )}
+                    >
+                      <TableCell className="font-medium">T{m.tier}</TableCell>
+                      <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
+                      <TableCell>
+                        <CrestBadge name={m.crest} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </TabsContent>
       </Tabs>

@@ -55,7 +55,7 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
           </TabsList>
           {allDifficulties.map((difficulty) => (
             <TabsContent key={difficulty.name} value={difficulty.name}>
-              <div className="space-y-6">
+              <div className="h-full overflow-auto">
                 {raids.map((raid) => {
                   const raidDiff = raid.difficulties.find(d => d.name === difficulty.name);
                   const normalBosses = raidDiff?.bossGroups.filter(bg => bg.bosses !== "Very Rare") ?? [];

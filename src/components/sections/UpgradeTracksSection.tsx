@@ -141,7 +141,7 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
 
       {/* Onglet "All" */}
       <TabsContent value="All" className="flex-1 min-h-0">
-        <div className="h-full overflow-auto scrollbar-sexy">
+        <div className="h-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
             <TableHeader className="table-header-sticky">
               <TableRow className="border-b">

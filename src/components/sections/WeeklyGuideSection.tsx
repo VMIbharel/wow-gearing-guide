@@ -33,7 +33,6 @@ export function WeeklyGuideSection() {
           {t("weekly.resetAll")}
         </Button>
       </div>
-
       {weeklyPhases.map((phase) => {
         const phaseItemIds = phase.items.map((i) => i.id);
         const checkedCount = phaseItemIds.filter((id) => checked[id]).length;
