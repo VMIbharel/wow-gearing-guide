@@ -148,7 +148,7 @@ export function DashboardSection({
   return (
     <div className="space-y-4">
       {currentIlvl === null && (
-        <div className="rounded-lg border bg-muted/50 px-4 py-3 text-sm text-muted-foreground text-center">
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 text-center">
           {t("dashboard.prompt")}
         </div>
       )}
