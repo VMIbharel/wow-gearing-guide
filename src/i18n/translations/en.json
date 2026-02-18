@@ -4,6 +4,7 @@
     "description": "Interactive guide to optimize item level progression in World of Warcraft"
   },
   "nav": {
+    "dashboard": "Summary",
     "weekly": "Weekly",
     "tracks": "Tracks",
     "raid": "Raid",
@@ -29,6 +30,7 @@
     "ilvl": "ilvl"
   },
   "sections": {
+    "dashboard": "Dashboard",
     "weekly": "Weekly Guide",
     "upgradeTracks": "Upgrade Tracks",
     "raid": "Raid",
@@ -67,6 +69,20 @@
   "ilvlFilter": {
     "label": "ilvl:",
     "all": "All"
+  },
+  "dashboard": {
+    "prompt": "Select your item level to see recommended activities",
+    "currentBest": "Best access",
+    "nextTier": "Next tier",
+    "gap": "+{gap} ilvl",
+    "maxReached": "Max reached",
+    "noAccess": "Not accessible",
+    "raid": "Raid",
+    "dungeons": "Dungeons",
+    "delves": "Delves",
+    "traque": "Hunt",
+    "pvp": "PvP",
+    "craft": "Crafting"
   },
   "game": {
     "season": {

@@ -4,6 +4,7 @@
     "description": "Guide interactif pour optimiser la montée en niveau d'objet dans World of Warcraft"
   },
   "nav": {
+    "dashboard": "Résumé",
     "weekly": "Hebdo",
     "tracks": "Pistes",
     "raid": "Raid",
@@ -29,6 +30,7 @@
     "ilvl": "niv"
   },
   "sections": {
+    "dashboard": "Tableau de bord",
     "weekly": "Guide Hebdomadaire",
     "upgradeTracks": "Pistes d'amélioration",
     "raid": "Raid",
@@ -67,6 +69,20 @@
   "ilvlFilter": {
     "label": "ilvl :",
     "all": "Tous"
+  },
+  "dashboard": {
+    "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
+    "currentBest": "Meilleur accès",
+    "nextTier": "Prochain palier",
+    "gap": "+{gap} niv",
+    "maxReached": "Maximum atteint",
+    "noAccess": "Non accessible",
+    "raid": "Raid",
+    "dungeons": "Donjons",
+    "delves": "Gouffres",
+    "traque": "Traque",
+    "pvp": "JcJ",
+    "craft": "Artisanat"
   },
   "game": {
     "season": {
