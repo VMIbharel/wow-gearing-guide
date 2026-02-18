@@ -174,7 +174,6 @@ function ActivityCardItem({
 }) {
   const { t } = useI18n();
   const hasAccess = card.currentBestIlvl !== null;
-  const isMaxed = hasAccess && card.nextIlvl === null;
   const gap =
     card.nextIlvl != null && currentIlvl != null
       ? card.nextIlvl - currentIlvl
@@ -197,61 +196,37 @@ function ActivityCardItem({
         </span>
       </div>
 
-      {/* Best accessible ilvl — large and colored */}
+      {/* Next tier to accomplish — large and colored */}
       <div className="mb-2">
         <p className="text-xs text-muted-foreground mb-0.5">
-          {t("dashboard.currentBest")}
+          {t("dashboard.nextTier")}
         </p>
-        {hasAccess ? (
-          <IlvlText
-            ilvl={card.currentBestIlvl!}
-            className="text-2xl font-mono font-bold"
-          />
+        {card.nextIlvl !== null ? (
+          <>
+            <IlvlText
+              ilvl={card.nextIlvl}
+              className="text-2xl font-mono font-bold"
+            />
+            {gap !== null && gap > 0 && (
+              <p className="text-xs text-muted-foreground/70 mt-0.5">
+                {t("dashboard.gap").replace("{gap}", String(gap))}
+              </p>
+            )}
+          </>
         ) : (
-          <span className="text-2xl font-mono font-bold text-muted-foreground/50">
-            —
+          <span className="text-2xl font-mono font-bold text-primary">
+            {t("dashboard.maxReached")}
           </span>
         )}
       </div>
 
-      {/* Next tier / gap / maxed */}
-      <div className="text-xs text-muted-foreground space-y-0.5">
-        {isMaxed && (
-          <span className="text-primary font-medium">
-            {t("dashboard.maxReached")}
-          </span>
-        )}
-        {!isMaxed && card.nextIlvl !== null && (
-          <>
-            <div>
-              <span className="text-muted-foreground">
-                {t("dashboard.nextTier")}
-              </span>
-              <div>
-                <IlvlText
-                  ilvl={card.nextIlvl}
-                  className="font-mono font-semibold"
-                />
-              </div>
-            </div>
-            {gap !== null && gap > 0 && (
-              <span className="block text-muted-foreground/70">
-                {t("dashboard.gap").replace("{gap}", String(gap))}
-              </span>
-            )}
-          </>
-        )}
-        {!hasAccess && currentIlvl !== null && card.nextIlvl !== null && (
-          <div>
-            <span className="text-muted-foreground">
-              {t("dashboard.nextTier")}
-            </span>
-            <div>
-              <IlvlText ilvl={card.nextIlvl} className="font-mono" />
-            </div>
-          </div>
-        )}
-      </div>
+      {/* Current best (secondary info) */}
+      {hasAccess && card.nextIlvl !== null && (
+        <div className="text-xs text-muted-foreground">
+          <p className="mb-0.5">{t("dashboard.currentBest")}</p>
+          <IlvlText ilvl={card.currentBestIlvl!} className="font-mono" />
+        </div>
+      )}
     </button>
   );
 }
