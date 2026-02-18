@@ -138,6 +138,14 @@ export function useGearingData() {
           delversBountyMaps: rawData.delversBountyMaps,
           delveNotes: t("game.notes.delves" as TranslationKey) as unknown as string[],
 
+          craft: rawData.craft,
+
+          traque: rawData.traque.map((item: any) => ({
+            ...item,
+            difficultyName: t(`game.traqueDifficulties.${item.difficultyId}` as TranslationKey),
+          })),
+          traqueNotes: t("game.notes.traque" as TranslationKey) as unknown as string[],
+
           pvp: rawData.pvp.map((item: any) => ({
             ...item,
             type: t(`game.pvpTypes.${item.typeId}` as TranslationKey),

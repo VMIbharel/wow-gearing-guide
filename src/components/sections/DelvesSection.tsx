@@ -60,35 +60,15 @@ export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl 
                   <TableRow
                     key={d.tier}
                     className={cn(
-                      currentIlvl != null && d.lootIlvl < currentIlvl && d.vaultIlvl < currentIlvl && "opacity-30",
-                      currentIlvl != null && d.lootIlvl >= currentIlvl && "bg-accent/50"
+                      currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+                      currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
                     )}
                   >
                     <TableCell className="font-medium">T{d.tier}</TableCell>
                     <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
                     <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
                     <TableCell>
-                      <div className="flex gap-1 flex-wrap items-center">
-                        {d.crest ? (
-                          <>
-                            <span className="text-xs font-semibold">{d.crestAmount}</span>
-                            <CrestBadge name={d.crest} />
-                          </>
-                        ) : (
-                          <span className="text-xs text-muted-foreground">{d.crestAmount}</span>
-                        )}
-                        {d.bonusCrest && (
-                          <span className="text-xs text-muted-foreground">
-                            (+<span className="font-semibold">{d.bonusAmount}</span> <CrestBadge name={d.bonusCrest} />)
-                          </span>
-                        )}
-                        {d.secondaryCrest && (
-                          <>
-                            <span className="text-xs font-semibold">{d.secondaryAmount}</span>
-                            <CrestBadge name={d.secondaryCrest} />
-                          </>
-                        )}
-                      </div>
+                      {d.crest ? <CrestBadge name={d.crest} /> : "—"}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -118,8 +98,7 @@ export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl 
                   >
                     <TableCell className="font-medium">T{m.tier}</TableCell>
                     <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
-                    <TableCell className="flex gap-1 items-center">
-                      {m.crestAmount && <span className="text-xs font-semibold">{m.crestAmount}</span>}
+                    <TableCell>
                       <CrestBadge name={m.crest} />
                     </TableCell>
                   </TableRow>

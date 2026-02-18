@@ -8,6 +8,8 @@
     "raid": "Raid",
     "dungeons": "Donjons",
     "delves": "Gouffres",
+    "craft": "Craft",
+    "traque": "Traque",
     "pvp": "JcJ",
     "info": "Info"
   },
@@ -16,6 +18,9 @@
     "loot": "Butin",
     "vault": "Coffre",
     "crests": "Écus",
+    "contract": "Contrat (max 4)",
+    "weeklyChest": "Coffre hebdo",
+    "sparks": "Étincelles",
     "level": "Niveau",
     "type": "Type",
     "tier": "Palier",
@@ -27,6 +32,8 @@
     "raid": "Raid",
     "dungeons": "Donjons (Mythique+)",
     "delves": "Gouffres",
+    "craft": "Artisanat",
+    "traque": "Contrats de Traque",
     "pvp": "JcJ",
     "info": "Informations"
   },
@@ -66,10 +73,11 @@
       "myth": "Mythe"
     },
     "crests": {
-      "weathered": "Abîmé",
-      "carved": "Gravé",
-      "runed": "Runique",
-      "gilded": "Doré"
+      "adventurer": "Aventurier",
+      "veteran": "Vétéran",
+      "champion": "Champion",
+      "hero": "Héros",
+      "myth": "Mythe"
     },
     "raids": {
       "voidspire": "The Voidspire",
@@ -81,6 +89,11 @@
       "normal": "Normal",
       "heroic": "Héroïque",
       "mythic": "Mythique"
+    },
+    "traqueDifficulties": {
+      "normal": "Normal",
+      "heroic": "Difficile",
+      "nightmare": "Cauchemar"
     },
     "dungeonLabels": {
       "normal": "Normal",
@@ -123,6 +136,11 @@
         "Vous pouvez obtenir 1 carte par semaine",
         "Les trésors cachés ne nécessitent pas de clés",
         "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
+      ],
+      "craft": [],
+      "traque": [
+        "Vous pouvez effectuer un maximum de 4 contrats par palier de difficulté par semaine",
+        "Les récompenses de la Grande Chambre forte évoluent selon la difficulté la plus élevée complétée"
       ]
     }
   }

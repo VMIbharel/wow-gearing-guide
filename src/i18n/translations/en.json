@@ -8,6 +8,8 @@
     "raid": "Raid",
     "dungeons": "Dungeons",
     "delves": "Delves",
+    "craft": "Craft",
+    "traque": "Hunt",
     "pvp": "PvP",
     "info": "Info"
   },
@@ -16,6 +18,9 @@
     "loot": "Loot",
     "vault": "Vault",
     "crests": "Crests",
+    "contract": "Contract (max 4)",
+    "weeklyChest": "Weekly Chest",
+    "sparks": "Sparks",
     "level": "Level",
     "type": "Type",
     "tier": "Tier",
@@ -27,6 +32,8 @@
     "raid": "Raid",
     "dungeons": "Dungeons (Mythic+)",
     "delves": "Delves",
+    "craft": "Crafting",
+    "traque": "Hunt Contracts",
     "pvp": "PvP",
     "info": "Information"
   },
@@ -66,10 +73,11 @@
       "myth": "Myth"
     },
     "crests": {
-      "weathered": "Weathered",
-      "carved": "Carved",
-      "runed": "Runed",
-      "gilded": "Gilded"
+      "adventurer": "Adventurer",
+      "veteran": "Veteran",
+      "champion": "Champion",
+      "hero": "Hero",
+      "myth": "Myth"
     },
     "raids": {
       "voidspire": "The Voidspire",
@@ -81,6 +89,11 @@
       "normal": "Normal",
       "heroic": "Heroic",
       "mythic": "Mythic"
+    },
+    "traqueDifficulties": {
+      "normal": "Normal",
+      "heroic": "Difficult",
+      "nightmare": "Nightmare"
     },
     "dungeonLabels": {
       "normal": "Normal",
@@ -123,6 +136,11 @@
         "You can get 1 map per week",
         "Hidden Troves don't need keys",
         "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week"
+      ],
+      "craft": [],
+      "traque": [
+        "You can complete a maximum of 4 contracts per difficulty tier per week",
+        "Weekly Vault rewards scale based on the highest difficulty completed"
       ]
     }
   }

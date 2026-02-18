@@ -42,8 +42,8 @@ export function DungeonTable({ dungeons, notes, currentIlvl }: Props) {
               <TableRow
                 key={d.level}
                 className={cn(
-                  currentIlvl != null && d.lootIlvl < currentIlvl && d.vaultIlvl < currentIlvl && "opacity-30",
-                  currentIlvl != null && d.lootIlvl >= currentIlvl && "bg-accent/50"
+                  currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+                  currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
                 )}
               >
                 <TableCell className="font-medium">

@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info } from "lucide-react";
+import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
 import { RaidSection } from "./sections/RaidSection";
 import { DungeonTable } from "./sections/DungeonTable";
 import { DelvesSection } from "./sections/DelvesSection";
+import { CraftSection } from "./sections/CraftSection";
+import { TraqueSection } from "./sections/TraqueSection";
 import { PvpTable } from "./sections/PvpTable";
 import { AppHeader } from "./layout/AppHeader";
 import { SectionNav } from "./layout/SectionNav";
@@ -44,6 +46,8 @@ function GearingGuideContent() {
     { id: "raid", label: t("nav.raid"), icon: Landmark },
     { id: "dungeons", label: t("nav.dungeons"), icon: Castle },
     { id: "delves", label: t("nav.delves"), icon: Pickaxe },
+    { id: "craft", label: t("nav.craft"), icon: Hammer },
+    { id: "traque", label: t("nav.traque"), icon: Target },
     { id: "pvp", label: t("nav.pvp"), icon: Swords },
     { id: "info", label: t("nav.info"), icon: Info },
   ] as const, [t]);
@@ -173,6 +177,28 @@ function GearingGuideContent() {
                 bountifulDelves={data.bountifulDelves}
                 bountyMaps={data.delversBountyMaps}
                 notes={data.delveNotes}
+                currentIlvl={currentIlvl}
+              />
+            </div>
+          </section>
+
+          {/* Panel: Craft */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.craft")}</h2>
+              <CraftSection
+                craft={data.craft}
+                currentIlvl={currentIlvl}
+              />
+            </div>
+          </section>
+
+          {/* Panel: Traque */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.traque")}</h2>
+              <TraqueSection
+                traque={data.traque}
                 currentIlvl={currentIlvl}
               />
             </div>

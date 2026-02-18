@@ -3,10 +3,11 @@ import { useI18n, type TranslationKey } from "@/i18n";
 import type { IlvlTier } from "@/lib/utils";
 
 const CREST_TIER: Record<string, IlvlTier> = {
-  weathered: "blue",
-  carved: "purple",
-  runed: "orange",
-  gilded: "gold",
+  adventurer: "green",
+  veteran: "blue",
+  champion: "purple",
+  hero: "orange",
+  myth: "gold",
 };
 
 interface CrestBadgeProps {

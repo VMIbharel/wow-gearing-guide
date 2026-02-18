@@ -87,31 +87,8 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                                   <TableCell className="font-medium">{bg.bosses}</TableCell>
                                   <TableCell><IlvlText ilvl={bg.lootIlvl} /></TableCell>
                                   <TableCell className="flex gap-1 flex-wrap items-center">
-                                    {bg.crest && bg.secondaryCrest && bg.crestAmount && !bg.secondaryCrestAmount ? (
-                                      <>
-                                        <span className="text-xs font-semibold">{bg.crestAmount}</span>
-                                        <span className="text-xs text-muted-foreground">(</span>
-                                        <CrestBadge name={bg.crest} />
-                                        <span className="text-xs text-muted-foreground">/</span>
-                                        <CrestBadge name={bg.secondaryCrest} />
-                                        <span className="text-xs text-muted-foreground">)</span>
-                                      </>
-                                    ) : (
-                                      <>
-                                        {bg.crest && (
-                                          <>
-                                            {bg.crestAmount && <span className="text-xs font-semibold mr-1">{bg.crestAmount}</span>}
-                                            <CrestBadge name={bg.crest} />
-                                          </>
-                                        )}
-                                        {bg.secondaryCrest && (
-                                          <>
-                                            {bg.secondaryCrestAmount && <span className="text-xs font-semibold mr-1">{bg.secondaryCrestAmount}</span>}
-                                            <CrestBadge name={bg.secondaryCrest} />
-                                          </>
-                                        )}
-                                      </>
-                                    )}
+                                    {bg.crest && <CrestBadge name={bg.crest} />}
+                                    {bg.secondaryCrest && <CrestBadge name={bg.secondaryCrest} />}
                                     {!bg.crest && !bg.secondaryCrest && "—"}
                                   </TableCell>
                                 </TableRow>
@@ -126,31 +103,8 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                                 <TableCell className="font-medium">{veryRare.bosses}</TableCell>
                                 <TableCell><IlvlText ilvl={veryRare.lootIlvl} /></TableCell>
                                 <TableCell className="flex gap-1 flex-wrap items-center">
-                                  {veryRare.crest && veryRare.secondaryCrest && veryRare.crestAmount && !veryRare.secondaryCrestAmount ? (
-                                    <>
-                                      <span className="text-xs font-semibold">{veryRare.crestAmount}</span>
-                                      <span className="text-xs text-muted-foreground">(</span>
-                                      <CrestBadge name={veryRare.crest} />
-                                      <span className="text-xs text-muted-foreground">/</span>
-                                      <CrestBadge name={veryRare.secondaryCrest} />
-                                      <span className="text-xs text-muted-foreground">)</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      {veryRare.crest && (
-                                        <>
-                                          {veryRare.crestAmount && <span className="text-xs font-semibold mr-1">{veryRare.crestAmount}</span>}
-                                          <CrestBadge name={veryRare.crest} />
-                                        </>
-                                      )}
-                                      {veryRare.secondaryCrest && (
-                                        <>
-                                          {veryRare.secondaryCrestAmount && <span className="text-xs font-semibold mr-1">{veryRare.secondaryCrestAmount}</span>}
-                                          <CrestBadge name={veryRare.secondaryCrest} />
-                                        </>
-                                      )}
-                                    </>
-                                  )}
+                                  {veryRare.crest && <CrestBadge name={veryRare.crest} />}
+                                  {veryRare.secondaryCrest && <CrestBadge name={veryRare.secondaryCrest} />}
                                   {!veryRare.crest && !veryRare.secondaryCrest && "—"}
                                 </TableCell>
                               </TableRow>
@@ -210,31 +164,8 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                       <TableCell className="font-medium">{bg.bosses}</TableCell>
                       <TableCell><IlvlText ilvl={bg.lootIlvl} /></TableCell>
                       <TableCell className="flex gap-1 flex-wrap items-center">
-                        {bg.crest && bg.secondaryCrest && bg.crestAmount && !bg.secondaryCrestAmount ? (
-                          <>
-                            <span className="text-xs font-semibold">{bg.crestAmount}</span>
-                            <span className="text-xs text-muted-foreground">(</span>
-                            <CrestBadge name={bg.crest} />
-                            <span className="text-xs text-muted-foreground">/</span>
-                            <CrestBadge name={bg.secondaryCrest} />
-                            <span className="text-xs text-muted-foreground">)</span>
-                          </>
-                        ) : (
-                          <>
-                            {bg.crest && (
-                              <>
-                                {bg.crestAmount && <span className="text-xs font-semibold mr-1">{bg.crestAmount}</span>}
-                                <CrestBadge name={bg.crest} />
-                              </>
-                            )}
-                            {bg.secondaryCrest && (
-                              <>
-                                {bg.secondaryCrestAmount && <span className="text-xs font-semibold mr-1">{bg.secondaryCrestAmount}</span>}
-                                <CrestBadge name={bg.secondaryCrest} />
-                              </>
-                            )}
-                          </>
-                        )}
+                        {bg.crest && <CrestBadge name={bg.crest} />}
+                        {bg.secondaryCrest && <CrestBadge name={bg.secondaryCrest} />}
                         {!bg.crest && !bg.secondaryCrest && "—"}
                       </TableCell>
                     </TableRow>
