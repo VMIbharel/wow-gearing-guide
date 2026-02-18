@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info } from "lucide-react";
+import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck, LayoutDashboard } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
+import { DashboardSection } from "./sections/DashboardSection";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
 import { RaidSection } from "./sections/RaidSection";
 import { DungeonTable } from "./sections/DungeonTable";
 import { DelvesSection } from "./sections/DelvesSection";
+import { CraftSection } from "./sections/CraftSection";
+import { TraqueSection } from "./sections/TraqueSection";
 import { PvpTable } from "./sections/PvpTable";
+import { WeeklyGuideSection } from "./sections/WeeklyGuideSection";
 import { AppHeader } from "./layout/AppHeader";
 import { SectionNav } from "./layout/SectionNav";
 import { SectionDots } from "./layout/SectionDots";
@@ -40,11 +44,15 @@ function GearingGuideContent() {
   activeSectionRef.current = activeSection;
 
   const sections = useMemo(() => [
-    { id: "tracks", label: t("nav.tracks"), icon: Map },
+    { id: "dashboard", label: t("nav.dashboard"), icon: LayoutDashboard },
+    { id: "weekly", label: t("nav.weekly"), icon: CalendarCheck },
     { id: "raid", label: t("nav.raid"), icon: Landmark },
     { id: "dungeons", label: t("nav.dungeons"), icon: Castle },
     { id: "delves", label: t("nav.delves"), icon: Pickaxe },
+    { id: "traque", label: t("nav.traque"), icon: Target },
     { id: "pvp", label: t("nav.pvp"), icon: Swords },
+    { id: "craft", label: t("nav.craft"), icon: Hammer },
+    { id: "tracks", label: t("nav.tracks"), icon: Map },
     { id: "info", label: t("nav.info"), icon: Info },
   ] as const, [t]);
 
@@ -54,6 +62,14 @@ function GearingGuideContent() {
     setActiveSection(index);
     container.scrollTo({ left: index * container.offsetWidth, behavior: "smooth" });
   }, []);
+
+  const navigateToSection = useCallback(
+    (sectionId: string) => {
+      const index = sections.findIndex((s) => s.id === sectionId);
+      if (index !== -1) scrollToSection(index);
+    },
+    [sections, scrollToSection]
+  );
 
   // Restore scroll position before paint when data reloads (language change remounts the container at 0)
   useLayoutEffect(() => {
@@ -133,21 +149,33 @@ function GearingGuideContent() {
           tabIndex={0}
           onKeyDown={handleKeyDown}
         >
-          {/* Panel: Upgrade Tracks */}
-          <section className="w-full shrink-0 snap-center flex flex-col">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
-              <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
+          {/* Panel: Dashboard */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.dashboard")}</h2>
+              <DashboardSection
+                currentIlvl={currentIlvl}
+                data={data}
+                onNavigate={navigateToSection}
+              />
+            </div>
+          </section>
+
+          {/* Panel: Weekly Guide */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.weekly")}</h2>
+              <WeeklyGuideSection />
             </div>
           </section>
 
           {/* Panel: Raid */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.raid").replace("{name}", data.raid.name)}</h2>
+              <h2 className="text-xl font-semibold mb-3">{t("sections.raid")}</h2>
               <RaidSection
-                difficulties={data.raid.difficulties}
-                notes={data.raid.notes}
+                raids={data.raids}
+                notes={data.raids[0]?.notes ?? []}
                 currentIlvl={currentIlvl}
               />
             </div>
@@ -178,11 +206,41 @@ function GearingGuideContent() {
             </div>
           </section>
 
+          {/* Panel: Traque */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.traque")}</h2>
+              <TraqueSection
+                traque={data.traque}
+                currentIlvl={currentIlvl}
+              />
+            </div>
+          </section>
+
           {/* Panel: PvP */}
           <section className="w-full shrink-0 snap-center overflow-y-auto">
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
               <h2 className="text-xl font-semibold mb-3">{t("sections.pvp")}</h2>
               <PvpTable pvp={data.pvp} currentIlvl={currentIlvl} />
+            </div>
+          </section>
+
+          {/* Panel: Craft */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.craft")}</h2>
+              <CraftSection
+                craft={data.craft}
+                currentIlvl={currentIlvl}
+              />
+            </div>
+          </section>
+
+          {/* Panel: Upgrade Tracks */}
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
+              <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
             </div>
           </section>
 

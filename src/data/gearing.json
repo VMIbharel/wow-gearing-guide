@@ -1,143 +1,239 @@
 {
   "version": "v01",
-  "lastUpdated": "2025-10-07",
+  "lastUpdated": "2026-18-02",
   "upgradeTracks": [
     {
       "trackId": "explorer",
-      "ranks": 8,
-      "ilvls": [642, 645, 649, 652, 655, 658, 662, 665],
+      "ranks": 6,
+      "ilvls": [208, 212, 215, 217, 220, 224],
       "crest": null
     },
     {
       "trackId": "adventurer",
-      "ranks": 8,
-      "ilvls": [655, 658, 662, 665, 668, 671, 675, 678],
-      "crest": null,
-      "secondaryCrest": "weathered",
-      "secondaryCrestFromRank": 5
+      "ranks": 6,
+      "ilvls": [220, 224, 227, 230, 233, 237],
+      "crest": "adventurer",
+      "crestFromRank": 2,
+      "secondaryCrest": "veteran",
+      "secondaryCrestFromRank": 6
     },
     {
       "trackId": "veteran",
-      "ranks": 8,
-      "ilvls": [668, 671, 675, 678, 681, 684, 688, 691],
-      "crest": "weathered",
-      "secondaryCrest": "carved",
-      "secondaryCrestFromRank": 5
+      "ranks": 6,
+      "ilvls": [233, 237, 240, 243, 246, 250],
+      "crest": "veteran",
+      "crestFromRank": 2,
+      "secondaryCrest": "champion",
+      "secondaryCrestFromRank": 6
     },
     {
       "trackId": "champion",
-      "ranks": 8,
-      "ilvls": [681, 684, 688, 691, 694, 697, 701, 704],
-      "crest": "carved",
-      "secondaryCrest": "runed",
-      "secondaryCrestFromRank": 5
+      "ranks": 6,
+      "ilvls": [246, 250, 253, 256, 259, 263],
+      "crest": "champion",
+      "crestFromRank": 2,
+      "secondaryCrest": "hero",
+      "secondaryCrestFromRank": 6
     },
     {
       "trackId": "hero",
-      "ranks": 8,
-      "ilvls": [694, 697, 701, 704, 707, 710, 714, 717],
-      "crest": "runed",
-      "secondaryCrest": "gilded",
-      "secondaryCrestFromRank": 5
+      "ranks": 6,
+      "ilvls": [259, 263, 266, 269, 272, 276],
+      "crest": "hero",
+      "crestFromRank": 2,
+      "secondaryCrest": "myth",
+      "secondaryCrestFromRank": 6
     },
     {
       "trackId": "myth",
-      "ranks": 8,
-      "ilvls": [707, 710, 714, 717, 720, 723, 727, 730],
-      "crest": "gilded"
+      "ranks": 6,
+      "ilvls": [272, 276, 279, 282, 285, 289],
+      "crest": "myth",
+      "crestFromRank": 2
     }
   ],
-  "raid": {
-    "raidId": "manaforge-omega",
-    "difficulties": [
-      {
-        "difficultyId": "lfr",
-        "bossGroups": [
-          { "bosses": "1,2,3", "lootIlvl": 671, "crest": "weathered", "crestAmount": 10 },
-          { "bosses": "4,5,6", "lootIlvl": 675, "crest": "weathered", "crestAmount": 10 },
-          { "bosses": "7,8", "lootIlvl": 678, "crest": "weathered", "crestAmount": 15, "secondaryCrest": "carved" },
-          { "bosses": "Very Rare", "lootIlvl": 691, "crest": null, "crestAmount": null }
-        ]
-      },
-      {
-        "difficultyId": "normal",
-        "bossGroups": [
-          { "bosses": "1,2,3", "lootIlvl": 684, "crest": "carved", "crestAmount": 10 },
-          { "bosses": "4,5,6", "lootIlvl": 688, "crest": "carved", "crestAmount": 10 },
-          { "bosses": "7,8", "lootIlvl": 691, "crest": "carved", "crestAmount": 15, "secondaryCrest": "runed" },
-          { "bosses": "Very Rare", "lootIlvl": 704, "crest": null, "crestAmount": null }
-        ]
-      },
-      {
-        "difficultyId": "heroic",
-        "bossGroups": [
-          { "bosses": "1,2,3", "lootIlvl": 697, "crest": "runed", "crestAmount": 10 },
-          { "bosses": "4,5,6", "lootIlvl": 701, "crest": "runed", "crestAmount": 10 },
-          { "bosses": "7,8", "lootIlvl": 704, "crest": "runed", "crestAmount": 15, "secondaryCrest": "gilded"},
-          { "bosses": "Very Rare", "lootIlvl": 710, "crest": null, "crestAmount": null }
-        ]
-      },
-      {
-        "difficultyId": "mythic",
-        "bossGroups": [
-          { "bosses": "1,2,3", "lootIlvl": 710, "crest": "gilded", "crestAmount": 10 },
-          { "bosses": "4,5,6", "lootIlvl": 714, "crest": "gilded", "crestAmount": 10 },
-          { "bosses": "7,8", "lootIlvl": 717, "crest": "gilded", "crestAmount": 15 },
-          { "bosses": "Very Rare", "lootIlvl": 723, "crest": null, "crestAmount": null }
-        ]
-      }
-    ]
-  },
+  "raids": [
+    {
+      "raidId": "voidspire",
+      "difficulties": [
+        {
+          "difficultyId": "lfr",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 233, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "2,3", "lootIlvl": 237, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "4,5", "lootIlvl": 240, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "6", "lootIlvl": 243, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 250, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "normal",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 246, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "2,3", "lootIlvl": 250, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "4,5", "lootIlvl": 253, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "6", "lootIlvl": 256, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 263, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "heroic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 259, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "2,3", "lootIlvl": 263, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "4,5", "lootIlvl": 269, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "6", "lootIlvl": 269, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 276, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "mythic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 272, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "2,3", "lootIlvl": 276, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "4,5", "lootIlvl": 282, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "6", "lootIlvl": 289, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 289, "crest": null, "crestAmount": null }
+          ]
+        }
+      ]
+    },
+    {
+      "raidId": "dreamrift",
+      "difficulties": [
+        {
+          "difficultyId": "lfr",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 237, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 250, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "normal",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 250, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 263, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "heroic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 263, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 276, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "mythic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 276, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 289, "crest": null, "crestAmount": null }
+          ]
+        }
+      ]
+    },
+    {
+      "raidId": "quel'danas",
+      "difficulties": [
+        {
+          "difficultyId": "lfr",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 240, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "2", "lootIlvl": 243, "crest": "veteran", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 250, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "normal",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 250, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "2", "lootIlvl": 253, "crest": "champion", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 263, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "heroic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 263, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "2", "lootIlvl": 263, "crest": "hero", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 276, "crest": null, "crestAmount": null }
+          ]
+        },
+        {
+          "difficultyId": "mythic",
+          "bossGroups": [
+            { "bosses": "1", "lootIlvl": 272, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "2", "lootIlvl": 276, "crest": "myth", "crestAmount": 0 },
+            { "bosses": "Very Rare", "lootIlvl": 289, "crest": null, "crestAmount": null }
+          ]
+        }
+      ]
+    }
+  ],
   "dungeons": [
-    { "levelId": "heroic", "lootIlvl": 665, "vaultIlvl": 678, "crest": "weathered", "crestAmount": 10, "affix": false },
-    { "levelId": "mythic0", "lootIlvl": 681, "vaultIlvl": 691, "crest": "carved", "crestAmount": 15, "affix": false },
-    { "levelId": "+2", "lootIlvl": 684, "vaultIlvl": 694, "crest": "carved", "crestAmount": 10, "affix": false },
-    { "levelId": "+3", "lootIlvl": 684, "vaultIlvl": 694, "crest": "carved", "crestAmount": 12, "affix": false },
-    { "levelId": "+4", "lootIlvl": 688, "vaultIlvl": 697, "crest": "runed", "crestAmount": 14, "affix": true },
-    { "levelId": "+5", "lootIlvl": 691, "vaultIlvl": 697, "crest": "runed", "crestAmount": 16, "affix": false },
-    { "levelId": "+6", "lootIlvl": 694, "vaultIlvl": 701, "crest": "runed", "crestAmount": 18, "affix": false },
-    { "levelId": "+7", "lootIlvl": 694, "vaultIlvl": 704, "crest": "runed", "crestAmount": 10, "affix": true },
-    { "levelId": "+8", "lootIlvl": 697, "vaultIlvl": 704, "crest": "gilded", "crestAmount": 12, "affix": false },
-    { "levelId": "+9", "lootIlvl": 697, "vaultIlvl": 704, "crest": "gilded", "crestAmount": 14, "affix": false },
-    { "levelId": "+10", "lootIlvl": 701, "vaultIlvl": 707, "crest": "gilded", "crestAmount": 16, "affix": true },
-    { "levelId": "+11", "lootIlvl": 701, "vaultIlvl": 707, "crest": "gilded", "crestAmount": 18, "affix": false },
-    { "levelId": "+12+", "lootIlvl": 701, "vaultIlvl": 707, "crest": "gilded", "crestAmount": 20, "affix": true }
+    { "levelId": "normal", "lootIlvl": 214, "vaultIlvl": null, "crest": null, "crestAmount": null, "affix": false },
+    { "levelId": "timewalking", "lootIlvl": 220, "vaultIlvl": 233, "crest": null, "crestAmount": null, "affix": false },
+    { "levelId": "heroic", "lootIlvl": 230, "vaultIlvl": 243, "crest": "veteran", "crestAmount": 15, "affix": false },
+    { "levelId": "mythic0", "lootIlvl": 246, "vaultIlvl": 256, "crest": "champion", "crestAmount": 15, "affix": false },
+    { "levelId": "+2", "lootIlvl": 250, "vaultIlvl": 259, "crest": "champion", "crestAmount": 10, "affix": false },
+    { "levelId": "+3", "lootIlvl": 250, "vaultIlvl": 259, "crest": "champion", "crestAmount": 12, "affix": false },
+    { "levelId": "+4", "lootIlvl": 253, "vaultIlvl": 263, "crest": "hero", "crestAmount": 14, "affix": true },
+    { "levelId": "+5", "lootIlvl": 256, "vaultIlvl": 263, "crest": "hero", "crestAmount": 16, "affix": false },
+    { "levelId": "+6", "lootIlvl": 259, "vaultIlvl": 266, "crest": "hero", "crestAmount": 18, "affix": false },
+    { "levelId": "+7", "lootIlvl": 259, "vaultIlvl": 269, "crest": "hero", "crestAmount": 10, "affix": true },
+    { "levelId": "+8", "lootIlvl": 263, "vaultIlvl": 269, "crest": "myth", "crestAmount": 12, "affix": false },
+    { "levelId": "+9", "lootIlvl": 263, "vaultIlvl": 269, "crest": "myth", "crestAmount": 14, "affix": false },
+    { "levelId": "+10", "lootIlvl": 266, "vaultIlvl": 272, "crest": "myth", "crestAmount": 16, "affix": true },
+    { "levelId": "+11", "lootIlvl": 266, "vaultIlvl": 272, "crest": "myth", "crestAmount": 18, "affix": false },
+    { "levelId": "+12+", "lootIlvl": 266, "vaultIlvl": 272, "crest": "myth", "crestAmount": 20, "affix": true }
   ],
   "bountifulDelves": [
-    { "tier": 1, "lootIlvl": 655, "vaultIlvl": 668, "crest": "weathered", "crestAmount": 4 },
-    { "tier": 2, "lootIlvl": 658, "vaultIlvl": 671, "crest": "weathered", "crestAmount": 6 },
-    { "tier": 3, "lootIlvl": 662, "vaultIlvl": 675, "crest": "weathered", "crestAmount": 8 },
-    { "tier": 4, "lootIlvl": 665, "vaultIlvl": 678, "crest": "weathered", "crestAmount": 10 },
-    { "tier": 5, "lootIlvl": 668, "vaultIlvl": 681, "crest": "weathered", "crestAmount": 12 },
-    { "tier": 6, "lootIlvl": 671, "vaultIlvl": 688, "crest": "carved", "crestAmount": 6 },
-    { "tier": 7, "lootIlvl": 681, "vaultIlvl": 691, "crest": "carved", "crestAmount": 10 },
-    { "tier": 8, "lootIlvl": 684, "vaultIlvl": 694, "crest": "carved", "crestAmount": 3, "bonusCrest": "runed", "bonusAmount": 5 },
-    { "tier": 9, "lootIlvl": 684, "vaultIlvl": 694, "crest": "runed", "crestAmount": 5, "bonusCrest": "runed", "bonusAmount": 5 },
-    { "tier": 10, "lootIlvl": 684, "vaultIlvl": 694, "crest": "runed", "crestAmount": 7, "bonusCrest": "runed", "bonusAmount": 5 },
-    { "tier": 11, "lootIlvl": 684, "vaultIlvl": 694, "crest": "runed", "crestAmount": 10, "bonusCrest": "runed", "bonusAmount": 5, "secondaryCrest": "gilded", "secondaryAmount": 7 }
-  ],
+    { "tier": 1, "lootIlvl": 220, "vaultIlvl": 233, "crest": "adventurer", "crestAmount": 0 },
+    { "tier": 2, "lootIlvl": 224, "vaultIlvl": 237, "crest": "adventurer", "crestAmount": 0 },
+    { "tier": 3, "lootIlvl": 227, "vaultIlvl": 240, "crest": "adventurer", "crestAmount": 0 },
+    { "tier": 4, "lootIlvl": 230, "vaultIlvl": 243, "crest": "adventurer", "crestAmount": 0 },
+    { "tier": 5, "lootIlvl": 233, "vaultIlvl": 246, "crest": "veteran", "crestAmount": 0 },
+    { "tier": 6, "lootIlvl": 237, "vaultIlvl": 253, "crest": "veteran", "crestAmount": 0 },
+    { "tier": 7, "lootIlvl": 250, "vaultIlvl": 256, "crest": "champion", "crestAmount": 0 },
+    { "tier": 8, "lootIlvl": 250, "vaultIlvl": 259, "crest": "champion", "crestAmount": 0 },
+    { "tier": 9, "lootIlvl": 250, "vaultIlvl": 259, "crest": "champion", "crestAmount": 0 },
+    { "tier": 10, "lootIlvl": 250, "vaultIlvl": 259, "crest": "champion", "crestAmount": 0 },
+    { "tier": 11, "lootIlvl": 250, "vaultIlvl": 259, "crest": "hero", "crestAmount": 0 }
+],
   "delversBountyMaps": [
-    { "tier": 4, "lootIlvl": 671, "crest": "carved", "crestAmount": 10 },
-    { "tier": 5, "lootIlvl": 678, "crest": "carved", "crestAmount": 20 },
-    { "tier": 6, "lootIlvl": 684, "crest": "runed", "crestAmount": 10 },
-    { "tier": 7, "lootIlvl": 691, "crest": "runed", "crestAmount": 20 },
-    { "tier": 8, "lootIlvl": 694, "crest": "gilded", "crestAmount": 8 },
-    { "tier": 9, "lootIlvl": 694, "crest": "gilded", "crestAmount": 12 },
-    { "tier": 10, "lootIlvl": 694, "crest": "gilded", "crestAmount": 16 },
-    { "tier": 11, "lootIlvl": 694, "crest": "gilded", "crestAmount": 20 }
+    { "tier": 4, "lootIlvl": 237, "crest": "veteran", "crestAmount": 0 },
+    { "tier": 5, "lootIlvl": 243, "crest": "veteran", "crestAmount": 0 },
+    { "tier": 6, "lootIlvl": 250, "crest": "champion", "crestAmount": 0 },
+    { "tier": 7, "lootIlvl": 256, "crest": "champion", "crestAmount": 0 },
+    { "tier": 8, "lootIlvl": 259, "crest": "hero", "crestAmount": 0 },
+    { "tier": 9, "lootIlvl": 259, "crest": "hero", "crestAmount": 0 },
+    { "tier": 10, "lootIlvl": 259, "crest": "hero", "crestAmount": 0 },
+    { "tier": 11, "lootIlvl": 259, "crest": "hero", "crestAmount": 0 }
   ],
   "pvp": [
-    { "typeId": "honor", "ilvl": 717 },
-    { "typeId": "warmode", "ilvl": 727 },
-    { "typeId": "conquest", "ilvl": 730 },
-    { "typeId": "combatant", "ilvl": 704 },
-    { "typeId": "aspirant", "ilvl": 717 },
-    { "typeId": "gladiator", "ilvl": 730 }
+    { "typeId": "honor", "ilvl": 276 },
+    { "typeId": "warmode", "ilvl": 285 },
+    { "typeId": "conquest", "ilvl": 289 },
+    { "typeId": "combatant", "ilvl": 263 },
+    { "typeId": "aspirant", "ilvl": 276 },
+    { "typeId": "gladiator", "ilvl": 289 }
+  ],
+  "craft": [
+    { "crest": "adventurer", "crestAmount": 60, "sparks": 0, "minIlvl": 220, "maxIlvl": 233 },
+    { "crest": "veteran", "crestAmount": 60, "sparks": 0, "minIlvl": 233, "maxIlvl": 246 },
+    { "crest": "champion", "crestAmount": 60, "sparks": 2, "minIlvl": 246, "maxIlvl": 259 },
+    { "crest": "hero", "crestAmount": 60, "sparks": 2, "minIlvl": 259, "maxIlvl": 272 },
+    { "crest": "myth", "crestAmount": 60, "sparks": 2, "minIlvl": 272, "maxIlvl": 285 }
+  ],
+  "traque": [
+    { "difficultyId": "normal", "tier": 1, "lootIlvl": 220, "weeklyChestIlvl": 233 },
+    { "difficultyId": "heroic", "tier": 5, "lootIlvl": 233, "weeklyChestIlvl": 246 },
+    { "difficultyId": "nightmare", "tier": 8, "lootIlvl": 246, "weeklyChestIlvl": 259 }
   ],
   "crests": [
-    { "name": "weathered", "color": "blue" },
-    { "name": "carved", "color": "purple" },
-    { "name": "runed", "color": "orange" },
-    { "name": "gilded", "color": "gold" }
+    { "name": "adventurer", "color": "green" },
+    { "name": "veteran", "color": "blue" },
+    { "name": "champion", "color": "purple" },
+    { "name": "hero", "color": "orange" },
+    { "name": "myth", "color": "gold" }
   ]
 }

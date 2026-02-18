@@ -15,7 +15,7 @@ interface IlvlFilterProps {
 // Générer une liste d'ilvls par pas de 5
 const generateIlvlOptions = () => {
   const options: number[] = [];
-  for (let i = 642; i <= 730; i += 5) {
+  for (let i = 208; i <= 289; i += 5) {
     options.push(i);
   }
   return options;

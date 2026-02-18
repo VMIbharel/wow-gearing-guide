@@ -23,14 +23,13 @@ interface Props {
 
 interface AllTracksRow {
   ilvl: number;
-  crestName: string | null;
+  crestNames: string[];
   ranksByTrack: { [trackName: string]: number | null };
 }
 
 function getDefaultTrack(tracks: UpgradeTrack[], currentIlvl: number | null): string {
-  if (currentIlvl === null) return "All"; // "All" par défaut
+  if (currentIlvl === null) return "All";
 
-  // Trouver le track où currentIlvl est dans la range
   for (const track of tracks) {
     const minIlvl = track.ilvls[0];
     const maxIlvl = track.ilvls[track.ilvls.length - 1];
@@ -39,45 +38,47 @@ function getDefaultTrack(tracks: UpgradeTrack[], currentIlvl: number | null): st
     }
   }
 
-  // Si trop haut, retourner Myth; si trop bas, Explorer
   return currentIlvl > tracks[tracks.length - 1].ilvls[0]
     ? tracks[tracks.length - 1].name
     : tracks[0].name;
 }
 
-function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
-  const ilvlMap = new Map<number, { crestName: string | null; ranksByTrack: { [trackName: string]: number | null } }>();
+function getCrestsForRank(track: UpgradeTrack, rank: number): string[] {
+  if (track.crestFromRank != null && rank < track.crestFromRank) {
+    return [];
+  } else if (track.secondaryCrestFromRank != null && rank >= track.secondaryCrestFromRank) {
+    const crests: string[] = [];
+    if (track.crest) crests.push(track.crest);
+    if (track.secondaryCrest) crests.push(track.secondaryCrest);
+    return crests;
+  } else {
+    return track.crest ? [track.crest] : [];
+  }
+}
 
-  // Parcourir tous les tracks et remplir la map
+function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
+  const ilvlMap = new Map<number, { crestNames: string[]; ranksByTrack: { [trackName: string]: number | null } }>();
+
   for (const track of tracks) {
     for (let rankIndex = 0; rankIndex < track.ilvls.length; rankIndex++) {
       const rank = rankIndex + 1;
       const ilvl = track.ilvls[rankIndex];
-
-      // Déterminer le crest basé sur le rank et les transitions
-      let crestName: string | null = null;
-      if (track.crestFromRank != null && rank < track.crestFromRank) {
-        crestName = null;
-      } else if (track.secondaryCrestFromRank != null && rank >= track.secondaryCrestFromRank) {
-        crestName = track.secondaryCrest ?? null;
-      } else {
-        crestName = track.crest;
-      }
+      const crests = getCrestsForRank(track, rank);
 
       if (!ilvlMap.has(ilvl)) {
-        ilvlMap.set(ilvl, { crestName, ranksByTrack: {} });
+        ilvlMap.set(ilvl, { crestNames: [], ranksByTrack: {} });
       }
 
       const entry = ilvlMap.get(ilvl)!;
-      // Le crest est le même pour tous les tracks à cet ilvl, on peut le garder
-      if (crestName && !entry.crestName) {
-        entry.crestName = crestName;
+      for (const crest of crests) {
+        if (!entry.crestNames.includes(crest)) {
+          entry.crestNames.push(crest);
+        }
       }
       entry.ranksByTrack[track.name] = rank;
     }
   }
 
-  // Initialiser ranksByTrack pour tous les tracks
   for (const entry of ilvlMap.values()) {
     for (const track of tracks) {
       if (!(track.name in entry.ranksByTrack)) {
@@ -86,20 +87,9 @@ function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
     }
   }
 
-  // Convertir en array et trier par ilvl croissant
   return Array.from(ilvlMap.entries())
     .map(([ilvl, data]) => ({ ilvl, ...data }))
     .sort((a, b) => a.ilvl - b.ilvl);
-}
-
-function getCrestForRank(track: UpgradeTrack, rank: number): string | null {
-  if (track.crestFromRank != null && rank < track.crestFromRank) {
-    return null;
-  } else if (track.secondaryCrestFromRank != null && rank >= track.secondaryCrestFromRank) {
-    return track.secondaryCrest ?? null;
-  } else {
-    return track.crest;
-  }
 }
 
 export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
@@ -181,7 +171,11 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                     <IlvlText ilvl={row.ilvl} />
                   </TableCell>
                   <TableCell>
-                    {row.crestName ? <CrestBadge name={row.crestName} /> : "—"}
+                    {row.crestNames.length > 0 ? (
+                      <div className="flex gap-1 flex-wrap">
+                        {row.crestNames.map((c) => <CrestBadge key={c} name={c} />)}
+                      </div>
+                    ) : "—"}
                   </TableCell>
                   {tracks.map((track) => (
                     <TableCell key={track.name} className="text-center text-sm">
@@ -211,7 +205,7 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
               <TableBody>
                 {track.ilvls.map((ilvl, rankIndex) => {
                   const rank = rankIndex + 1;
-                  const crestName = getCrestForRank(track, rank);
+                  const crests = getCrestsForRank(track, rank);
                   const isHighlighted = currentIlvl != null && ilvl > currentIlvl;
                   const isBelow = currentIlvl != null && ilvl <= currentIlvl;
 
@@ -227,7 +221,11 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                         <IlvlText ilvl={ilvl} />
                       </TableCell>
                       <TableCell>
-                        {crestName ? <CrestBadge name={crestName} /> : "—"}
+                        {crests.length > 0 ? (
+                          <div className="flex gap-1 flex-wrap">
+                            {crests.map((c) => <CrestBadge key={c} name={c} />)}
+                          </div>
+                        ) : "—"}
                       </TableCell>
                       <TableCell>{rank}</TableCell>
                     </TableRow>

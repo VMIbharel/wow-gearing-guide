@@ -4,10 +4,14 @@
     "description": "Interactive guide to optimize item level progression in World of Warcraft"
   },
   "nav": {
+    "dashboard": "Summary",
+    "weekly": "Weekly",
     "tracks": "Tracks",
     "raid": "Raid",
     "dungeons": "Dungeons",
     "delves": "Delves",
+    "craft": "Craft",
+    "traque": "Hunt",
     "pvp": "PvP",
     "info": "Info"
   },
@@ -16,6 +20,9 @@
     "loot": "Loot",
     "vault": "Vault",
     "crests": "Crests",
+    "contract": "Contract (max 4)",
+    "weeklyChest": "Weekly Chest",
+    "sparks": "Sparks",
     "level": "Level",
     "type": "Type",
     "tier": "Tier",
@@ -23,12 +30,20 @@
     "ilvl": "ilvl"
   },
   "sections": {
+    "dashboard": "Dashboard",
+    "weekly": "Weekly Guide",
     "upgradeTracks": "Upgrade Tracks",
-    "raid": "Raid: {name}",
+    "raid": "Raid",
     "dungeons": "Dungeons (Mythic+)",
     "delves": "Delves",
+    "craft": "Crafting",
+    "traque": "Hunt Contracts",
     "pvp": "PvP",
     "info": "Information"
+  },
+  "weekly": {
+    "reset": "Reset",
+    "resetAll": "Reset all"
   },
   "tabs": {
     "all": "All",
@@ -46,16 +61,33 @@
     "prevSection": "Previous section",
     "nextSection": "Next section",
     "toggleTheme": "Toggle theme",
-    "selectLanguage": "Select language"
+    "selectLanguage": "Select language",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "ilvlFilter": {
     "label": "ilvl:",
     "all": "All"
   },
+  "dashboard": {
+    "prompt": "Select your item level to see recommended activities",
+    "currentBest": "Best access",
+    "nextTier": "Next tier",
+    "maxAvailable": "Max available gear",
+    "gap": "+{gap} ilvl",
+    "maxReached": "Max reached",
+    "noAccess": "Not accessible",
+    "raid": "Raid",
+    "dungeons": "Dungeons",
+    "delves": "Delves",
+    "traque": "Hunt",
+    "pvp": "PvP",
+    "craft": "Crafting"
+  },
   "game": {
     "season": {
-      "full": "The War Within - Season 3",
-      "short": "TWW S3 - Turbo Boost"
+      "full": "Midnight - Pre-season",
+      "short": "Mid PS"
     },
     "tracks": {
       "explorer": "Explorer",
@@ -66,13 +98,16 @@
       "myth": "Myth"
     },
     "crests": {
-      "weathered": "Weathered",
-      "carved": "Carved",
-      "runed": "Runed",
-      "gilded": "Gilded"
+      "adventurer": "Adventurer",
+      "veteran": "Veteran",
+      "champion": "Champion",
+      "hero": "Hero",
+      "myth": "Myth"
     },
     "raids": {
-      "manaforge-omega": "Manaforge Omega"
+      "voidspire": "The Voidspire",
+      "dreamrift": "The Dreamrift",
+      "quel'danas": "March on Quel'Danas"
     },
     "difficulties": {
       "lfr": "LFR",
@@ -80,7 +115,14 @@
       "heroic": "Heroic",
       "mythic": "Mythic"
     },
+    "traqueDifficulties": {
+      "normal": "Normal",
+      "heroic": "Difficult",
+      "nightmare": "Nightmare"
+    },
     "dungeonLabels": {
+      "normal": "Normal",
+      "timewalking": "Timewalking",
       "heroic": "Heroic",
       "mythic0": "Mythic 0",
       "+2": "+2",
@@ -105,13 +147,11 @@
     },
     "notes": {
       "raid": [
-        "Very Rare gear drops from boss 7 - Nexus-King Salhadaar (2H Agi/Str Mace)",
-        "On LFR, Normal, and Heroic, bosses 7 & 8 drop both types of Crests listed",
         "Great Vault rewards from raids scale in ilvl based on the hardest boss killed that week per difficulty"
       ],
       "dungeons": [
         "M0 dungeons are on a weekly lockout",
-        "Completing an expired keystone will deduct 4 Crests from the values above",
+        "Completing an expired keystone will deduct Crests from the values above",
         "Affix changes indicated by * on key level"
       ],
       "delves": [
@@ -119,6 +159,11 @@
         "You can get 1 map per week",
         "Hidden Troves don't need keys",
         "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week"
+      ],
+      "craft": [],
+      "traque": [
+        "You can complete a maximum of 4 contracts per difficulty tier per week",
+        "Weekly Vault rewards scale based on the highest difficulty completed"
       ]
     }
   }
