@@ -43,8 +43,7 @@
   },
   "weekly": {
     "reset": "Reset",
-    "resetAll": "Reset all",
-    "addonNote": "An addon by Dev from Refined automatically syncs with this checklist!"
+    "resetAll": "Reset all"
   },
   "tabs": {
     "all": "All",

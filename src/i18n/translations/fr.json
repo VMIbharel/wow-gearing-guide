@@ -43,8 +43,7 @@
   },
   "weekly": {
     "reset": "Réinitialiser",
-    "resetAll": "Tout réinitialiser",
-    "addonNote": "Un addon créé par Dev de Refined se synchronise automatiquement avec cette checklist !"
+    "resetAll": "Tout réinitialiser"
   },
   "tabs": {
     "all": "Tous",

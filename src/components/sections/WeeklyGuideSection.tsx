@@ -21,11 +21,8 @@ export function WeeklyGuideSection() {
 
   return (
     <div className="space-y-3">
-      {/* Header with addon note and global reset */}
-      <div className="flex items-start justify-between gap-4">
-        <p className="text-xs text-muted-foreground italic">
-          {t("weekly.addonNote")}
-        </p>
+      {/* Global reset button */}
+      <div className="flex justify-end">
         <Button
           variant="ghost"
           size="sm"
