@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target } from "lucide-react";
+import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
 import { RaidSection } from "./sections/RaidSection";
@@ -8,6 +8,7 @@ import { DelvesSection } from "./sections/DelvesSection";
 import { CraftSection } from "./sections/CraftSection";
 import { TraqueSection } from "./sections/TraqueSection";
 import { PvpTable } from "./sections/PvpTable";
+import { WeeklyGuideSection } from "./sections/WeeklyGuideSection";
 import { AppHeader } from "./layout/AppHeader";
 import { SectionNav } from "./layout/SectionNav";
 import { SectionDots } from "./layout/SectionDots";
@@ -42,6 +43,7 @@ function GearingGuideContent() {
   activeSectionRef.current = activeSection;
 
   const sections = useMemo(() => [
+    { id: "weekly", label: t("nav.weekly"), icon: CalendarCheck },
     { id: "tracks", label: t("nav.tracks"), icon: Map },
     { id: "raid", label: t("nav.raid"), icon: Landmark },
     { id: "dungeons", label: t("nav.dungeons"), icon: Castle },
@@ -137,6 +139,14 @@ function GearingGuideContent() {
           tabIndex={0}
           onKeyDown={handleKeyDown}
         >
+          {/* Panel: Weekly Guide */}
+          <section className="w-full shrink-0 snap-center overflow-y-auto">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 min-h-full">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.weekly")}</h2>
+              <WeeklyGuideSection />
+            </div>
+          </section>
+
           {/* Panel: Upgrade Tracks */}
           <section className="w-full shrink-0 snap-center flex flex-col">
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">

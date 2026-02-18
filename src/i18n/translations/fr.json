@@ -4,6 +4,7 @@
     "description": "Guide interactif pour optimiser la montée en niveau d'objet dans World of Warcraft"
   },
   "nav": {
+    "weekly": "Hebdo",
     "tracks": "Pistes",
     "raid": "Raid",
     "dungeons": "Donjons",
@@ -28,6 +29,7 @@
     "ilvl": "niv"
   },
   "sections": {
+    "weekly": "Guide Hebdomadaire",
     "upgradeTracks": "Pistes d'amélioration",
     "raid": "Raid",
     "dungeons": "Donjons (Mythique+)",
@@ -36,6 +38,11 @@
     "traque": "Contrats de Traque",
     "pvp": "JcJ",
     "info": "Informations"
+  },
+  "weekly": {
+    "reset": "Réinitialiser",
+    "resetAll": "Tout réinitialiser",
+    "addonNote": "Un addon créé par Dev de Refined se synchronise automatiquement avec cette checklist !"
   },
   "tabs": {
     "all": "Tous",
@@ -53,7 +60,9 @@
     "prevSection": "Section précédente",
     "nextSection": "Section suivante",
     "toggleTheme": "Basculer le thème",
-    "selectLanguage": "Sélectionner la langue"
+    "selectLanguage": "Sélectionner la langue",
+    "openMenu": "Ouvrir le menu de navigation",
+    "closeMenu": "Fermer le menu de navigation"
   },
   "ilvlFilter": {
     "label": "ilvl :",
@@ -122,13 +131,11 @@
     },
     "notes": {
       "raid": [
-        "L'équipement très rare provient du boss 7 - Roi-nexus Salhadaar (Masse Agi/For 2M)",
-        "En LFR, Normal et Héroïque, les boss 7 et 8 donnent les deux types d'écussons listés",
         "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
       ],
       "dungeons": [
         "Les donjons M0 ont un verrouillage hebdomadaire",
-        "Terminer une clé expirée déduit 4 écussons des valeurs ci-dessus",
+        "Terminer une clé expirée réduit les écus des valeurs ci-dessus",
         "Les changements d'affixes sont indiqués par * sur le niveau de clé"
       ],
       "delves": [

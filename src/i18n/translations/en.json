@@ -4,6 +4,7 @@
     "description": "Interactive guide to optimize item level progression in World of Warcraft"
   },
   "nav": {
+    "weekly": "Weekly",
     "tracks": "Tracks",
     "raid": "Raid",
     "dungeons": "Dungeons",
@@ -28,6 +29,7 @@
     "ilvl": "ilvl"
   },
   "sections": {
+    "weekly": "Weekly Guide",
     "upgradeTracks": "Upgrade Tracks",
     "raid": "Raid",
     "dungeons": "Dungeons (Mythic+)",
@@ -36,6 +38,11 @@
     "traque": "Hunt Contracts",
     "pvp": "PvP",
     "info": "Information"
+  },
+  "weekly": {
+    "reset": "Reset",
+    "resetAll": "Reset all",
+    "addonNote": "An addon by Dev from Refined automatically syncs with this checklist!"
   },
   "tabs": {
     "all": "All",
@@ -53,7 +60,9 @@
     "prevSection": "Previous section",
     "nextSection": "Next section",
     "toggleTheme": "Toggle theme",
-    "selectLanguage": "Select language"
+    "selectLanguage": "Select language",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "ilvlFilter": {
     "label": "ilvl:",
@@ -122,13 +131,11 @@
     },
     "notes": {
       "raid": [
-        "Very Rare gear drops from boss 7 - Nexus-King Salhadaar (2H Agi/Str Mace)",
-        "On LFR, Normal, and Heroic, bosses 7 & 8 drop both types of Crests listed",
         "Great Vault rewards from raids scale in ilvl based on the hardest boss killed that week per difficulty"
       ],
       "dungeons": [
         "M0 dungeons are on a weekly lockout",
-        "Completing an expired keystone will deduct 4 Crests from the values above",
+        "Completing an expired keystone will deduct Crests from the values above",
         "Affix changes indicated by * on key level"
       ],
       "delves": [
