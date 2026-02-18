@@ -74,6 +74,7 @@
     "prompt": "Select your item level to see recommended activities",
     "currentBest": "Best access",
     "nextTier": "Next tier",
+    "maxAvailable": "Max available gear",
     "gap": "+{gap} ilvl",
     "maxReached": "Max reached",
     "noAccess": "Not accessible",

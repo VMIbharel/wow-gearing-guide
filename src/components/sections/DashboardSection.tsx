@@ -202,7 +202,7 @@ function ActivityCardItem({
       {/* Next tier to accomplish — large and colored */}
       <div className="mb-2">
         <p className="text-xs text-muted-foreground mb-0.5">
-          {t("dashboard.nextTier")}
+          {currentIlvl === null ? t("dashboard.maxAvailable") : t("dashboard.nextTier")}
         </p>
         {card.nextIlvl !== null ? (
           <>

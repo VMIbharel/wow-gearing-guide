@@ -74,6 +74,7 @@
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
     "currentBest": "Meilleur accès",
     "nextTier": "Prochain palier",
+    "maxAvailable": "Équipement maximum disponible",
     "gap": "+{gap} niv",
     "maxReached": "Maximum atteint",
     "noAccess": "Non accessible",
