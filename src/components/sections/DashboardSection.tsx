@@ -23,21 +23,24 @@ function getBest(ilvls: number[], currentIlvl: number | null) {
   if (ilvls.length === 0) return { currentBestIlvl: null, nextIlvl: null };
 
   const sorted = [...new Set(ilvls)].sort((a, b) => a - b);
+  const maxAbsolute = sorted[sorted.length - 1];
 
   if (currentIlvl === null) {
-    // Reference mode: show absolute max
-    return { currentBestIlvl: sorted[sorted.length - 1], nextIlvl: null };
+    // No ilvl selected: show absolute max as next tier
+    return { currentBestIlvl: null, nextIlvl: maxAbsolute };
   }
 
-  const accessible = sorted.filter((v) => v >= currentIlvl);
-  if (accessible.length === 0) {
-    // Nothing accessible: show the lowest value as "next"
-    return { currentBestIlvl: null, nextIlvl: sorted[0] };
+  // Find the next tier ABOVE current ilvl
+  const above = sorted.filter((v) => v > currentIlvl);
+
+  if (above.length === 0) {
+    // Already at max or beyond
+    return { currentBestIlvl: maxAbsolute, nextIlvl: null };
   }
 
-  const currentBestIlvl = accessible[accessible.length - 1]; // highest accessible
-  const above = sorted.filter((v) => v > currentBestIlvl);
-  const nextIlvl = above.length > 0 ? above[0] : null;
+  // There's a next tier to reach
+  const nextIlvl = above[0]; // first tier above currentIlvl
+  const currentBestIlvl = maxAbsolute; // for secondary display
 
   return { currentBestIlvl, nextIlvl };
 }
