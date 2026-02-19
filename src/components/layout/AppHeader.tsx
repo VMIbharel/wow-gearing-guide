@@ -19,8 +19,12 @@ export function AppHeader({ season, currentIlvl, onIlvlChange }: AppHeaderProps)
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 min-w-0">
             <Logo />
-            <div className="hidden sm:block">
-              <h1 className="text-sm font-semibold truncate">{t("app.title")}</h1>
+            <div className="hidden sm:flex sm:flex-col sm:min-w-0">
+              <img
+                src="/title.webp"
+                alt={t("app.title")}
+                className="h-6 w-auto object-contain object-left dark:brightness-0 dark:invert"
+              />
               {season && (
                 <p className="text-xs text-muted-foreground truncate">{season}</p>
               )}
