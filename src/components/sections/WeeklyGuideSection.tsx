@@ -128,6 +128,21 @@ export function WeeklyGuideSection() {
                             {item.note[lang]}
                           </span>
                         )}
+                        {item.links && item.links.length > 0 && (
+                          <span className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                            {item.links.map((link, i) => (
+                              <a
+                                key={i}
+                                href={`https://${lang === "fr" ? "fr" : "www"}.wowhead.com/${link.path}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-primary underline hover:text-primary/80 transition-colors not-italic"
+                              >
+                                {link.label[lang]}
+                              </a>
+                            ))}
+                          </span>
+                        )}
                       </label>
                     </li>
                   ))}

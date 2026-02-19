@@ -2,6 +2,7 @@ export interface WeeklyItem {
   id: string;
   text: { fr: string; en: string };
   note?: { fr: string; en: string };
+  links?: { label: { fr: string; en: string }; path: string }[];
 }
 
 export interface WeeklyPhase {
@@ -17,6 +18,55 @@ export interface WeeklyPhase {
 
 export const weeklyPhases: WeeklyPhase[] = [
   {
+    id: "pre-launch",
+    title: { fr: "Préparation", en: "Preparation" },
+    date: "Avant le 27 fév",
+    items: [
+      {
+        id: "pl-potions",
+        text: {
+          fr: "Stocker des potions, flasques et runes",
+          en: "Stock up on potions, flasks and runes",
+        },
+      },
+      {
+        id: "pl-mounts",
+        text: {
+          fr: "Avoir une monture Mammouth, Yack de Grand Voyage ou Brutosaure — accès instantané aux marchands sans retour en ville",
+          en: "Have a Mammoth, Grand Expedition Yak or Brutosaur mount — instant vendor access without returning to town",
+        },
+      },
+      {
+        id: "pl-pistobottes",
+        text: {
+          fr: "Préparer des Pisto-Bottes (boost de vitesse utile pour la montée en niveau)",
+          en: "Prepare Rocket Boots (speed boost useful during leveling)",
+        },
+      },
+      {
+        id: "pl-bags",
+        text: {
+          fr: "Libérer de l'espace dans les sacs",
+          en: "Free up bag space",
+        },
+      },
+      {
+        id: "pl-quest-log",
+        text: {
+          fr: "Nettoyer son journal de quêtes",
+          en: "Clean your quest log",
+        },
+      },
+      {
+        id: "pl-aoe-build",
+        text: {
+          fr: "Prévoir un build orienté AOE pour tuer les mobs rapidement",
+          en: "Prepare an AOE-oriented build for fast mob clearing",
+        },
+      },
+    ],
+  },
+  {
     id: "early-access",
     title: { fr: "Accès Anticipé", en: "Early Access" },
     date: "27 fév – 3 mars",
@@ -27,10 +77,58 @@ export const weeklyPhases: WeeklyPhase[] = [
     },
     items: [
       {
+        id: "ea-quest-profession",
+        text: {
+          fr: "Rendre les quêtes de Métier à la capitale et à Dornogal — récompenses : connaissance de métier et Acuités d'Artisan",
+          en: "Turn in Profession quests at the capital city and Dornogal — rewards: profession knowledge and Artisan's Acuity",
+        },
+        links: [
+          { label: { fr: "Kala Clayhoof (Dornogal)", en: "Kala Clayhoof (Dornogal)" }, path: "npc=228177/kala-clayhoof" },
+        ],
+      },
+      {
+        id: "ea-quest-fishing-cooking",
+        text: {
+          fr: "Rendre les quêtes journalières de Pêche et Cuisine à Hurlevent ou Orgrimmar",
+          en: "Turn in Fishing and Cooking daily quests in Stormwind or Orgrimmar",
+        },
+        links: [
+          { label: { fr: "Catherine Leland (Hurlevent – Pêche)", en: "Catherine Leland (Stormwind – Fishing)" }, path: "npc=5494/catherine-leland" },
+          { label: { fr: "Razgar (Orgrimmar – Pêche)", en: "Razgar (Orgrimmar – Fishing)" }, path: "npc=43239/razgar" },
+          { label: { fr: "Robby Flay (Hurlevent – Cuisine)", en: "Robby Flay (Stormwind – Cooking)" }, path: "npc=42288/robby-flay" },
+          { label: { fr: "Marogg (Orgrimmar – Cuisine)", en: "Marogg (Orgrimmar – Cooking)" }, path: "npc=42506/marogg" },
+        ],
+      },
+      {
+        id: "ea-quest-balloon",
+        text: {
+          fr: "Rendre la quête du Ballon (\"Emporté par le vent\") à Hurlevent ou Orgrimmar — collectez 5 ballons dans la capitale",
+          en: "Turn in Balloon quest (\"Blown Away\") in Stormwind or Orgrimmar — collect 5 balloons around the capital",
+        },
+        links: [
+          { label: { fr: "Vin (Hurlevent – Alliance)", en: "Vin (Stormwind – Alliance)" }, path: "npc=54117/vin" },
+          { label: { fr: "Jaga (Orgrimmar – Horde)", en: "Jaga (Orgrimmar – Horde)" }, path: "npc=54004/jaga" },
+        ],
+      },
+      {
+        id: "ea-quest-delves",
+        text: {
+          fr: "Rendre les quêtes de Gouffres obtenues lors des sessions de Gouffres",
+          en: "Turn in Delve quests obtained while running Delves",
+        },
+      },
+      {
+        id: "ea-choose-professions",
+        text: {
+          fr: "Choisir ses métiers dès que possible",
+          en: "Choose your professions as soon as possible",
+        },
+      },
+      {
         id: "ea-level-chars",
         text: {
-          fr: "Monter vos personnages au niveau maximum avant le reset hebdomadaire (les M0 seront disponibles à ce moment)",
-          en: "Level your characters to max before the weekly reset (M0s become available then)",
+          fr: "Monter vos personnages au niveau maximum avant le reset hebdomadaire (le HM sera disponibles à ce moment)",
+          en: "Level your characters to max before the weekly reset (HM become available then)",
         },
       },
       {
@@ -57,7 +155,7 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "ea-renown-craft",
         text: {
-          fr: "Artisans : minimisez les quêtes secondaires avant dimanche pour profiter du bonus de +10% de Renommée de la Foire de SombreLune",
+          fr: "Optimisation bonus : minimisez les quêtes secondaires avant dimanche pour profiter du bonus de +10% de Renommée de la Foire de SombreLune",
           en: "Crafters/min-maxers: minimize side quests before Sunday to gain DMF's 10% Renown bonus",
         },
       },
@@ -67,12 +165,19 @@ export const weeklyPhases: WeeklyPhase[] = [
     id: "pre-season-week-1",
     title: { fr: "Pré-saison – Semaine 1", en: "Pre-Season Week 1" },
     date: "4 mars",
-    subtitle: { fr: "M0 disponibles (ilvl réduit)", en: "M0s available at reduced item level" },
+    subtitle: { fr: "HM disponibles", en: "HM available" },
     warning: {
       fr: "Ne pas dépenser d'écus",
       en: "Do not spend any Crests",
     },
     items: [
+      {
+        id: "ps1-choose-professions",
+        text: {
+          fr: "Si ce n'est pas encore fait : choisir ses métiers dès que possible",
+          en: "If not already done: choose your professions as soon as possible",
+        },
+      },
       {
         id: "ps1-voidspire-renown",
         text: {
@@ -136,8 +241,8 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "ps1-m0-tour",
         text: {
-          fr: "Compléter une fois tous les donjons M0 — butin au rang Vétéran (240 ilvl). Ne pas améliorer avec des Ecus",
-          en: "Complete a World Tour of M0 dungeons — loot at Veteran rank (240 ilvl). Do not upgrade with Crests",
+          fr: "Compléter une fois tous les donjons HM — butin au rang Vétéran (240 ilvl). Ne pas améliorer avec des Ecus",
+          en: "Complete a World Tour of HM dungeons — loot at Veteran rank (240 ilvl). Do not upgrade with Crests",
         },
       },
       {
@@ -153,7 +258,7 @@ export const weeklyPhases: WeeklyPhase[] = [
     id: "pre-season-week-2",
     title: { fr: "Pré-saison – Semaine 2", en: "Pre-Season Week 2" },
     date: "11 mars",
-    subtitle: { fr: "M0 disponibles (ilvl réduit)", en: "M0s available at reduced item level" },
+    subtitle: { fr: "HM disponibles", en: "HM available" },
     warning: {
       fr: "Ne pas dépenser d'écus",
       en: "Do not spend any Crests",
@@ -197,8 +302,8 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "ps2-m0-tour",
         text: {
-          fr: "Compléter une fois tous les donjons M0 — butin au rang Vétéran (240 ilvl). Ne pas améliorer avec des écus",
-          en: "Complete a World Tour of M0 dungeons — Veteran rank loot (240 ilvl). Do not upgrade with Crests",
+          fr: "Compléter une fois tous les donjons HM — butin au rang Vétéran (240 ilvl). Ne pas améliorer avec des écus",
+          en: "Complete a World Tour of HM dungeons — Veteran rank loot (240 ilvl). Do not upgrade with Crests",
         },
       },
       {
@@ -221,7 +326,7 @@ export const weeklyPhases: WeeklyPhase[] = [
     id: "season-week-1",
     title: { fr: "Saison 1 – Semaine 1", en: "Season 1 Week 1" },
     date: "18 mars",
-    subtitle: { fr: "Semaine Héroïque – pas de M+", en: "Heroic Week – no M+" },
+    subtitle: { fr: "Semaine Mythic – pas de M+", en: "Mythic Week – no M+" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
       en: "Do NOT spend Heroic or Mythic crests",
