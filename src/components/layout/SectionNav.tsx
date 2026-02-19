@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { cn } from "@/lib/utils";
 
@@ -55,19 +55,17 @@ export function SectionNav({ sections, activeSection, onSectionClick }: SectionN
     <nav ref={navRef} className="shrink-0 bg-background/95 backdrop-blur border-b z-10 relative">
       <div className="mx-auto max-w-5xl px-4">
 
-        {/* Mobile bar (< md): active section + hamburger button */}
+        {/* Mobile bar (< md): dropdown button with active section */}
         <div className="flex md:hidden items-center justify-between py-2">
-          <div className="flex items-center gap-2 text-sm font-medium text-primary">
-            {ActiveIcon && <ActiveIcon className="w-4 h-4" />}
-            <span>{ActiveSection?.label}</span>
-          </div>
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-accent transition-colors"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-accent transition-colors text-sm font-medium text-primary flex-1"
             aria-label={menuOpen ? t("aria.closeMenu") : t("aria.openMenu")}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {ActiveIcon && <ActiveIcon className="w-4 h-4 shrink-0" />}
+            <span className="flex-1 text-left">{ActiveSection?.label}</span>
+            <ChevronDown className={cn("w-4 h-4 shrink-0 transition-transform", menuOpen && "rotate-180")} />
           </button>
         </div>
 
