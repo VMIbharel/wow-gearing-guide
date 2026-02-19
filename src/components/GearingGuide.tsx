@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck, LayoutDashboard } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
+import { useWeeklyChecklist } from "@/hooks/useWeeklyChecklist";
 import { DashboardSection } from "./sections/DashboardSection";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
 import { RaidSection } from "./sections/RaidSection";
@@ -37,6 +38,7 @@ export function GearingGuide() {
 function GearingGuideContent() {
   const { t } = useI18n();
   const data = useGearingData();
+  const checklist = useWeeklyChecklist();
   const [currentIlvl, setCurrentIlvl] = useState<number | null>(null);
   const [activeSection, setActiveSection] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -158,6 +160,7 @@ function GearingGuideContent() {
                 currentIlvl={currentIlvl}
                 data={data}
                 onNavigate={navigateToSection}
+                checked={checklist.checked}
               />
               </div>
             </div>
@@ -168,7 +171,7 @@ function GearingGuideContent() {
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
               <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.weekly")}</h2>
               <div className="flex-1 min-h-0 overflow-auto">
-              <WeeklyGuideSection />
+              <WeeklyGuideSection {...checklist} />
               </div>
             </div>
           </section>

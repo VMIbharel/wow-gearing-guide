@@ -95,7 +95,11 @@
     "pvp": "JcJ",
     "pvpSub": "Honneur · Warmode · Conquête",
     "craft": "Artisanat",
-    "craftSub": "Artisanat avec écus de saison"
+    "craftSub": "Artisanat avec écus de saison",
+    "roadmapSub": "Suivez votre progression semaine par semaine",
+    "roadmapPhase": "Phase actuelle",
+    "roadmapProgress": "{done}/{total} tâches",
+    "tracksSub": "{count} pistes · Explorateur → Mythe"
   },
   "game": {
     "season": {

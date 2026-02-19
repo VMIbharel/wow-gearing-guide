@@ -95,7 +95,11 @@
     "pvp": "PvP",
     "pvpSub": "Honor · Warmode · Conquest",
     "craft": "Crafting",
-    "craftSub": "Craft with season crests"
+    "craftSub": "Craft with season crests",
+    "roadmapSub": "Track your weekly progression through the season",
+    "roadmapPhase": "Current phase",
+    "roadmapProgress": "{done}/{total} tasks",
+    "tracksSub": "{count} tracks · Explorer → Myth"
   },
   "game": {
     "season": {
