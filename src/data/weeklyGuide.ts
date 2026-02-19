@@ -19,7 +19,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "early-access",
     title: { fr: "Accès Anticipé", en: "Early Access" },
-    date: "26 fév – 2 mars",
+    date: "27 fév – 3 mars",
     subtitle: { fr: "Pay to Win", en: "Pay to Win" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -66,7 +66,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "pre-season-week-1",
     title: { fr: "Pré-saison – Semaine 1", en: "Pre-Season Week 1" },
-    date: "3 mars",
+    date: "4 mars",
     subtitle: { fr: "M0 disponibles (ilvl réduit)", en: "M0s available at reduced item level" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -152,7 +152,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "pre-season-week-2",
     title: { fr: "Pré-saison – Semaine 2", en: "Pre-Season Week 2" },
-    date: "10 mars",
+    date: "11 mars",
     subtitle: { fr: "M0 disponibles (ilvl réduit)", en: "M0s available at reduced item level" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -220,7 +220,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-1",
     title: { fr: "Saison 1 – Semaine 1", en: "Season 1 Week 1" },
-    date: "17 mars",
+    date: "18 mars",
     subtitle: { fr: "Semaine Héroïque – pas de M+", en: "Heroic Week – no M+" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
@@ -309,7 +309,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-2",
     title: { fr: "Semaine 2", en: "Week 2" },
-    date: "24 mars",
+    date: "25 mars",
     subtitle: { fr: "Semaine Mythique – M+ ouvre", en: "Mythic Week – M+ opens" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
@@ -364,7 +364,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-3",
     title: { fr: "Semaine 3", en: "Week 3" },
-    date: "31 mars",
+    date: "1 avr",
     subtitle: { fr: "Dernier Raid disponible", en: "Final Raid opens" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques avant le reset du raid",
@@ -421,7 +421,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-4",
     title: { fr: "Semaine 4", en: "Week 4" },
-    date: "7 avr",
+    date: "8 avr",
     items: [
       {
         id: "s1w4-vault",
@@ -480,7 +480,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-5",
     title: { fr: "Semaine 5", en: "Week 5" },
-    date: "14 avr",
+    date: "15 avr",
     items: [
       {
         id: "s1w5-vault",
@@ -521,7 +521,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-6",
     title: { fr: "Semaine 6", en: "Week 6" },
-    date: "21 avr",
+    date: "22 avr",
     items: [
       {
         id: "s1w6-vault",
@@ -566,7 +566,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-7",
     title: { fr: "Semaine 7", en: "Week 7" },
-    date: "28 avr",
+    date: "29 avr",
     items: [
       {
         id: "s1w7-vault",
@@ -607,7 +607,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-8",
     title: { fr: "Semaine 8", en: "Week 8" },
-    date: "5 mai",
+    date: "6 mai",
     subtitle: { fr: "Fin des écus Héroïques", en: "Done with Heroic Crests" },
     items: [
       {
@@ -660,7 +660,7 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-weeks-9plus",
     title: { fr: "Semaine 9+", en: "Weeks 9+" },
-    date: "12 mai+",
+    date: "13 mai+",
     items: [
       {
         id: "s1w9-craft-slots",
