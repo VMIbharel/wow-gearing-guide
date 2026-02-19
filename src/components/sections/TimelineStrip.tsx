@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import type { WeeklyPhase } from "@/data/weeklyGuide";
 
@@ -10,7 +11,7 @@ interface TimelineStripProps {
   onPhaseClick: (phaseId: string) => void;
 }
 
-export function TimelineStrip({
+export const TimelineStrip = memo(function TimelineStrip({
   phases,
   checked,
   lang,
@@ -18,18 +19,25 @@ export function TimelineStrip({
   todayLabel,
   onPhaseClick,
 }: TimelineStripProps) {
-  const activeIndex = [...phases]
-    .reverse()
-    .findIndex((p) => p.startDate <= today);
-  const currentIndex =
-    activeIndex === -1 ? 0 : phases.length - 1 - activeIndex;
+  const currentIndex = useMemo(() => {
+    const activeIndex = [...phases].reverse().findIndex((p) => p.startDate <= today);
+    return activeIndex === -1 ? 0 : phases.length - 1 - activeIndex;
+  }, [phases, today]);
+
+  const phaseCounts = useMemo(
+    () =>
+      phases.map((phase) => {
+        const done = phase.items.filter((item) => checked[item.id]).length;
+        return { done, total: phase.items.length };
+      }),
+    [phases, checked]
+  );
 
   return (
     <div className="pb-1">
       <div className="flex flex-wrap gap-1">
         {phases.map((phase, i) => {
-          const total = phase.items.length;
-          const done = phase.items.filter((item) => checked[item.id]).length;
+          const { done, total } = phaseCounts[i];
           const pct = total > 0 ? done / total : 0;
           const isComplete = total > 0 && done === total;
           const isCurrent = i === currentIndex;
@@ -97,4 +105,4 @@ export function TimelineStrip({
       </div>
     </div>
   );
-}
+});

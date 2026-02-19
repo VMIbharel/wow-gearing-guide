@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useI18n } from "@/i18n";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -22,6 +23,39 @@ interface Props {
   currentIlvl: number | null;
 }
 
+type IlvlStatus = "below" | "above" | "none";
+
+function getIlvlStatus(rowIlvl: number, currentIlvl: number | null): IlvlStatus {
+  if (currentIlvl == null) return "none";
+  return rowIlvl < currentIlvl ? "below" : "above";
+}
+
+const DungeonRow = memo(
+  function DungeonRow({ d, currentIlvl }: { d: Dungeon; currentIlvl: number | null }) {
+    return (
+      <TableRow
+        className={cn(
+          currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+          currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
+        )}
+      >
+        <TableCell className="font-medium">
+          {d.label}{d.affix ? "*" : ""}
+        </TableCell>
+        <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
+        <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
+        <TableCell className="flex gap-1 items-center">
+          <span className="text-xs font-semibold">{d.crestAmount}</span>
+          <CrestBadge name={d.crest} />
+        </TableCell>
+      </TableRow>
+    );
+  },
+  (prev, next) =>
+    getIlvlStatus(prev.d.vaultIlvl, prev.currentIlvl) ===
+    getIlvlStatus(next.d.vaultIlvl, next.currentIlvl)
+);
+
 export function DungeonTable({ dungeons, notes, currentIlvl }: Props) {
   const { t } = useI18n();
 
@@ -39,23 +73,7 @@ export function DungeonTable({ dungeons, notes, currentIlvl }: Props) {
           </TableHeader>
           <TableBody>
             {dungeons.map((d) => (
-              <TableRow
-                key={d.level}
-                className={cn(
-                  currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
-                  currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
-                )}
-              >
-                <TableCell className="font-medium">
-                  {d.label}{d.affix ? "*" : ""}
-                </TableCell>
-                <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
-                <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
-                <TableCell className="flex gap-1 items-center">
-                  <span className="text-xs font-semibold">{d.crestAmount}</span>
-                  <CrestBadge name={d.crest} />
-                </TableCell>
-              </TableRow>
+              <DungeonRow key={d.level} d={d} currentIlvl={currentIlvl} />
             ))}
           </TableBody>
         </Table>

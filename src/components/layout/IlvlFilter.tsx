@@ -1,3 +1,4 @@
+import { useState, useTransition, useEffect } from "react";
 import { useI18n } from "@/i18n";
 import {
   Select,
@@ -25,6 +26,16 @@ const ilvlOptions = generateIlvlOptions();
 
 export function IlvlFilter({ value, onChange }: IlvlFilterProps) {
   const { t } = useI18n();
+  const [, startTransition] = useTransition();
+  // Local display value — updates immediately so the Select closes and shows
+  // the new value on the first paint, while the expensive parent re-render
+  // is deferred via startTransition.
+  const [displayValue, setDisplayValue] = useState<string>(value?.toString() ?? "all");
+
+  // Sync when parent value changes externally (e.g., language change resets data)
+  useEffect(() => {
+    setDisplayValue(value?.toString() ?? "all");
+  }, [value]);
 
   return (
     <div className="flex items-center gap-3">
@@ -32,9 +43,12 @@ export function IlvlFilter({ value, onChange }: IlvlFilterProps) {
         {t("ilvlFilter.label")}
       </label>
       <Select
-        value={value?.toString() ?? "all"}
+        value={displayValue}
         onValueChange={(v) => {
-          onChange(v === "all" ? null : Number(v));
+          setDisplayValue(v);
+          startTransition(() => {
+            onChange(v === "all" ? null : Number(v));
+          });
         }}
       >
         <SelectTrigger className="w-32">

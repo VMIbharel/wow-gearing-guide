@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useI18n } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -95,7 +95,7 @@ function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
 export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
   const { t } = useI18n();
   const defaultTrack = getDefaultTrack(tracks, currentIlvl);
-  const allTracksData = buildAllTracksData(tracks);
+  const allTracksData = useMemo(() => buildAllTracksData(tracks), [tracks]);
   const [activeTab, setActiveTab] = useState(defaultTrack);
 
   return (

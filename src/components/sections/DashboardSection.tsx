@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck } from "lucide-react";
 import { useI18n, useGearingData } from "@/i18n";
 import { IlvlText } from "@/components/shared/IlvlText";
@@ -292,7 +292,7 @@ function TracksCard({
   );
 }
 
-function ActivityCardItem({
+const ActivityCardItem = memo(function ActivityCardItem({
   card,
   currentIlvl,
   onNavigate,
@@ -363,4 +363,4 @@ function ActivityCardItem({
       )}
     </button>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useI18n } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -33,6 +34,58 @@ interface Props {
   currentIlvl: number | null;
 }
 
+type IlvlStatus = "below" | "above" | "none";
+
+function getIlvlStatus(rowIlvl: number, currentIlvl: number | null): IlvlStatus {
+  if (currentIlvl == null) return "none";
+  return rowIlvl < currentIlvl ? "below" : "above";
+}
+
+const BountifulDelveRow = memo(
+  function BountifulDelveRow({ d, currentIlvl }: { d: BountifulDelve; currentIlvl: number | null }) {
+    return (
+      <TableRow
+        className={cn(
+          currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+          currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
+        )}
+      >
+        <TableCell className="font-medium">T{d.tier}</TableCell>
+        <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
+        <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
+        <TableCell>
+          {d.crest ? <CrestBadge name={d.crest} /> : "—"}
+        </TableCell>
+      </TableRow>
+    );
+  },
+  (prev, next) =>
+    getIlvlStatus(prev.d.vaultIlvl, prev.currentIlvl) ===
+    getIlvlStatus(next.d.vaultIlvl, next.currentIlvl)
+);
+
+const BountyMapRow = memo(
+  function BountyMapRow({ m, currentIlvl }: { m: BountyMap; currentIlvl: number | null }) {
+    return (
+      <TableRow
+        className={cn(
+          currentIlvl != null && m.lootIlvl < currentIlvl && "opacity-30",
+          currentIlvl != null && m.lootIlvl >= currentIlvl && "bg-accent/50"
+        )}
+      >
+        <TableCell className="font-medium">T{m.tier}</TableCell>
+        <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
+        <TableCell>
+          <CrestBadge name={m.crest} />
+        </TableCell>
+      </TableRow>
+    );
+  },
+  (prev, next) =>
+    getIlvlStatus(prev.m.lootIlvl, prev.currentIlvl) ===
+    getIlvlStatus(next.m.lootIlvl, next.currentIlvl)
+);
+
 export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl }: Props) {
   const { t } = useI18n();
 
@@ -58,20 +111,7 @@ export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl 
                 </TableHeader>
                 <TableBody>
                   {bountifulDelves.map((d) => (
-                    <TableRow
-                      key={d.tier}
-                      className={cn(
-                        currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
-                        currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
-                      )}
-                    >
-                      <TableCell className="font-medium">T{d.tier}</TableCell>
-                      <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
-                      <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
-                      <TableCell>
-                        {d.crest ? <CrestBadge name={d.crest} /> : "—"}
-                      </TableCell>
-                    </TableRow>
+                    <BountifulDelveRow key={d.tier} d={d} currentIlvl={currentIlvl} />
                   ))}
                 </TableBody>
               </Table>
@@ -92,19 +132,7 @@ export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl 
                 </TableHeader>
                 <TableBody>
                   {bountyMaps.map((m) => (
-                    <TableRow
-                      key={m.tier}
-                      className={cn(
-                        currentIlvl != null && m.lootIlvl < currentIlvl && "opacity-30",
-                        currentIlvl != null && m.lootIlvl >= currentIlvl && "bg-accent/50"
-                      )}
-                    >
-                      <TableCell className="font-medium">T{m.tier}</TableCell>
-                      <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
-                      <TableCell>
-                        <CrestBadge name={m.crest} />
-                      </TableCell>
-                    </TableRow>
+                    <BountyMapRow key={m.tier} m={m} currentIlvl={currentIlvl} />
                   ))}
                 </TableBody>
               </Table>

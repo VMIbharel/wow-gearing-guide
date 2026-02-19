@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useI18n } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -38,8 +39,22 @@ interface Props {
 export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) {
   const { t } = useI18n();
 
+  // Pre-sort boss groups once — raids data is static, sort never changes
+  const sortedRaids = useMemo(() =>
+    raids?.map((raid) => ({
+      ...raid,
+      difficulties: raid.difficulties.map((diff) => ({
+        ...diff,
+        normalBosses: diff.bossGroups
+          .filter((bg) => bg.bosses !== "Very Rare")
+          .sort((a, b) => a.lootIlvl - b.lootIlvl),
+        veryRare: diff.bossGroups.find((bg) => bg.bosses === "Very Rare"),
+      })),
+    })),
+  [raids]);
+
   // If raids are provided, create tabs by difficulty
-  if (raids) {
+  if (raids && sortedRaids) {
     // Extract unique difficulties from all raids
     const allDifficulties = raids[0]?.difficulties ?? [];
 
@@ -56,10 +71,10 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
           {allDifficulties.map((difficulty) => (
             <TabsContent key={difficulty.name} value={difficulty.name}>
               <div className="h-full overflow-auto">
-                {raids.map((raid) => {
+                {sortedRaids.map((raid) => {
                   const raidDiff = raid.difficulties.find(d => d.name === difficulty.name);
-                  const normalBosses = raidDiff?.bossGroups.filter(bg => bg.bosses !== "Very Rare") ?? [];
-                  const veryRare = raidDiff?.bossGroups.find(bg => bg.bosses === "Very Rare");
+                  const normalBosses = raidDiff?.normalBosses ?? [];
+                  const veryRare = raidDiff?.veryRare;
 
                   return (
                     <div key={raid.raidId}>
@@ -74,9 +89,7 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {normalBosses
-                              .sort((a, b) => a.lootIlvl - b.lootIlvl)
-                              .map((bg) => (
+                            {normalBosses.map((bg) => (
                                 <TableRow
                                   key={`${raid.raidId}-${difficulty.name}-${bg.bosses}`}
                                   className={cn(

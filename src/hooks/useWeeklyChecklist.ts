@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const STORAGE_KEY = "weeklyGuide.checklist";
 
@@ -25,19 +25,19 @@ function saveToStorage(state: ChecklistState): void {
 export function useWeeklyChecklist() {
   const [checked, setChecked] = useState<ChecklistState>(loadFromStorage);
 
+  // Persist to localStorage after render, not during setState (avoids blocking paint)
+  useEffect(() => {
+    saveToStorage(checked);
+  }, [checked]);
+
   const toggle = useCallback((id: string) => {
-    setChecked((prev) => {
-      const next = { ...prev, [id]: !prev[id] };
-      saveToStorage(next);
-      return next;
-    });
+    setChecked((prev) => ({ ...prev, [id]: !prev[id] }));
   }, []);
 
   const resetPhase = useCallback((phaseItemIds: string[]) => {
     setChecked((prev) => {
       const next = { ...prev };
       for (const id of phaseItemIds) delete next[id];
-      saveToStorage(next);
       return next;
     });
   }, []);
