@@ -72,18 +72,30 @@
   },
   "dashboard": {
     "prompt": "Select your item level to see recommended activities",
-    "currentBest": "Best access",
+    "intro": "Select your current item level to see the next gear thresholds to aim for in each activity. Click a card to explore detailed rewards.",
+    "seasonLabel": "Season at a glance",
+    "statMaxIlvl": "Max ilvl",
+    "statRaids": "Raids",
+    "statTracks": "Tracks",
+    "statActivities": "Activities",
+    "currentBest": "Activity max",
     "nextTier": "Next tier",
     "maxAvailable": "Max available gear",
     "gap": "+{gap} ilvl",
     "maxReached": "Max reached",
     "noAccess": "Not accessible",
     "raid": "Raid",
+    "raidSub": "3 raids · LFR → Mythic",
     "dungeons": "Dungeons",
+    "dungeonsSub": "Mythic+ · up to +12",
     "delves": "Delves",
+    "delvesSub": "Bountiful Delves · tiers 1-11",
     "traque": "Hunt",
+    "traqueSub": "4 contracts per difficulty / week",
     "pvp": "PvP",
-    "craft": "Crafting"
+    "pvpSub": "Honor · Warmode · Conquest",
+    "craft": "Crafting",
+    "craftSub": "Craft with season crests"
   },
   "game": {
     "season": {

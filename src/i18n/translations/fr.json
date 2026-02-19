@@ -72,18 +72,30 @@
   },
   "dashboard": {
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
-    "currentBest": "Meilleur accès",
+    "intro": "Sélectionnez votre niveau d'objet actuel pour voir les prochains paliers à viser dans chaque activité. Cliquez sur une carte pour explorer les récompenses détaillées.",
+    "seasonLabel": "Saison en bref",
+    "statMaxIlvl": "ilvl max",
+    "statRaids": "Raids",
+    "statTracks": "Pistes",
+    "statActivities": "Activités",
+    "currentBest": "Max. de l'activité",
     "nextTier": "Prochain palier",
     "maxAvailable": "Équipement maximum disponible",
     "gap": "+{gap} niv",
     "maxReached": "Maximum atteint",
     "noAccess": "Non accessible",
     "raid": "Raid",
+    "raidSub": "3 raids · LFR → Mythique",
     "dungeons": "Donjons",
+    "dungeonsSub": "Mythique+ · jusqu'au +12",
     "delves": "Gouffres",
+    "delvesSub": "Gouffres abondants · paliers 1-11",
     "traque": "Traque",
+    "traqueSub": "4 contrats par difficulté / semaine",
     "pvp": "JcJ",
-    "craft": "Artisanat"
+    "pvpSub": "Honneur · Warmode · Conquête",
+    "craft": "Artisanat",
+    "craftSub": "Artisanat avec écus de saison"
   },
   "game": {
     "season": {

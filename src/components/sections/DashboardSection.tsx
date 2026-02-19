@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Landmark, Castle, Pickaxe, Target, Swords, Hammer } from "lucide-react";
+import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight } from "lucide-react";
 import { useI18n, useGearingData } from "@/i18n";
 import { IlvlText } from "@/components/shared/IlvlText";
 import { cn } from "@/lib/utils";
@@ -82,6 +82,11 @@ export function DashboardSection({
 }: DashboardSectionProps) {
   const { t } = useI18n();
 
+  const maxIlvl = useMemo(() => {
+    const lastTrack = data.upgradeTracks.at(-1);
+    return lastTrack?.ilvls.at(-1) ?? null;
+  }, [data.upgradeTracks]);
+
   const cards: ActivityCard[] = useMemo(() => {
     const raid = getBest(computeRaidIlvls(data.raids), currentIlvl);
     const dungeons = getBest(computeDungeonIlvls(data.dungeons), currentIlvl);
@@ -145,8 +150,33 @@ export function DashboardSection({
     ];
   }, [currentIlvl, data]);
 
+  const seasonStats = useMemo(() => [
+    { label: t("dashboard.statMaxIlvl"), value: maxIlvl ?? "—" },
+    { label: t("dashboard.statRaids"), value: data.raids.length },
+    { label: t("dashboard.statTracks"), value: data.upgradeTracks.length },
+    { label: t("dashboard.statActivities"), value: 6 },
+  ], [t, maxIlvl, data.raids.length, data.upgradeTracks.length]);
+
   return (
     <div className="space-y-4">
+      {/* Intro */}
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        {t("dashboard.intro")}
+      </p>
+
+      {/* Season stats */}
+      <div className="flex flex-wrap gap-2">
+        {seasonStats.map(({ label, value }) => (
+          <span
+            key={label}
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium"
+          >
+            <span className="font-bold text-foreground">{value}</span>
+            <span className="text-muted-foreground">{label}</span>
+          </span>
+        ))}
+      </div>
+
       {currentIlvl === null && (
         <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 text-center">
           {t("dashboard.prompt")}
@@ -191,13 +221,18 @@ function ActivityCardItem({
         !hasAccess && currentIlvl !== null && "opacity-50"
       )}
     >
-      {/* Header row: icon + activity name */}
-      <div className="flex items-center gap-2 mb-3">
+      {/* Header row: icon + activity name + chevron */}
+      <div className="flex items-center gap-2 mb-1">
         <Icon className="w-4 h-4 text-muted-foreground shrink-0" />
-        <span className="text-xs font-medium text-muted-foreground truncate">
+        <span className="text-xs font-medium text-muted-foreground truncate flex-1">
           {t(card.labelKey as any)}
         </span>
+        <ChevronRight className="w-3 h-3 text-muted-foreground/40 shrink-0 group-hover:text-muted-foreground transition-colors" />
       </div>
+      {/* Subtitle */}
+      <p className="text-xs text-muted-foreground/60 mb-3 leading-tight">
+        {t(`dashboard.${card.id}Sub` as any)}
+      </p>
 
       {/* Next tier to accomplish — large and colored */}
       <div className="mb-2">
