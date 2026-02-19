@@ -5,7 +5,7 @@
   },
   "nav": {
     "dashboard": "Summary",
-    "weekly": "Weekly",
+    "weekly": "Roadmap",
     "tracks": "Tracks",
     "raid": "Raid",
     "dungeons": "Dungeons",
@@ -31,7 +31,7 @@
   },
   "sections": {
     "dashboard": "Dashboard",
-    "weekly": "Weekly Guide",
+    "weekly": "Season Roadmap",
     "upgradeTracks": "Upgrade Tracks",
     "raid": "Raid",
     "dungeons": "Dungeons (Mythic+)",
@@ -41,9 +41,10 @@
     "pvp": "PvP",
     "info": "Information"
   },
-  "weekly": {
+  "roadmap": {
     "reset": "Reset",
-    "resetAll": "Reset all"
+    "resetAll": "Reset all",
+    "today": "Today"
   },
   "tabs": {
     "all": "All",

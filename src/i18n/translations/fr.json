@@ -5,7 +5,7 @@
   },
   "nav": {
     "dashboard": "Résumé",
-    "weekly": "Hebdo",
+    "weekly": "Roadmap",
     "tracks": "Pistes",
     "raid": "Raid",
     "dungeons": "Donjons",
@@ -31,7 +31,7 @@
   },
   "sections": {
     "dashboard": "Tableau de bord",
-    "weekly": "Guide Hebdomadaire",
+    "weekly": "Roadmap de saison",
     "upgradeTracks": "Pistes d'amélioration",
     "raid": "Raid",
     "dungeons": "Donjons (Mythique+)",
@@ -41,9 +41,10 @@
     "pvp": "JcJ",
     "info": "Informations"
   },
-  "weekly": {
+  "roadmap": {
     "reset": "Réinitialiser",
-    "resetAll": "Tout réinitialiser"
+    "resetAll": "Tout réinitialiser",
+    "today": "Auj."
   },
   "tabs": {
     "all": "Tous",

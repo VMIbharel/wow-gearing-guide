@@ -8,7 +8,9 @@ export interface WeeklyItem {
 export interface WeeklyPhase {
   id: string;
   title: { fr: string; en: string };
+  shortLabel: { fr: string; en: string };
   date: string;
+  startDate: string;
   subtitle?: { fr: string; en: string };
   warning?: { fr: string; en: string };
   items: WeeklyItem[];
@@ -20,7 +22,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "pre-launch",
     title: { fr: "Préparation", en: "Preparation" },
+    shortLabel: { fr: "Prép.", en: "Prep." },
     date: "Avant le 27 fév",
+    startDate: "2026-01-01",
     items: [
       {
         id: "pl-potions",
@@ -69,7 +73,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "early-access",
     title: { fr: "Accès Anticipé", en: "Early Access" },
+    shortLabel: { fr: "EA", en: "EA" },
     date: "27 fév – 3 mars",
+    startDate: "2026-02-27",
     subtitle: { fr: "Pay to Win", en: "Pay to Win" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -164,7 +170,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "pre-season-week-1",
     title: { fr: "Pré-saison – Semaine 1", en: "Pre-Season Week 1" },
+    shortLabel: { fr: "PS1", en: "PS1" },
     date: "4 mars",
+    startDate: "2026-03-04",
     subtitle: { fr: "HM disponibles", en: "HM available" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -257,7 +265,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "pre-season-week-2",
     title: { fr: "Pré-saison – Semaine 2", en: "Pre-Season Week 2" },
+    shortLabel: { fr: "PS2", en: "PS2" },
     date: "11 mars",
+    startDate: "2026-03-11",
     subtitle: { fr: "HM disponibles", en: "HM available" },
     warning: {
       fr: "Ne pas dépenser d'écus",
@@ -325,7 +335,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-1",
     title: { fr: "Saison 1 – Semaine 1", en: "Season 1 Week 1" },
+    shortLabel: { fr: "S1", en: "S1" },
     date: "18 mars",
+    startDate: "2026-03-18",
     subtitle: { fr: "Semaine Mythic – pas de M+", en: "Mythic Week – no M+" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
@@ -414,7 +426,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-2",
     title: { fr: "Semaine 2", en: "Week 2" },
+    shortLabel: { fr: "S2", en: "S2" },
     date: "25 mars",
+    startDate: "2026-03-25",
     subtitle: { fr: "Semaine Mythique – M+ ouvre", en: "Mythic Week – M+ opens" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
@@ -469,7 +483,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-3",
     title: { fr: "Semaine 3", en: "Week 3" },
+    shortLabel: { fr: "S3", en: "S3" },
     date: "1 avr",
+    startDate: "2026-04-01",
     subtitle: { fr: "Dernier Raid disponible", en: "Final Raid opens" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques avant le reset du raid",
@@ -526,7 +542,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-4",
     title: { fr: "Semaine 4", en: "Week 4" },
+    shortLabel: { fr: "S4", en: "S4" },
     date: "8 avr",
+    startDate: "2026-04-08",
     items: [
       {
         id: "s1w4-vault",
@@ -585,7 +603,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-5",
     title: { fr: "Semaine 5", en: "Week 5" },
+    shortLabel: { fr: "S5", en: "S5" },
     date: "15 avr",
+    startDate: "2026-04-15",
     items: [
       {
         id: "s1w5-vault",
@@ -626,7 +646,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-6",
     title: { fr: "Semaine 6", en: "Week 6" },
+    shortLabel: { fr: "S6", en: "S6" },
     date: "22 avr",
+    startDate: "2026-04-22",
     items: [
       {
         id: "s1w6-vault",
@@ -671,7 +693,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-7",
     title: { fr: "Semaine 7", en: "Week 7" },
+    shortLabel: { fr: "S7", en: "S7" },
     date: "29 avr",
+    startDate: "2026-04-29",
     items: [
       {
         id: "s1w7-vault",
@@ -712,7 +736,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-week-8",
     title: { fr: "Semaine 8", en: "Week 8" },
+    shortLabel: { fr: "S8", en: "S8" },
     date: "6 mai",
+    startDate: "2026-05-06",
     subtitle: { fr: "Fin des écus Héroïques", en: "Done with Heroic Crests" },
     items: [
       {
@@ -765,7 +791,9 @@ export const weeklyPhases: WeeklyPhase[] = [
   {
     id: "season-weeks-9plus",
     title: { fr: "Semaine 9+", en: "Weeks 9+" },
+    shortLabel: { fr: "S9+", en: "S9+" },
     date: "13 mai+",
+    startDate: "2026-05-13",
     items: [
       {
         id: "s1w9-craft-slots",

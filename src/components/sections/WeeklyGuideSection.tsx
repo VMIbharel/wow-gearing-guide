@@ -5,6 +5,7 @@ import { weeklyPhases } from "@/data/weeklyGuide";
 import { useWeeklyChecklist } from "@/hooks/useWeeklyChecklist";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { TimelineStrip } from "./TimelineStrip";
 
 export function WeeklyGuideSection() {
   const { language, t } = useI18n();
@@ -19,8 +20,29 @@ export function WeeklyGuideSection() {
     setOpenPhases((prev) => ({ ...prev, [phaseId]: !prev[phaseId] }));
   };
 
+  const openPhase = (phaseId: string) => {
+    setOpenPhases((prev) => ({ ...prev, [phaseId]: true }));
+    setTimeout(() => {
+      document.getElementById(`phase-${phaseId}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 50);
+  };
+
+  const today = new Date().toISOString().slice(0, 10);
+
   return (
     <div className="space-y-3">
+      {/* Timeline strip */}
+      <div className="pt-5">
+        <TimelineStrip
+          phases={weeklyPhases}
+          checked={checked}
+          lang={lang}
+          today={today}
+          todayLabel={t("roadmap.today")}
+          onPhaseClick={openPhase}
+        />
+      </div>
+
       {/* Global reset button */}
       <div className="flex justify-end">
         <Button
@@ -30,7 +52,7 @@ export function WeeklyGuideSection() {
           className="shrink-0 text-muted-foreground h-7 px-2"
         >
           <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
-          {t("weekly.resetAll")}
+          {t("roadmap.resetAll")}
         </Button>
       </div>
       {weeklyPhases.map((phase) => {
@@ -41,7 +63,7 @@ export function WeeklyGuideSection() {
         const isDone = total > 0 && checkedCount === total;
 
         return (
-          <div key={phase.id} className="rounded-lg border bg-card">
+          <div key={phase.id} id={`phase-${phase.id}`} className="rounded-lg border bg-card">
             {/* Phase header */}
             <button
               onClick={() => togglePhase(phase.id)}
@@ -168,7 +190,7 @@ export function WeeklyGuideSection() {
                       className="shrink-0 text-muted-foreground h-7 px-2"
                     >
                       <RotateCcw className="w-3 h-3 mr-1" />
-                      {t("weekly.reset")}
+                      {t("roadmap.reset")}
                     </Button>
                   </div>
                 )}
@@ -183,7 +205,7 @@ export function WeeklyGuideSection() {
                       className="text-muted-foreground h-7 px-2"
                     >
                       <RotateCcw className="w-3 h-3 mr-1" />
-                      {t("weekly.reset")}
+                      {t("roadmap.reset")}
                     </Button>
                   </div>
                 )}
