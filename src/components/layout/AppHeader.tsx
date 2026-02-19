@@ -3,6 +3,7 @@ import { IlvlFilter } from "./IlvlFilter";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 import { Logo } from "./Logo";
+import { Badge } from "@/components/ui/badge";
 
 interface AppHeaderProps {
   season?: string;
@@ -19,6 +20,12 @@ export function AppHeader({ season, currentIlvl, onIlvlChange }: AppHeaderProps)
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 min-w-0">
             <Logo />
+            <Badge
+              variant="outline"
+              className="text-[10px] px-1.5 py-0 h-4 border-amber-500/50 text-amber-600 dark:text-amber-400 font-semibold shrink-0"
+            >
+              Beta
+            </Badge>
             <div className="hidden sm:flex sm:flex-col sm:min-w-0">
               <img
                 src="/title.webp"
