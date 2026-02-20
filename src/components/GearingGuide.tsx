@@ -39,7 +39,19 @@ function GearingGuideContent() {
   const { t } = useI18n();
   const data = useGearingData();
   const checklist = useWeeklyChecklist();
-  const [currentIlvl, setCurrentIlvl] = useState<number | null>(null);
+  const [currentIlvl, setCurrentIlvl] = useState<number | null>(() => {
+    const stored = localStorage.getItem("ilvlFilter.ilvl");
+    return stored ? Number(stored) : null;
+  });
+
+  const handleIlvlChange = useCallback((ilvl: number | null) => {
+    setCurrentIlvl(ilvl);
+    if (ilvl === null) {
+      localStorage.removeItem("ilvlFilter.ilvl");
+    } else {
+      localStorage.setItem("ilvlFilter.ilvl", String(ilvl));
+    }
+  }, []);
   const [activeSection, setActiveSection] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeSectionRef = useRef(activeSection);
@@ -110,7 +122,7 @@ function GearingGuideContent() {
   if (!data) {
     return (
       <div className="flex flex-col h-dvh overflow-hidden">
-        <AppHeader currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+        <AppHeader currentIlvl={currentIlvl} onIlvlChange={handleIlvlChange} />
         <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
         <LoadingScreen />
       </div>
@@ -119,7 +131,7 @@ function GearingGuideContent() {
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
-      <AppHeader season={data.season} currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+      <AppHeader season={data.season} currentIlvl={currentIlvl} onIlvlChange={handleIlvlChange} />
       <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
 
       {/* Horizontal scroll container */}

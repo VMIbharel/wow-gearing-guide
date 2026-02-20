@@ -1,20 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useI18n } from "@/i18n";
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { t } = useI18n();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    // Lire le thème au mount
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
     const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-    const initialTheme = stored ??
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
-  }, []);
+    return stored ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  });
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
