@@ -3,7 +3,8 @@ import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, C
 import { useI18n, useGearingData } from "@/i18n";
 import { IlvlText } from "@/components/shared/IlvlText";
 import { cn } from "@/lib/utils";
-import { weeklyPhases } from "@/data/weeklyGuide";
+import { weeklyPhases } from "@/data/roadmap";
+import { CLASSES } from "@/data/classes";
 
 interface ActivityCard {
   id: string;
@@ -19,6 +20,8 @@ interface DashboardSectionProps {
   data: ReturnType<typeof useGearingData>;
   onNavigate: (sectionId: string) => void;
   checked: Record<string, boolean>;
+  classId?: string | null;
+  specId?: string | null;
 }
 
 function getBest(ilvls: number[], currentIlvl: number | null) {
@@ -82,8 +85,10 @@ export function DashboardSection({
   data,
   onNavigate,
   checked,
+  classId,
+  specId,
 }: DashboardSectionProps) {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
 
   const maxIlvl = useMemo(() => {
     const lastTrack = data.upgradeTracks.at(-1);
@@ -179,6 +184,37 @@ export function DashboardSection({
           </span>
         ))}
       </div>
+
+      {/* Stat priority banner — shown when class + spec are selected */}
+      {classId && specId && (() => {
+        const cls = CLASSES.find((c) => c.id === classId);
+        const spec = cls?.specs.find((s) => s.id === specId);
+        if (!cls || !spec) return null;
+        const lang = language as "en" | "fr";
+        const primaryKey = `stats.${spec.primaryStat}` as const;
+        const statKeys = [primaryKey, ...spec.statPriority.map((s) => `stats.${s}` as const)];
+        return (
+          <div className="rounded-lg border bg-card px-4 py-3 text-sm">
+            <p className="text-xs text-muted-foreground mb-1 font-medium">
+              {lang === "fr" ? cls.fr : cls.en}
+              {" · "}
+              {lang === "fr" ? spec.fr : spec.en}
+            </p>
+            <p className="font-mono text-xs text-foreground/80 tracking-wide">
+              {statKeys.map((k, i) => (
+                <span key={k}>
+                  <span className={i === 0 ? "text-primary font-semibold" : ""}>
+                    {t(k as any)}
+                  </span>
+                  {i < statKeys.length - 1 && (
+                    <span className="text-muted-foreground mx-1">{">"}</span>
+                  )}
+                </span>
+              ))}
+            </p>
+          </div>
+        );
+      })()}
 
       {currentIlvl === null && (
         <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 text-center">

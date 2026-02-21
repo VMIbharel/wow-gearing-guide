@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, RotateCcw, AlertTriangle } from "lucide-react";
 import { useI18n } from "@/i18n";
-import { weeklyPhases } from "@/data/weeklyGuide";
+import { weeklyPhases } from "@/data/roadmap";
 import type { useWeeklyChecklist } from "@/hooks/useWeeklyChecklist";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ import { TimelineStrip } from "./TimelineStrip";
 
 type ChecklistProps = ReturnType<typeof useWeeklyChecklist>;
 
-export function WeeklyGuideSection({ checked, toggle, resetPhase, resetAll }: ChecklistProps) {
+export function RoadmapSection({ checked, toggle, resetPhase, resetAll }: ChecklistProps) {
   const { language, t } = useI18n();
   const lang = language as "fr" | "en";
 

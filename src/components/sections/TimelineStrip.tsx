@@ -1,6 +1,6 @@
 import { memo, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import type { WeeklyPhase } from "@/data/weeklyGuide";
+import type { WeeklyPhase } from "@/data/roadmap";
 
 interface TimelineStripProps {
   phases: WeeklyPhase[];

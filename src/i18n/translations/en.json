@@ -63,8 +63,27 @@
     "nextSection": "Next section",
     "toggleTheme": "Toggle theme",
     "selectLanguage": "Select language",
+    "openCharacterSelector": "Open character profile",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu"
+  },
+  "characterSelector": {
+    "title": "My Character",
+    "ilvl": "Item Level",
+    "class": "Class",
+    "spec": "Specialization",
+    "heroTalent": "Hero Talent",
+    "close": "Close",
+    "noFilter": "All"
+  },
+  "stats": {
+    "strength": "Strength",
+    "agility": "Agility",
+    "intellect": "Intellect",
+    "haste": "Haste",
+    "crit": "Crit",
+    "mastery": "Mastery",
+    "versatility": "Versatility"
   },
   "ilvlFilter": {
     "label": "ilvl:",

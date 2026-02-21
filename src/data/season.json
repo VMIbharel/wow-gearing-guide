@@ -1,0 +1,11 @@
+{
+  "version": "v01",
+  "lastUpdated": "2026-18-02",
+  "crests": [
+    { "name": "adventurer", "color": "green" },
+    { "name": "veteran", "color": "blue" },
+    { "name": "champion", "color": "purple" },
+    { "name": "hero", "color": "orange" },
+    { "name": "myth", "color": "gold" }
+  ]
+}
