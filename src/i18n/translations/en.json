@@ -13,6 +13,7 @@
     "craft": "Craft",
     "traque": "Hunt",
     "pvp": "PvP",
+    "outdoor": "Outdoor",
     "info": "Info"
   },
   "table": {
@@ -27,7 +28,9 @@
     "type": "Type",
     "tier": "Tier",
     "rank": "Rank",
-    "ilvl": "ilvl"
+    "ilvl": "ilvl",
+    "gold": "Gold",
+    "activity": "Activity"
   },
   "sections": {
     "dashboard": "Dashboard",
@@ -39,6 +42,7 @@
     "craft": "Crafting",
     "traque": "Hunt Contracts",
     "pvp": "PvP",
+    "outdoor": "Outdoor Activities",
     "info": "Information"
   },
   "roadmap": {
@@ -49,6 +53,7 @@
   "tabs": {
     "all": "All",
     "bountifulDelves": "Bountiful Delves",
+    "classicDelves": "Classic Delves",
     "bountyMaps": "Bounty Maps"
   },
   "info": {
@@ -123,7 +128,9 @@
     "roadmapProgress": "{done}/{total} tasks",
     "tracksSub": "{count} tracks · Explorer → Myth",
     "statPriority": "Stat Priority",
-    "guides": "Guides"
+    "guides": "Guides",
+    "outdoor": "Outdoor",
+    "outdoorSub": "Events · Treasures · Caches"
   },
   "game": {
     "season": {
@@ -186,6 +193,15 @@
       "aspirant": "Crafted (Aspirant)",
       "gladiator": "Crafted (Gladiator)"
     },
+    "outdoor": {
+      "event": "Events",
+      "treasure": "Treasures / Quests",
+      "lootCache": "Loot Cache",
+      "weeklyEvent": "Weekly Event"
+    },
+    "tracks": {
+      "costNote": "{crests} crests + {gold}g per upgrade"
+    },
     "notes": {
       "raid": [
         "Great Vault rewards from raids scale in ilvl based on the hardest boss killed that week per difficulty"
@@ -199,13 +215,15 @@
         "Delver's Bounty maps unlock at level 2 of the Delver's Journey",
         "You can get 1 map per week",
         "Hidden Troves don't need keys",
-        "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week"
+        "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week",
+        "Classic Delves do not grant access to the Great Vault"
       ],
       "craft": [],
       "traque": [
         "You can complete a maximum of 4 contracts per difficulty tier per week",
         "Weekly Vault rewards scale based on the highest difficulty completed"
-      ]
+      ],
+      "outdoor": []
     }
   }
 }

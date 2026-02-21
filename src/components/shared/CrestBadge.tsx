@@ -12,9 +12,10 @@ const CREST_TIER: Record<string, IlvlTier> = {
 
 interface CrestBadgeProps {
   name: string;
+  amount?: number;
 }
 
-export function CrestBadge({ name }: CrestBadgeProps) {
+export function CrestBadge({ name, amount }: CrestBadgeProps) {
   const { t } = useI18n();
   const tier = CREST_TIER[name];
   if (!tier) return null;
@@ -30,7 +31,7 @@ export function CrestBadge({ name }: CrestBadgeProps) {
         color: `var(--tier-${tier})`,
       }}
     >
-      {translatedName}
+      {amount != null ? `×${amount} ${translatedName}` : translatedName}
     </Badge>
   );
 }

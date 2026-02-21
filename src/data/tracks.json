@@ -4,7 +4,9 @@
       "trackId": "explorer",
       "ranks": 6,
       "ilvls": [208, 212, 215, 217, 220, 224],
-      "crest": null
+      "crest": null,
+      "crestPerRank": 0,
+      "goldPerRank": 0
     },
     {
       "trackId": "adventurer",
@@ -13,7 +15,9 @@
       "crest": "adventurer",
       "crestFromRank": 2,
       "secondaryCrest": "veteran",
-      "secondaryCrestFromRank": 6
+      "secondaryCrestFromRank": 6,
+      "crestPerRank": 20,
+      "goldPerRank": 10
     },
     {
       "trackId": "veteran",
@@ -22,7 +26,9 @@
       "crest": "veteran",
       "crestFromRank": 2,
       "secondaryCrest": "champion",
-      "secondaryCrestFromRank": 6
+      "secondaryCrestFromRank": 6,
+      "crestPerRank": 20,
+      "goldPerRank": 20
     },
     {
       "trackId": "champion",
@@ -31,7 +37,9 @@
       "crest": "champion",
       "crestFromRank": 2,
       "secondaryCrest": "hero",
-      "secondaryCrestFromRank": 6
+      "secondaryCrestFromRank": 6,
+      "crestPerRank": 20,
+      "goldPerRank": 30
     },
     {
       "trackId": "hero",
@@ -40,14 +48,18 @@
       "crest": "hero",
       "crestFromRank": 2,
       "secondaryCrest": "myth",
-      "secondaryCrestFromRank": 6
+      "secondaryCrestFromRank": 6,
+      "crestPerRank": 20,
+      "goldPerRank": 40
     },
     {
       "trackId": "myth",
       "ranks": 6,
       "ilvls": [272, 276, 279, 282, 285, 289],
       "crest": "myth",
-      "crestFromRank": 2
+      "crestFromRank": 2,
+      "crestPerRank": 20,
+      "goldPerRank": 50
     }
   ]
 }

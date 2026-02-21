@@ -192,13 +192,21 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
 
       {/* Onglets individuels par track */}
       {tracks.map((track) => (
-        <TabsContent key={track.trackId} value={track.trackId} className="flex-1 min-h-0">
-          <div className="h-full overflow-auto scrollbar-sexy">
+        <TabsContent key={track.trackId} value={track.trackId} className="flex-1 min-h-0 flex flex-col">
+          {(track.crestPerRank != null && track.crestPerRank > 0) || (track.goldPerRank != null && track.goldPerRank > 0) ? (
+            <p className="text-xs text-muted-foreground mb-2 shrink-0">
+              {t("game.tracks.costNote" as any)
+                .replace("{crests}", String(track.crestPerRank ?? 0))
+                .replace("{gold}", String(track.goldPerRank ?? 0))}
+            </p>
+          ) : null}
+          <div className="flex-1 min-h-0 overflow-auto scrollbar-sexy">
             <Table>
               <TableHeader className="table-header-sticky">
                 <TableRow className="border-b">
                   <TableHead>{t("table.ilvl")}</TableHead>
                   <TableHead>{t("table.crests")}</TableHead>
+                  <TableHead>{t("table.gold")}</TableHead>
                   <TableHead>{t("table.rank")}</TableHead>
                 </TableRow>
               </TableHeader>
@@ -226,6 +234,11 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                             {crests.map((c) => <CrestBadge key={c} name={c} />)}
                           </div>
                         ) : "—"}
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        {track.goldPerRank != null && track.goldPerRank > 0
+                          ? `${track.goldPerRank}g`
+                          : "—"}
                       </TableCell>
                       <TableCell>{rank}</TableCell>
                     </TableRow>

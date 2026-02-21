@@ -13,6 +13,7 @@
     "craft": "Craft",
     "traque": "Traque",
     "pvp": "JcJ",
+    "outdoor": "Extérieur",
     "info": "Info"
   },
   "table": {
@@ -27,7 +28,9 @@
     "type": "Type",
     "tier": "Palier",
     "rank": "Rang",
-    "ilvl": "niv"
+    "ilvl": "niv",
+    "gold": "Or",
+    "activity": "Activité"
   },
   "sections": {
     "dashboard": "Tableau de bord",
@@ -39,6 +42,7 @@
     "craft": "Artisanat",
     "traque": "Contrats de Traque",
     "pvp": "JcJ",
+    "outdoor": "Activités en extérieur",
     "info": "Informations"
   },
   "roadmap": {
@@ -49,6 +53,7 @@
   "tabs": {
     "all": "Tous",
     "bountifulDelves": "Gouffres abondants",
+    "classicDelves": "Gouffres classiques",
     "bountyMaps": "Cartes aux trésors"
   },
   "info": {
@@ -123,7 +128,9 @@
     "roadmapProgress": "{done}/{total} tâches",
     "tracksSub": "{count} pistes · Explorateur → Mythe",
     "statPriority": "Priorité des stats",
-    "guides": "Guides"
+    "guides": "Guides",
+    "outdoor": "Extérieur",
+    "outdoorSub": "Événements · Trésors · Caches"
   },
   "game": {
     "season": {
@@ -186,6 +193,15 @@
       "aspirant": "Fabriqué (Aspirant)",
       "gladiator": "Fabriqué (Gladiateur)"
     },
+    "outdoor": {
+      "event": "Événements",
+      "treasure": "Trésors / Quêtes",
+      "lootCache": "Cache de butin",
+      "weeklyEvent": "Événement hebdomadaire"
+    },
+    "tracks": {
+      "costNote": "{crests} écus + {gold}g par amélioration"
+    },
     "notes": {
       "raid": [
         "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
@@ -199,13 +215,15 @@
         "Les cartes de butin d'archéologue se débloquent au niveau 2 du Périple de gouffre",
         "Vous pouvez obtenir 1 carte par semaine",
         "Les trésors cachés ne nécessitent pas de clés",
-        "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
+        "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine",
+        "Les gouffres classiques ne donnent pas accès à la Grande Chambre forte"
       ],
       "craft": [],
       "traque": [
         "Vous pouvez effectuer un maximum de 4 contrats par palier de difficulté par semaine",
         "Les récompenses de la Grande Chambre forte évoluent selon la difficulté la plus élevée complétée"
-      ]
+      ],
+      "outdoor": []
     }
   }
 }

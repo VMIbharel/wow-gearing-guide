@@ -20,15 +20,24 @@ interface BountifulDelve {
   secondaryAmount?: number;
 }
 
+interface ClassicDelve {
+  tier: number;
+  crest: string;
+  crestAmount: number;
+}
+
 interface BountyMap {
   tier: number;
   lootIlvl: number;
   crest: string;
   crestAmount: number | null;
+  secondaryCrest?: string;
+  secondaryAmount?: number;
 }
 
 interface Props {
   bountifulDelves: BountifulDelve[];
+  classicDelves: ClassicDelve[];
   bountyMaps: BountyMap[];
   notes: string[];
   currentIlvl: number | null;
@@ -53,8 +62,13 @@ const BountifulDelveRow = memo(
         <TableCell className="font-medium">T{d.tier}</TableCell>
         <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
         <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
-        <TableCell>
-          {d.crest ? <CrestBadge name={d.crest} /> : "—"}
+        <TableCell className="flex gap-1 items-center">
+          {d.crest ? (
+            <>
+              <span className="text-xs font-semibold">{d.crestAmount}</span>
+              <CrestBadge name={d.crest} />
+            </>
+          ) : "—"}
         </TableCell>
       </TableRow>
     );
@@ -62,6 +76,20 @@ const BountifulDelveRow = memo(
   (prev, next) =>
     getIlvlStatus(prev.d.vaultIlvl, prev.currentIlvl) ===
     getIlvlStatus(next.d.vaultIlvl, next.currentIlvl)
+);
+
+const ClassicDelveRow = memo(
+  function ClassicDelveRow({ d }: { d: ClassicDelve }) {
+    return (
+      <TableRow>
+        <TableCell className="font-medium">T{d.tier}</TableCell>
+        <TableCell className="flex gap-1 items-center">
+          <span className="text-xs font-semibold">{d.crestAmount}</span>
+          <CrestBadge name={d.crest} />
+        </TableCell>
+      </TableRow>
+    );
+  }
 );
 
 const BountyMapRow = memo(
@@ -76,7 +104,21 @@ const BountyMapRow = memo(
         <TableCell className="font-medium">T{m.tier}</TableCell>
         <TableCell><IlvlText ilvl={m.lootIlvl} /></TableCell>
         <TableCell>
-          <CrestBadge name={m.crest} />
+          <div className="flex gap-1 flex-wrap items-center">
+            {m.crestAmount != null && m.crestAmount > 0 && (
+              <>
+                <span className="text-xs font-semibold">{m.crestAmount}</span>
+                <CrestBadge name={m.crest} />
+              </>
+            )}
+            {m.secondaryCrest && m.secondaryAmount != null && m.secondaryAmount > 0 && (
+              <>
+                <span className="text-xs font-semibold">{m.secondaryAmount}</span>
+                <CrestBadge name={m.secondaryCrest} />
+              </>
+            )}
+            {(m.crestAmount == null || m.crestAmount === 0) && !m.secondaryCrest && "—"}
+          </div>
         </TableCell>
       </TableRow>
     );
@@ -86,16 +128,37 @@ const BountyMapRow = memo(
     getIlvlStatus(next.m.lootIlvl, next.currentIlvl)
 );
 
-export function DelvesSection({ bountifulDelves, bountyMaps, notes, currentIlvl }: Props) {
+export function DelvesSection({ classicDelves, bountifulDelves,  bountyMaps, notes, currentIlvl }: Props) {
   const { t } = useI18n();
 
   return (
     <div>
-      <Tabs defaultValue="bountiful">
+      <Tabs defaultValue="classic">
         <TabsList>
+          <TabsTrigger value="classic">{t("tabs.classicDelves")}</TabsTrigger>
           <TabsTrigger value="bountiful">{t("tabs.bountifulDelves")}</TabsTrigger>
           <TabsTrigger value="maps">{t("tabs.bountyMaps")}</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="classic">
+          <div className="h-full overflow-auto">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("table.tier")}</TableHead>
+                    <TableHead>{t("table.crests")}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {classicDelves.map((d) => (
+                    <ClassicDelveRow key={d.tier} d={d} />
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </TabsContent>
 
         <TabsContent value="bountiful">
           <div className="h-full overflow-auto">

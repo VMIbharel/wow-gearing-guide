@@ -131,6 +131,7 @@ function buildTranslatedData(t: (key: TranslationKey) => string) {
     dungeonNotes: t("game.notes.dungeons" as TranslationKey) as unknown as string[],
 
     bountifulDelves: rawActivities.bountifulDelves,
+    classicDelves: rawActivities.classicDelves,
     delversBountyMaps: rawActivities.delversBountyMaps,
     delveNotes: t("game.notes.delves" as TranslationKey) as unknown as string[],
 
@@ -146,6 +147,12 @@ function buildTranslatedData(t: (key: TranslationKey) => string) {
       ...item,
       type: t(`game.pvpTypes.${item.typeId}` as TranslationKey),
     })),
+
+    outdoor: rawActivities.outdoor.map((item: any) => ({
+      ...item,
+      label: t(`game.outdoorTypes.${item.typeId}` as TranslationKey),
+    })),
+    outdoorNotes: t("game.notes.outdoor" as TranslationKey) as unknown as string[],
 
     crests: rawSeason.crests,
   };

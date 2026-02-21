@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck, LayoutDashboard } from "lucide-react";
+import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck, LayoutDashboard, Globe } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
 import { useWeeklyChecklist } from "@/hooks/useWeeklyChecklist";
 import { useCharacterProfile } from "@/hooks/useCharacterProfile";
@@ -17,6 +17,7 @@ import { SectionNav } from "./layout/SectionNav";
 import { SectionDots } from "./layout/SectionDots";
 import { LoadingScreen } from "./layout/LoadingScreen";
 import { InfoSection } from "./sections/InfoSection";
+import { OutdoorSection } from "./sections/OutdoorSection";
 
 export interface UpgradeTrack {
   trackId: string;
@@ -27,6 +28,8 @@ export interface UpgradeTrack {
   crestFromRank?: number;
   secondaryCrest?: string;
   secondaryCrestFromRank?: number;
+  crestPerRank?: number;
+  goldPerRank?: number;
 }
 
 export function GearingGuide() {
@@ -55,6 +58,7 @@ function GearingGuideContent() {
     { id: "dungeons", label: t("nav.dungeons"), icon: Castle },
     { id: "delves", label: t("nav.delves"), icon: Pickaxe },
     { id: "traque", label: t("nav.traque"), icon: Target },
+    { id: "outdoor", label: t("nav.outdoor"), icon: Globe },
     { id: "pvp", label: t("nav.pvp"), icon: Swords },
     { id: "craft", label: t("nav.craft"), icon: Hammer },
     { id: "tracks", label: t("nav.tracks"), icon: Map },
@@ -216,6 +220,7 @@ function GearingGuideContent() {
               <div className="flex-1 min-h-0 overflow-auto">
               <DelvesSection
                 bountifulDelves={data.bountifulDelves}
+                classicDelves={data.classicDelves}
                 bountyMaps={data.delversBountyMaps}
                 notes={data.delveNotes}
                 currentIlvl={currentIlvl}
@@ -232,6 +237,19 @@ function GearingGuideContent() {
               <TraqueSection
                 traque={data.traque}
                 currentIlvl={currentIlvl}
+              />
+              </div>
+            </div>
+          </section>
+
+          {/* Panel: Outdoor */}
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.outdoor")}</h2>
+              <div className="flex-1 min-h-0 overflow-auto">
+              <OutdoorSection
+                outdoor={data.outdoor}
+                notes={data.outdoorNotes}
               />
               </div>
             </div>
