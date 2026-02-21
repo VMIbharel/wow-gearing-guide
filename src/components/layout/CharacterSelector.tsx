@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { User } from "lucide-react";
 import { useI18n } from "@/i18n";
-import { CLASSES, HERO_TALENTS } from "@/data/classes";
+import { CLASSES } from "@/data/classes";
 import type { CharacterProfile } from "@/hooks/useCharacterProfile";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,15 +51,40 @@ function useIsDesktop() {
 // ---------------------------------------------------------------------------
 interface PanelProps {
   profile: CharacterProfile;
-  onUpdate: (updates: Partial<CharacterProfile>) => void;
+  onApply: (profile: CharacterProfile) => void;
+  onClose: () => void;
   language: "en" | "fr";
 }
 
-function CharacterForm({ profile, onUpdate, language }: PanelProps) {
+function CharacterForm({ profile, onApply, onClose, language }: PanelProps) {
   const { t } = useI18n();
+  const [local, setLocal] = useState<CharacterProfile>(profile);
 
-  const selectedClass = CLASSES.find((c) => c.id === profile.classId) ?? null;
-  const selectedSpec = selectedClass?.specs.find((s) => s.id === profile.specId) ?? null;
+  // Sync local state when the dialog opens with a new profile
+  useEffect(() => {
+    setLocal(profile);
+  }, [profile]);
+
+  function update(updates: Partial<CharacterProfile>) {
+    setLocal((prev) => {
+      const next = { ...prev, ...updates };
+      if ("classId" in updates) {
+        next.specId = null;
+        next.heroTalentId = null;
+      }
+      if ("specId" in updates) {
+        next.heroTalentId = null;
+      }
+      return next;
+    });
+  }
+
+  function handleApply() {
+    onApply(local);
+    onClose();
+  }
+
+  const selectedClass = CLASSES.find((c) => c.id === local.classId) ?? null;
 
   const sortedClasses = [...CLASSES].sort((a, b) =>
     (language === "fr" ? a.fr : a.en).localeCompare(language === "fr" ? b.fr : b.en)
@@ -71,8 +96,8 @@ function CharacterForm({ profile, onUpdate, language }: PanelProps) {
       <div className="space-y-1.5">
         <label className="text-sm font-medium">{t("characterSelector.ilvl")}</label>
         <Select
-          value={profile.ilvl?.toString() ?? "all"}
-          onValueChange={(v) => onUpdate({ ilvl: v === "all" ? null : Number(v) })}
+          value={local.ilvl?.toString() ?? "all"}
+          onValueChange={(v) => update({ ilvl: v === "all" ? null : Number(v) })}
         >
           <SelectTrigger>
             <SelectValue />
@@ -92,8 +117,8 @@ function CharacterForm({ profile, onUpdate, language }: PanelProps) {
       <div className="space-y-1.5">
         <label className="text-sm font-medium">{t("characterSelector.class")}</label>
         <Select
-          value={profile.classId ?? "none"}
-          onValueChange={(v) => onUpdate({ classId: v === "none" ? null : v })}
+          value={local.classId ?? "none"}
+          onValueChange={(v) => update({ classId: v === "none" ? null : v })}
         >
           <SelectTrigger>
             <SelectValue placeholder="—" />
@@ -115,8 +140,8 @@ function CharacterForm({ profile, onUpdate, language }: PanelProps) {
           {t("characterSelector.spec")}
         </label>
         <Select
-          value={profile.specId ?? "none"}
-          onValueChange={(v) => onUpdate({ specId: v === "none" ? null : v })}
+          value={local.specId ?? "none"}
+          onValueChange={(v) => update({ specId: v === "none" ? null : v })}
           disabled={!selectedClass}
         >
           <SelectTrigger>
@@ -133,33 +158,30 @@ function CharacterForm({ profile, onUpdate, language }: PanelProps) {
         </Select>
       </div>
 
-      {/* Hero Talent */}
+      {/* Hero Talent — disabled for now */}
       <div className="space-y-1.5">
-        <label className="text-sm font-medium text-foreground/70">
-          {t("characterSelector.heroTalent")}
-        </label>
-        <Select
-          value={profile.heroTalentId ?? "none"}
-          onValueChange={(v) => onUpdate({ heroTalentId: v === "none" ? null : v })}
-          disabled={!selectedSpec}
-        >
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-foreground/70">
+            {t("characterSelector.heroTalent")}
+          </label>
+          <span className="text-xs text-muted-foreground italic">
+            {t("characterSelector.comingSoon" as any)}
+          </span>
+        </div>
+        <Select value="none" disabled>
           <SelectTrigger>
             <SelectValue placeholder="—" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="none">—</SelectItem>
-            {selectedSpec?.heroTalents.map((htId) => {
-              const ht = HERO_TALENTS[htId];
-              if (!ht) return null;
-              return (
-                <SelectItem key={ht.id} value={ht.id}>
-                  {language === "fr" ? ht.fr : ht.en}
-                </SelectItem>
-              );
-            })}
           </SelectContent>
         </Select>
       </div>
+
+      {/* Apply button */}
+      <Button onClick={handleApply} className="w-full">
+        {t("characterSelector.apply" as any)}
+      </Button>
     </div>
   );
 }
@@ -176,6 +198,10 @@ export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelecto
   const { t, language } = useI18n();
   const [open, setOpen] = useState(false);
   const isDesktop = useIsDesktop();
+
+  function handleApply(updated: CharacterProfile) {
+    onProfileUpdate(updated);
+  }
 
   const trigger = (
     <Button
@@ -196,7 +222,8 @@ export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelecto
 
   const formProps: PanelProps = {
     profile,
-    onUpdate: onProfileUpdate,
+    onApply: handleApply,
+    onClose: () => setOpen(false),
     language: language as "en" | "fr",
   };
 

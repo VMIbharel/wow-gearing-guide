@@ -165,6 +165,10 @@ export function DashboardSection({
     { label: t("dashboard.statActivities"), value: 6 },
   ], [t, maxIlvl, data.raids.length, data.upgradeTracks.length]);
 
+  const isProfileIncomplete = useMemo(() => {
+    return currentIlvl === null || !classId || !specId;
+  }, [currentIlvl, classId, specId]);
+
   return (
     <div className="space-y-4">
       {/* Intro */}
@@ -186,7 +190,7 @@ export function DashboardSection({
       </div>
 
       {/* Stat priority banner — shown when class + spec are selected */}
-      {classId && specId && (() => {
+      {currentIlvl !== null && classId && specId && (() => {
         const cls = CLASSES.find((c) => c.id === classId);
         const spec = cls?.specs.find((s) => s.id === specId);
         if (!cls || !spec) return null;
@@ -216,9 +220,9 @@ export function DashboardSection({
         );
       })()}
 
-      {currentIlvl === null && (
+      {isProfileIncomplete && (
         <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 text-center">
-          {t("dashboard.prompt")}
+          {t("dashboard.completeProfile")}
         </div>
       )}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">

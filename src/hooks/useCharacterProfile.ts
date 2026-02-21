@@ -39,13 +39,16 @@ export function useCharacterProfile() {
   const updateProfile = useCallback((updates: Partial<CharacterProfile>) => {
     setProfile((prev) => {
       const next = { ...prev, ...updates };
-      // Cascade resets when parent selection changes
-      if ("classId" in updates) {
-        next.specId = null;
-        next.heroTalentId = null;
-      }
-      if ("specId" in updates) {
-        next.heroTalentId = null;
+      // Cascade resets only for individual field changes, not full profile replacements
+      const isFullReplace = "ilvl" in updates && "classId" in updates && "specId" in updates;
+      if (!isFullReplace) {
+        if ("classId" in updates) {
+          next.specId = null;
+          next.heroTalentId = null;
+        }
+        if ("specId" in updates) {
+          next.heroTalentId = null;
+        }
       }
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));

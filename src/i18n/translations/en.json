@@ -73,6 +73,8 @@
     "class": "Class",
     "spec": "Specialization",
     "heroTalent": "Hero Talent",
+    "comingSoon": "Coming soon",
+    "apply": "Apply",
     "close": "Close",
     "noFilter": "All"
   },
@@ -91,6 +93,7 @@
   },
   "dashboard": {
     "prompt": "Select your item level to see recommended activities",
+    "completeProfile": "Please fill in all your information to display stat priority",
     "intro": "Select your current item level to see the next gear thresholds to aim for in each activity. Click a card to explore detailed rewards.",
     "seasonLabel": "Season at a glance",
     "statMaxIlvl": "Max ilvl",

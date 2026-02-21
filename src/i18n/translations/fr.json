@@ -73,6 +73,8 @@
     "class": "Classe",
     "spec": "Spécialisation",
     "heroTalent": "Talent héroïque",
+    "comingSoon": "Bientôt",
+    "apply": "Valider",
     "close": "Fermer",
     "noFilter": "Tous"
   },
@@ -91,6 +93,7 @@
   },
   "dashboard": {
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
+    "completeProfile": "Veuillez renseigner l'ensemble de vos informations pour afficher la priorité des stats",
     "intro": "Sélectionnez votre niveau d'objet actuel pour voir les prochains paliers à viser dans chaque activité. Cliquez sur une carte pour explorer les récompenses détaillées.",
     "seasonLabel": "Saison en bref",
     "statMaxIlvl": "ilvl max",
