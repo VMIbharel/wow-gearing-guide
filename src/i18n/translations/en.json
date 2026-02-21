@@ -143,7 +143,8 @@
       "veteran": "Veteran",
       "champion": "Champion",
       "hero": "Hero",
-      "myth": "Myth"
+      "myth": "Myth",
+      "costNote": "{crests} crests + {gold}g per upgrade"
     },
     "crests": {
       "adventurer": "Adventurer",
@@ -193,14 +194,11 @@
       "aspirant": "Crafted (Aspirant)",
       "gladiator": "Crafted (Gladiator)"
     },
-    "outdoor": {
+    "outdoorTypes": {
       "event": "Events",
       "treasure": "Treasures / Quests",
       "lootCache": "Loot Cache",
       "weeklyEvent": "Weekly Event"
-    },
-    "tracks": {
-      "costNote": "{crests} crests + {gold}g per upgrade"
     },
     "notes": {
       "raid": [

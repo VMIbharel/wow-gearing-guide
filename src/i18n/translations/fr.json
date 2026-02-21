@@ -143,7 +143,8 @@
       "veteran": "Vétéran",
       "champion": "Champion",
       "hero": "Héros",
-      "myth": "Mythe"
+      "myth": "Mythe",
+      "costNote": "{crests} écus + {gold}g par amélioration"
     },
     "crests": {
       "adventurer": "Aventurier",
@@ -193,14 +194,11 @@
       "aspirant": "Fabriqué (Aspirant)",
       "gladiator": "Fabriqué (Gladiateur)"
     },
-    "outdoor": {
+    "outdoorTypes": {
       "event": "Événements",
       "treasure": "Trésors / Quêtes",
       "lootCache": "Cache de butin",
       "weeklyEvent": "Événement hebdomadaire"
-    },
-    "tracks": {
-      "costNote": "{crests} écus + {gold}g par amélioration"
     },
     "notes": {
       "raid": [
