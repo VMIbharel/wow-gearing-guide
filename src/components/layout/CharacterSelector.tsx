@@ -4,13 +4,7 @@ import { useI18n } from "@/i18n";
 import { CLASSES } from "@/data/classes";
 import type { CharacterProfile } from "@/hooks/useCharacterProfile";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { NativeSelect } from "@/components/ui/native-select";
 import {
   Dialog,
   DialogContent,
@@ -23,12 +17,39 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
 // ilvl options (208–289 step 5)
 // ---------------------------------------------------------------------------
 const ILVL_OPTIONS: number[] = [];
 for (let i = 208; i <= 289; i += 5) ILVL_OPTIONS.push(i);
+
+// ---------------------------------------------------------------------------
+// Class sprite offset mapping (30px per icon, 390x30 sprite)
+// ---------------------------------------------------------------------------
+const CLASS_SPRITE_X: Record<string, number> = {
+  "death-knight": 0,
+  "demon-hunter": 30,
+  "druid": 60,
+  "evoker": 90,
+  "hunter": 120,
+  "mage": 150,
+  "monk": 180,
+  "paladin": 210,
+  "priest": 240,
+  "rogue": 270,
+  "shaman": 300,
+  "warlock": 330,
+  "warrior": 360,
+};
+
+// Role colors for spec badges
+const ROLE_COLORS: Record<string, string> = {
+  dps: "bg-red-500/20 text-red-400",
+  tank: "bg-blue-500/20 text-blue-400",
+  healer: "bg-green-500/20 text-green-400",
+};
 
 // ---------------------------------------------------------------------------
 // Responsive hook
@@ -47,6 +68,120 @@ function useIsDesktop() {
 }
 
 // ---------------------------------------------------------------------------
+// Icon Card (for class, spec, hero talent)
+// ---------------------------------------------------------------------------
+interface IconCardProps {
+  type: "class" | "spec" | "hero-talent";
+  label: string;
+  selected: boolean;
+  onClick: () => void;
+  classId?: string; // for class and spec cards
+  roleColor?: string; // for spec cards
+}
+
+function IconCard({
+  type,
+  label,
+  selected,
+  onClick,
+  classId,
+  roleColor,
+}: IconCardProps) {
+  const offsetX = classId ? CLASS_SPRITE_X[classId] ?? 0 : 0;
+
+  if (type === "hero-talent") {
+    // Text-only card for hero talents
+    return (
+      <button
+        onClick={onClick}
+        className={cn(
+          "flex items-center justify-center px-3 py-2 rounded-lg border-2 transition-all text-sm",
+          selected
+            ? "border-primary bg-primary/10 font-medium"
+            : "border-muted-foreground/30 hover:border-muted-foreground/50"
+        )}
+      >
+        {label}
+      </button>
+    );
+  }
+
+  // Icon card (class or spec)
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "flex flex-col items-center justify-center gap-0.5 p-1.5 rounded-lg border-2 transition-all shrink-0 w-20 h-20",
+        selected
+          ? "border-primary bg-primary/10"
+          : "border-transparent hover:border-muted-foreground/40 hover:bg-muted/50"
+      )}
+    >
+      <div
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            backgroundImage: "url('/wow-icons/class-sprite.webp')",
+            backgroundPosition: `-${offsetX}px 0`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "auto",
+            width: 30,
+            height: 30,
+          }}
+        />
+      </div>
+      <div className="flex flex-col items-center gap-0 w-full px-1 flex-1">
+        <span className="text-[9px] text-center leading-tight line-clamp-2 font-semibold text-slate-900 dark:text-slate-100">
+          {label}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal Carousel (scroll-snap, mobile)
+// ---------------------------------------------------------------------------
+function HorizontalCarousel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {children}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Grid Container (desktop)
+// ---------------------------------------------------------------------------
+interface GridProps {
+  children: React.ReactNode;
+  columns?: number;
+}
+
+function Grid({ children, columns = 4 }: GridProps) {
+  const gridColsMap: Record<number, string> = {
+    2: "grid-cols-2",
+    3: "grid-cols-3",
+    4: "grid-cols-4",
+    5: "grid-cols-5",
+  };
+  return (
+    <div className={cn("grid gap-2 justify-items-center", gridColsMap[columns] || "grid-cols-5")}>
+      {children}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Panel content (shared between Dialog and Drawer)
 // ---------------------------------------------------------------------------
 interface PanelProps {
@@ -54,9 +189,16 @@ interface PanelProps {
   onApply: (profile: CharacterProfile) => void;
   onClose: () => void;
   language: "en" | "fr";
+  isDesktop: boolean;
 }
 
-function CharacterForm({ profile, onApply, onClose, language }: PanelProps) {
+function CharacterForm({
+  profile,
+  onApply,
+  onClose,
+  language,
+  isDesktop,
+}: PanelProps) {
   const { t } = useI18n();
   const [local, setLocal] = useState<CharacterProfile>(profile);
 
@@ -87,96 +229,131 @@ function CharacterForm({ profile, onApply, onClose, language }: PanelProps) {
   const selectedClass = CLASSES.find((c) => c.id === local.classId) ?? null;
 
   const sortedClasses = [...CLASSES].sort((a, b) =>
-    (language === "fr" ? a.fr : a.en).localeCompare(language === "fr" ? b.fr : b.en)
+    (language === "fr" ? a.fr : a.en).localeCompare(
+      language === "fr" ? b.fr : b.en
+    )
   );
 
+  const getSpecRoleColor = (role: string): string => {
+    return (
+      ROLE_COLORS[role as keyof typeof ROLE_COLORS] ||
+      "bg-gray-500/20 text-gray-400"
+    );
+  };
+
+  const getLocale = (item: { en: string; fr: string }): string => {
+    return language === "fr" ? item.fr : item.en;
+  };
+
   return (
-    <div className="space-y-4 px-1">
-      {/* ilvl */}
+    <div className="space-y-5 px-1">
+      {/* =============== ilvl (native select) =============== */}
       <div className="space-y-1.5">
-        <label className="text-sm font-medium">{t("characterSelector.ilvl")}</label>
-        <Select
-          value={local.ilvl?.toString() ?? "all"}
-          onValueChange={(v) => update({ ilvl: v === "all" ? null : Number(v) })}
-        >
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("characterSelector.noFilter")}</SelectItem>
-            {ILVL_OPTIONS.map((ilvl) => (
-              <SelectItem key={ilvl} value={ilvl.toString()}>
-                {ilvl}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Class */}
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium">{t("characterSelector.class")}</label>
-        <Select
-          value={local.classId ?? "none"}
-          onValueChange={(v) => update({ classId: v === "none" ? null : v })}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="—" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">—</SelectItem>
-            {sortedClasses.map((cls) => (
-              <SelectItem key={cls.id} value={cls.id}>
-                {language === "fr" ? cls.fr : cls.en}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Spec */}
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium text-foreground/70">
-          {t("characterSelector.spec")}
+        <label className="text-sm font-medium">
+          {t("characterSelector.ilvl")}
         </label>
-        <Select
-          value={local.specId ?? "none"}
-          onValueChange={(v) => update({ specId: v === "none" ? null : v })}
-          disabled={!selectedClass}
+        <NativeSelect
+          value={local.ilvl?.toString() ?? "all"}
+          onChange={(e) =>
+            update({
+              ilvl: e.target.value === "all" ? null : Number(e.target.value),
+            })
+          }
         >
-          <SelectTrigger>
-            <SelectValue placeholder="—" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">—</SelectItem>
-            {selectedClass?.specs.map((spec) => (
-              <SelectItem key={spec.id} value={spec.id}>
-                {language === "fr" ? spec.fr : spec.en}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          <option value="all">{t("characterSelector.noFilter")}</option>
+          {ILVL_OPTIONS.map((v) => (
+            <option key={v} value={v}>
+              {v}
+            </option>
+          ))}
+        </NativeSelect>
       </div>
 
-      {/* Hero Talent — disabled for now */}
-      <div className="space-y-1.5">
-        <div className="flex items-center gap-2">
+      {/* =============== Class (carousel or grid) =============== */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">
+          {t("characterSelector.class")}
+        </label>
+        {isDesktop ? (
+          <Grid columns={5}>
+            {sortedClasses.map((cls) => (
+              <IconCard
+                key={cls.id}
+                type="class"
+                classId={cls.id}
+                label={getLocale(cls)}
+                selected={local.classId === cls.id}
+                onClick={() => update({ classId: cls.id })}
+              />
+            ))}
+          </Grid>
+        ) : (
+          <HorizontalCarousel>
+            {sortedClasses.map((cls) => (
+              <div key={cls.id} className="snap-start">
+                <IconCard
+                  type="class"
+                  classId={cls.id}
+                  label={getLocale(cls)}
+                  selected={local.classId === cls.id}
+                  onClick={() => update({ classId: cls.id })}
+                />
+              </div>
+            ))}
+          </HorizontalCarousel>
+        )}
+      </div>
+
+      {/* =============== Spec (carousel or grid) =============== */}
+      {selectedClass && (
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-foreground/70">
+            {t("characterSelector.spec")}
+          </label>
+          {isDesktop ? (
+            <Grid columns={selectedClass.specs.length}>
+              {selectedClass.specs.map((spec) => (
+                <IconCard
+                  key={spec.id}
+                  type="spec"
+                  classId={selectedClass.id}
+                  label={getLocale(spec)}
+                  roleColor={getSpecRoleColor(spec.role)}
+                  selected={local.specId === spec.id}
+                  onClick={() => update({ specId: spec.id })}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <HorizontalCarousel>
+              {selectedClass.specs.map((spec) => (
+                <div key={spec.id} className="snap-start">
+                  <IconCard
+                    type="spec"
+                    classId={selectedClass.id}
+                    label={getLocale(spec)}
+                    roleColor={getSpecRoleColor(spec.role)}
+                    selected={local.specId === spec.id}
+                    onClick={() => update({ specId: spec.id })}
+                  />
+                </div>
+              ))}
+            </HorizontalCarousel>
+          )}
+        </div>
+      )}
+
+      {/* =============== Hero Talent (hidden for now) =============== */}
+      {/* Disabled until hero talent icons are ready
+      {selectedSpec && availableHeroTalents.length > 0 && (
+        <div className="space-y-2">
           <label className="text-sm font-medium text-foreground/70">
             {t("characterSelector.heroTalent")}
           </label>
-          <span className="text-xs text-muted-foreground italic">
-            {t("characterSelector.comingSoon" as any)}
-          </span>
+          ...
         </div>
-        <Select value="none" disabled>
-          <SelectTrigger>
-            <SelectValue placeholder="—" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">—</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      )}
+      */}
 
       {/* Apply button */}
       <Button onClick={handleApply} className="w-full">
@@ -194,7 +371,10 @@ interface CharacterSelectorProps {
   onProfileUpdate: (updates: Partial<CharacterProfile>) => void;
 }
 
-export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelectorProps) {
+export function CharacterSelector({
+  profile,
+  onProfileUpdate,
+}: CharacterSelectorProps) {
   const { t, language } = useI18n();
   const [open, setOpen] = useState(false);
   const isDesktop = useIsDesktop();
@@ -225,6 +405,7 @@ export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelecto
     onApply: handleApply,
     onClose: () => setOpen(false),
     language: language as "en" | "fr",
+    isDesktop,
   };
 
   if (isDesktop) {
@@ -232,7 +413,7 @@ export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelecto
       <>
         {trigger}
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="sm:max-w-sm">
+          <DialogContent className="sm:max-w-2xl">
             <DialogHeader>
               <DialogTitle>{t("characterSelector.title")}</DialogTitle>
             </DialogHeader>
@@ -247,11 +428,11 @@ export function CharacterSelector({ profile, onProfileUpdate }: CharacterSelecto
     <>
       {trigger}
       <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerContent>
+        <DrawerContent className="max-h-[90vh]">
           <DrawerHeader>
             <DrawerTitle>{t("characterSelector.title")}</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-6">
+          <div className="px-4 pb-6 overflow-y-auto max-h-[calc(90vh-60px)]">
             <CharacterForm {...formProps} />
           </div>
         </DrawerContent>
