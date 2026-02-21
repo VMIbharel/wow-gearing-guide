@@ -121,7 +121,9 @@
     "roadmapSub": "Track your weekly progression through the season",
     "roadmapPhase": "Current phase",
     "roadmapProgress": "{done}/{total} tasks",
-    "tracksSub": "{count} tracks · Explorer → Myth"
+    "tracksSub": "{count} tracks · Explorer → Myth",
+    "statPriority": "Stat Priority",
+    "guides": "Guides"
   },
   "game": {
     "season": {

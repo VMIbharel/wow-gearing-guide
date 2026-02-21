@@ -1,5 +1,5 @@
 import { memo, useMemo } from "react";
-import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck } from "lucide-react";
+import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck, Signpost } from "lucide-react";
 import { useI18n, useGearingData } from "@/i18n";
 import { IlvlText } from "@/components/shared/IlvlText";
 import { cn } from "@/lib/utils";
@@ -197,14 +197,40 @@ export function DashboardSection({
         const lang = language as "en" | "fr";
         const primaryKey = `stats.${spec.primaryStat}` as const;
         const statKeys = [primaryKey, ...spec.statPriority.map((s) => `stats.${s}` as const)];
+        const wowheadUrl = `https://www.wowhead.com/guide/classes/${classId}/${specId}/overview`;
+        const icyVeinsRole = spec.role === "healer" ? "healing" : spec.role;
+        const icyVeinsUrl = `https://www.icy-veins.com/wow/${specId}-${classId}-pve-${icyVeinsRole}-guide`;
+        const archonUrl = `https://www.archon.gg/wow/builds/${specId}/${classId}/mythic-plus/overview/10/all-dungeons/this-week`;
         return (
-          <div className="rounded-lg border bg-card px-4 py-3 text-sm">
-            <p className="text-xs text-muted-foreground mb-1 font-medium">
-              {lang === "fr" ? cls.fr : cls.en}
-              {" · "}
-              {lang === "fr" ? spec.fr : spec.en}
-            </p>
-            <p className="font-mono text-xs text-foreground/80 tracking-wide">
+          <div className="rounded-lg border bg-card px-4 py-3 text-sm space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <Signpost className="w-4 h-4 text-muted-foreground shrink-0" />
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {t("dashboard.statPriority")}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground/60 leading-tight pl-6">
+                  {lang === "fr" ? cls.fr : cls.en}
+                  {" · "}
+                  {lang === "fr" ? spec.fr : spec.en}
+                </p>
+              </div>
+            </div>
+            {/* Mobile : liste numérotée */}
+            <ol className="space-y-1 sm:hidden">
+              {statKeys.map((k, i) => (
+                <li key={k} className="flex items-center gap-2 text-xs">
+                  <span className="text-muted-foreground w-4 shrink-0 text-right">{i + 1}.</span>
+                  <span className={i === 0 ? "font-semibold text-primary" : "text-foreground"}>
+                    {t(k as any)}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            {/* Desktop : ligne avec ">" */}
+            <p className="hidden sm:block font-mono text-xs text-foreground/80 tracking-wide">
               {statKeys.map((k, i) => (
                 <span key={k}>
                   <span className={i === 0 ? "text-primary font-semibold" : ""}>
@@ -216,6 +242,23 @@ export function DashboardSection({
                 </span>
               ))}
             </p>
+            <p className="text-xs text-muted-foreground/60 leading-tight">
+              Réferences :
+            </p>
+            <div className="flex gap-3 text-xs">
+              <a href={wowheadUrl} target="_blank" rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                WoWHead
+              </a>
+              <a href={icyVeinsUrl} target="_blank" rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                Icy Veins
+              </a>
+              <a href={archonUrl} target="_blank" rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                Archon
+              </a>
+            </div>
           </div>
         );
       })()}

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { User } from "lucide-react";
+import { User, Minus, Plus } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { CLASSES } from "@/data/classes";
 import type { CharacterProfile } from "@/hooks/useCharacterProfile";
 import { Button } from "@/components/ui/button";
-import { NativeSelect } from "@/components/ui/native-select";
 import {
   Dialog,
   DialogContent,
@@ -247,26 +246,76 @@ function CharacterForm({
 
   return (
     <div className="space-y-5 px-1">
-      {/* =============== ilvl (native select) =============== */}
+      {/* =============== ilvl (stepper) =============== */}
       <div className="space-y-1.5">
         <label className="text-sm font-medium">
           {t("characterSelector.ilvl")}
         </label>
-        <NativeSelect
-          value={local.ilvl?.toString() ?? "all"}
-          onChange={(e) =>
-            update({
-              ilvl: e.target.value === "all" ? null : Number(e.target.value),
-            })
-          }
-        >
-          <option value="all">{t("characterSelector.noFilter")}</option>
-          {ILVL_OPTIONS.map((v) => (
-            <option key={v} value={v}>
-              {v}
-            </option>
-          ))}
-        </NativeSelect>
+        <div className="flex items-center justify-center gap-1">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => {
+              if (local.ilvl === null) return;
+              const next = Math.round((local.ilvl - 5) * 10) / 10;
+              update({ ilvl: next < ILVL_OPTIONS[0] ? null : next });
+            }}
+            disabled={local.ilvl === null}
+          >
+            <Minus className="h-4 w-4" />
+            <span className="sr-only">Decrease</span>
+          </Button>
+          <div className="text-center w-32">
+            <input
+              type="number"
+              inputMode="decimal"
+              value={local.ilvl ?? ""}
+              placeholder="—"
+              min={ILVL_OPTIONS[0]}
+              max={ILVL_OPTIONS[ILVL_OPTIONS.length - 1]}
+              step={0.1}
+              onChange={(e) => {
+                const val = e.target.value === "" ? null : Number(e.target.value);
+                update({ ilvl: val });
+              }}
+              onBlur={(e) => {
+                if (e.target.value === "") { update({ ilvl: null }); return; }
+                const val = Math.round(
+                  Math.min(ILVL_OPTIONS[ILVL_OPTIONS.length - 1],
+                    Math.max(ILVL_OPTIONS[0], Number(e.target.value))) * 10
+                ) / 10;
+                update({ ilvl: val });
+              }}
+              className="w-full text-center text-5xl font-bold tracking-tighter tabular-nums bg-transparent border-none outline-none focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <div className="text-muted-foreground text-[0.70rem] uppercase mt-0.5">
+              {local.ilvl === null ? t("characterSelector.noFilter") : "ilvl"}
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => {
+              const next = Math.round(((local.ilvl ?? ILVL_OPTIONS[0] - 5) + 5) * 10) / 10;
+              update({ ilvl: Math.min(next, ILVL_OPTIONS[ILVL_OPTIONS.length - 1]) });
+            }}
+            disabled={local.ilvl !== null && local.ilvl >= ILVL_OPTIONS[ILVL_OPTIONS.length - 1]}
+          >
+            <Plus className="h-4 w-4" />
+            <span className="sr-only">Increase</span>
+          </Button>
+        </div>
+        {local.ilvl !== null && (
+          <button
+            type="button"
+            onClick={() => update({ ilvl: null })}
+            className="w-full text-center text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+          >
+            {t("characterSelector.noFilter")}
+          </button>
+        )}
       </div>
 
       {/* =============== Class (carousel or grid) =============== */}
