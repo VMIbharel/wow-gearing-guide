@@ -22,7 +22,7 @@ export function InfoSection({ version, lastUpdated, season }: InfoSectionProps) 
                 rel="noopener noreferrer"
                 className="underline hover:text-foreground"
               >
-                Gandalin's Gearing Guide
+                Gandalin’s Gearing Guide
               </a>
             </li>
             <li>
@@ -43,6 +43,81 @@ export function InfoSection({ version, lastUpdated, season }: InfoSectionProps) 
                 className="underline hover:text-foreground"
               >
                 Larias’ Raider’s Guide for Midnight
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span className="font-medium text-foreground">{t("info.links")}</span>
+          <ul className="mt-1 space-y-1 pl-2">
+            <li>
+              <a
+                href="https://www.wowhead.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                WoWHead
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.icy-veins.com/wow/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Icy Veins
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.archon.gg/wow"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Archon
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.warcraftlogs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Warcraft Logs
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.mythictrap.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                MythicTrap
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.mamytwink.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Mamytwink
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.blizzspirit.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                BlizzSpirit
               </a>
             </li>
           </ul>

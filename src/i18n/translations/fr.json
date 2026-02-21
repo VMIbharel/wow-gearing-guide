@@ -58,6 +58,7 @@
   },
   "info": {
     "source": "Source :",
+    "links": "Liens utiles :",
     "version": "Version :",
     "lastUpdated": "Dernière mise à jour :",
     "season": "Saison :",
@@ -99,7 +100,8 @@
   "dashboard": {
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
     "completeProfile": "Veuillez renseigner votre classe et votre spécialisation pour afficher la priorité des stats",
-    "intro": "Sélectionnez votre niveau d'objet actuel pour voir les prochains paliers à viser dans chaque activité. Cliquez sur une carte pour explorer les récompenses détaillées.",
+    "intro": "Votre guide d'équipement pour la saison WoW en cours. Renseignez votre profil pour voir vos priorités de stats et les activités recommandées pour votre niveau d'objet.",
+    "references": "Références :",
     "seasonLabel": "Saison en bref",
     "statMaxIlvl": "ilvl max",
     "statRaids": "Raids",
@@ -134,7 +136,7 @@
   },
   "game": {
     "season": {
-      "full": "Midnight - Pré-saison",
+      "full": "Midnight",
       "short": "Mid PS"
     },
     "tracks": {

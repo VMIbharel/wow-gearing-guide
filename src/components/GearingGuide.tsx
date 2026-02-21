@@ -54,6 +54,7 @@ function GearingGuideContent() {
   const sections = useMemo(() => [
     { id: "dashboard", label: t("nav.dashboard"), icon: LayoutDashboard },
     { id: "weekly", label: t("nav.weekly"), icon: CalendarCheck },
+    { id: "tracks", label: t("nav.tracks"), icon: Map },
     { id: "raid", label: t("nav.raid"), icon: Landmark },
     { id: "dungeons", label: t("nav.dungeons"), icon: Castle },
     { id: "delves", label: t("nav.delves"), icon: Pickaxe },
@@ -61,7 +62,6 @@ function GearingGuideContent() {
     { id: "outdoor", label: t("nav.outdoor"), icon: Globe },
     { id: "pvp", label: t("nav.pvp"), icon: Swords },
     { id: "craft", label: t("nav.craft"), icon: Hammer },
-    { id: "tracks", label: t("nav.tracks"), icon: Map },
     { id: "info", label: t("nav.info"), icon: Info },
   ] as const, [t]);
 
@@ -126,7 +126,7 @@ function GearingGuideContent() {
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
-      <AppHeader season={data.season} profile={profile} onProfileUpdate={updateProfile} />
+      <AppHeader profile={profile} onProfileUpdate={updateProfile} />
       <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
 
       {/* Horizontal scroll container */}
@@ -182,6 +182,14 @@ function GearingGuideContent() {
               <div className="flex-1 min-h-0 overflow-auto">
               <RoadmapSection {...checklist} />
               </div>
+            </div>
+          </section>
+
+          {/* Panel: Upgrade Tracks */}
+          <section className="w-full shrink-0 snap-center flex flex-col">
+            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
+              <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
+              <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
             </div>
           </section>
 
@@ -275,14 +283,6 @@ function GearingGuideContent() {
                 currentIlvl={currentIlvl}
               />
               </div>
-            </div>
-          </section>
-
-          {/* Panel: Upgrade Tracks */}
-          <section className="w-full shrink-0 snap-center flex flex-col">
-            <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
-              <h2 className="text-xl font-semibold mb-3">{t("sections.upgradeTracks")}</h2>
-              <UpgradeTracksSection tracks={data.upgradeTracks} currentIlvl={currentIlvl} />
             </div>
           </section>
 
