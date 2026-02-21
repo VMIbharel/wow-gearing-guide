@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { User, Minus, Plus } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { User, Minus, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { CLASSES } from "@/data/classes";
 import type { CharacterProfile } from "@/hooks/useCharacterProfile";
@@ -151,9 +151,43 @@ function IconCard({
 // Horizontal Carousel (scroll-snap, mobile)
 // ---------------------------------------------------------------------------
 function HorizontalCarousel({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  function checkScroll() {
+    const el = ref.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  }
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    return () => el.removeEventListener("scroll", checkScroll);
+  }, []);
+
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      {children}
+    <div className="relative">
+      {canScrollLeft && (
+        <div className="absolute left-0 top-0 bottom-2 w-8 bg-linear-to-r from-background to-transparent z-10 flex items-center pointer-events-none">
+          <ChevronLeft className="w-4 h-4 text-muted-foreground" />
+        </div>
+      )}
+      <div
+        ref={ref}
+        className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {children}
+      </div>
+      {canScrollRight && (
+        <div className="absolute right-0 top-0 bottom-2 w-8 bg-linear-to-l from-background to-transparent z-10 flex items-center justify-end pointer-events-none">
+          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+        </div>
+      )}
     </div>
   );
 }
