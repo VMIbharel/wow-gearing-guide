@@ -18,7 +18,7 @@ export function Logo() {
             className="w-8 h-8 flex items-center justify-center hover:opacity-75 transition-opacity"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt={t("app.title")}
               className="w-full h-full object-contain dark:brightness-0 dark:invert"
             />

@@ -1,5 +1,6 @@
 import { useI18n } from "@/i18n";
-import { IlvlFilter } from "./IlvlFilter";
+import type { CharacterProfile } from "@/hooks/useCharacterProfile";
+import { CharacterSelector } from "./CharacterSelector";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 import { Logo } from "./Logo";
@@ -7,11 +8,11 @@ import { Badge } from "@/components/ui/badge";
 
 interface AppHeaderProps {
   season?: string;
-  currentIlvl: number | null;
-  onIlvlChange: (val: number | null) => void;
+  profile: CharacterProfile;
+  onProfileUpdate: (updates: Partial<CharacterProfile>) => void;
 }
 
-export function AppHeader({ season, currentIlvl, onIlvlChange }: AppHeaderProps) {
+export function AppHeader({ season, profile, onProfileUpdate }: AppHeaderProps) {
   const { t } = useI18n();
 
   return (
@@ -38,7 +39,7 @@ export function AppHeader({ season, currentIlvl, onIlvlChange }: AppHeaderProps)
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <IlvlFilter value={currentIlvl} onChange={onIlvlChange} />
+            <CharacterSelector profile={profile} onProfileUpdate={onProfileUpdate} />
             <LanguageSelector />
             <ThemeToggle />
           </div>

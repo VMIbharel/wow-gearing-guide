@@ -11,6 +11,11 @@ import type { Language, NestedKeyOf } from "./types";
 import enTranslations from "./translations/en.json";
 import frTranslations from "./translations/fr.json";
 
+// Import gearing data (split into logical files)
+import rawSeason from "@/data/season.json";
+import rawTracks from "@/data/tracks.json";
+import rawActivities from "@/data/activities.json";
+
 const translations = {
   en: enTranslations,
   fr: frTranslations,
@@ -92,73 +97,65 @@ export function useI18n() {
   return context;
 }
 
+// Pure function: merges raw JSON data with current translations
+function buildTranslatedData(t: (key: TranslationKey) => string) {
+  return {
+    version: rawSeason.version,
+    lastUpdated: rawSeason.lastUpdated,
+    season: t("game.season.full"),
+    seasonShort: t("game.season.short"),
+
+    upgradeTracks: rawTracks.upgradeTracks.map((track: any) => ({
+      ...track,
+      name: t(`game.tracks.${track.trackId}` as TranslationKey),
+    })),
+
+    raids: rawActivities.raids.map((raid: any) => ({
+      ...raid,
+      name: t(`game.raids.${raid.raidId}` as TranslationKey),
+      difficulties: raid.difficulties.map((diff: any) => ({
+        ...diff,
+        name: t(`game.difficulties.${diff.difficultyId}` as TranslationKey),
+      })),
+      notes: t("game.notes.raid" as TranslationKey) as unknown as string[],
+    })),
+
+    dungeons: rawActivities.dungeons.map((dungeon: any) => ({
+      ...dungeon,
+      label: t(`game.dungeonLabels.${dungeon.levelId}` as TranslationKey),
+    })),
+    dungeonNotes: t("game.notes.dungeons" as TranslationKey) as unknown as string[],
+
+    bountifulDelves: rawActivities.bountifulDelves,
+    delversBountyMaps: rawActivities.delversBountyMaps,
+    delveNotes: t("game.notes.delves" as TranslationKey) as unknown as string[],
+
+    craft: rawActivities.craft,
+
+    traque: rawActivities.traque.map((item: any) => ({
+      ...item,
+      difficultyName: t(`game.traqueDifficulties.${item.difficultyId}` as TranslationKey),
+    })),
+    traqueNotes: t("game.notes.traque" as TranslationKey) as unknown as string[],
+
+    pvp: rawActivities.pvp.map((item: any) => ({
+      ...item,
+      type: t(`game.pvpTypes.${item.typeId}` as TranslationKey),
+    })),
+
+    crests: rawSeason.crests,
+  };
+}
+
 // Hook for loading translated game data
 export function useGearingData() {
   const { language, t } = useI18n();
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    // Reset data when language changes
+    // Reset to show loading state while translations update
     setData(null);
-
-    // Import the single data file
-    import("@/data/gearing.json")
-      .then((module) => {
-        const rawData = module.default;
-
-        // Merge data with translations
-        const translatedData = {
-          version: rawData.version,
-          lastUpdated: rawData.lastUpdated,
-          season: t("game.season.full"),
-          seasonShort: t("game.season.short"),
-
-          upgradeTracks: rawData.upgradeTracks.map((track: any) => ({
-            ...track,
-            name: t(`game.tracks.${track.trackId}` as TranslationKey),
-          })),
-
-          raids: rawData.raids.map((raid: any) => ({
-            ...raid,
-            name: t(`game.raids.${raid.raidId}` as TranslationKey),
-            difficulties: raid.difficulties.map((diff: any) => ({
-              ...diff,
-              name: t(`game.difficulties.${diff.difficultyId}` as TranslationKey),
-            })),
-            notes: t("game.notes.raid" as TranslationKey) as unknown as string[],
-          })),
-
-          dungeons: rawData.dungeons.map((dungeon: any) => ({
-            ...dungeon,
-            label: t(`game.dungeonLabels.${dungeon.levelId}` as TranslationKey),
-          })),
-          dungeonNotes: t("game.notes.dungeons" as TranslationKey) as unknown as string[],
-
-          bountifulDelves: rawData.bountifulDelves,
-          delversBountyMaps: rawData.delversBountyMaps,
-          delveNotes: t("game.notes.delves" as TranslationKey) as unknown as string[],
-
-          craft: rawData.craft,
-
-          traque: rawData.traque.map((item: any) => ({
-            ...item,
-            difficultyName: t(`game.traqueDifficulties.${item.difficultyId}` as TranslationKey),
-          })),
-          traqueNotes: t("game.notes.traque" as TranslationKey) as unknown as string[],
-
-          pvp: rawData.pvp.map((item: any) => ({
-            ...item,
-            type: t(`game.pvpTypes.${item.typeId}` as TranslationKey),
-          })),
-
-          crests: rawData.crests,
-        };
-
-        setData(translatedData);
-      })
-      .catch((error) => {
-        console.error("Failed to load gearing data:", error);
-      });
+    setData(buildTranslatedData(t));
   }, [language, t]);
 
   return data;

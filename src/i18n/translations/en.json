@@ -63,8 +63,29 @@
     "nextSection": "Next section",
     "toggleTheme": "Toggle theme",
     "selectLanguage": "Select language",
+    "openCharacterSelector": "Open character profile",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu"
+  },
+  "characterSelector": {
+    "title": "My Character",
+    "ilvl": "Item Level",
+    "class": "Class",
+    "spec": "Specialization",
+    "heroTalent": "Hero Talent",
+    "comingSoon": "Coming soon",
+    "apply": "Apply",
+    "close": "Close",
+    "noFilter": "All"
+  },
+  "stats": {
+    "strength": "Strength",
+    "agility": "Agility",
+    "intellect": "Intellect",
+    "haste": "Haste",
+    "crit": "Crit",
+    "mastery": "Mastery",
+    "versatility": "Versatility"
   },
   "ilvlFilter": {
     "label": "ilvl:",
@@ -72,6 +93,7 @@
   },
   "dashboard": {
     "prompt": "Select your item level to see recommended activities",
+    "completeProfile": "Please fill in all your information to display stat priority",
     "intro": "Select your current item level to see the next gear thresholds to aim for in each activity. Click a card to explore detailed rewards.",
     "seasonLabel": "Season at a glance",
     "statMaxIlvl": "Max ilvl",
@@ -99,7 +121,9 @@
     "roadmapSub": "Track your weekly progression through the season",
     "roadmapPhase": "Current phase",
     "roadmapProgress": "{done}/{total} tasks",
-    "tracksSub": "{count} tracks · Explorer → Myth"
+    "tracksSub": "{count} tracks · Explorer → Myth",
+    "statPriority": "Stat Priority",
+    "guides": "Guides"
   },
   "game": {
     "season": {

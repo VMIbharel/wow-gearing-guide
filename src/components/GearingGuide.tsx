@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useLayoutEffect, useCallback, useMemo } fr
 import { ChevronLeft, ChevronRight, Swords, Map, Landmark, Pickaxe, Castle, Info, Hammer, Target, CalendarCheck, LayoutDashboard } from "lucide-react";
 import { I18nProvider, useI18n, useGearingData } from "@/i18n";
 import { useWeeklyChecklist } from "@/hooks/useWeeklyChecklist";
+import { useCharacterProfile } from "@/hooks/useCharacterProfile";
 import { DashboardSection } from "./sections/DashboardSection";
 import { UpgradeTracksSection } from "./sections/UpgradeTracksSection";
 import { RaidSection } from "./sections/RaidSection";
@@ -10,7 +11,7 @@ import { DelvesSection } from "./sections/DelvesSection";
 import { CraftSection } from "./sections/CraftSection";
 import { TraqueSection } from "./sections/TraqueSection";
 import { PvpTable } from "./sections/PvpTable";
-import { WeeklyGuideSection } from "./sections/WeeklyGuideSection";
+import { RoadmapSection } from "./sections/RoadmapSection";
 import { AppHeader } from "./layout/AppHeader";
 import { SectionNav } from "./layout/SectionNav";
 import { SectionDots } from "./layout/SectionDots";
@@ -39,7 +40,8 @@ function GearingGuideContent() {
   const { t } = useI18n();
   const data = useGearingData();
   const checklist = useWeeklyChecklist();
-  const [currentIlvl, setCurrentIlvl] = useState<number | null>(null);
+  const { profile, updateProfile } = useCharacterProfile();
+  const currentIlvl = profile.ilvl;
   const [activeSection, setActiveSection] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeSectionRef = useRef(activeSection);
@@ -110,7 +112,7 @@ function GearingGuideContent() {
   if (!data) {
     return (
       <div className="flex flex-col h-dvh overflow-hidden">
-        <AppHeader currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+        <AppHeader profile={profile} onProfileUpdate={updateProfile} />
         <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
         <LoadingScreen />
       </div>
@@ -119,7 +121,7 @@ function GearingGuideContent() {
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
-      <AppHeader season={data.season} currentIlvl={currentIlvl} onIlvlChange={setCurrentIlvl} />
+      <AppHeader season={data.season} profile={profile} onProfileUpdate={updateProfile} />
       <SectionNav sections={sections} activeSection={activeSection} onSectionClick={scrollToSection} />
 
       {/* Horizontal scroll container */}
@@ -161,6 +163,8 @@ function GearingGuideContent() {
                 data={data}
                 onNavigate={navigateToSection}
                 checked={checklist.checked}
+                classId={profile.classId}
+                specId={profile.specId}
               />
               </div>
             </div>
@@ -171,7 +175,7 @@ function GearingGuideContent() {
             <div className="glass-panel mx-auto w-full max-w-5xl px-4 py-4 flex flex-col flex-1 min-h-0">
               <h2 className="text-xl font-semibold mb-3 shrink-0">{t("sections.weekly")}</h2>
               <div className="flex-1 min-h-0 overflow-auto">
-              <WeeklyGuideSection {...checklist} />
+              <RoadmapSection {...checklist} />
               </div>
             </div>
           </section>
