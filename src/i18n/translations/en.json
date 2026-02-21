@@ -37,7 +37,7 @@
     "weekly": "Season Roadmap",
     "upgradeTracks": "Upgrade Tracks",
     "raid": "Raid",
-    "dungeons": "Dungeons (Mythic+)",
+    "dungeons": "Dungeons",
     "delves": "Delves",
     "craft": "Crafting",
     "traque": "Hunt Contracts",
@@ -98,7 +98,7 @@
   },
   "dashboard": {
     "prompt": "Select your item level to see recommended activities",
-    "completeProfile": "Please fill in all your information to display stat priority",
+    "completeProfile": "Please fill in your class and specialization to display stat priority",
     "intro": "Select your current item level to see the next gear thresholds to aim for in each activity. Click a card to explore detailed rewards.",
     "seasonLabel": "Season at a glance",
     "statMaxIlvl": "Max ilvl",
@@ -126,7 +126,7 @@
     "roadmapSub": "Track your weekly progression through the season",
     "roadmapPhase": "Current phase",
     "roadmapProgress": "{done}/{total} tasks",
-    "tracksSub": "{count} tracks · Explorer → Myth",
+    "tracksSub": "{count} tracks · Adventurer → Myth",
     "statPriority": "Stat Priority",
     "guides": "Guides",
     "outdoor": "Outdoor",
@@ -138,7 +138,6 @@
       "short": "Mid PS"
     },
     "tracks": {
-      "explorer": "Explorer",
       "adventurer": "Adventurer",
       "veteran": "Veteran",
       "champion": "Champion",

@@ -37,7 +37,7 @@
     "weekly": "Roadmap de saison",
     "upgradeTracks": "Pistes d'amélioration",
     "raid": "Raid",
-    "dungeons": "Donjons (Mythique+)",
+    "dungeons": "Donjons",
     "delves": "Gouffres",
     "craft": "Artisanat",
     "traque": "Contrats de Traque",
@@ -98,7 +98,7 @@
   },
   "dashboard": {
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
-    "completeProfile": "Veuillez renseigner l'ensemble de vos informations pour afficher la priorité des stats",
+    "completeProfile": "Veuillez renseigner votre classe et votre spécialisation pour afficher la priorité des stats",
     "intro": "Sélectionnez votre niveau d'objet actuel pour voir les prochains paliers à viser dans chaque activité. Cliquez sur une carte pour explorer les récompenses détaillées.",
     "seasonLabel": "Saison en bref",
     "statMaxIlvl": "ilvl max",
@@ -126,7 +126,7 @@
     "roadmapSub": "Suivez votre progression semaine par semaine",
     "roadmapPhase": "Phase actuelle",
     "roadmapProgress": "{done}/{total} tâches",
-    "tracksSub": "{count} pistes · Explorateur → Mythe",
+    "tracksSub": "{count} pistes · Aventurier → Mythe",
     "statPriority": "Priorité des stats",
     "guides": "Guides",
     "outdoor": "Extérieur",
@@ -138,7 +138,6 @@
       "short": "Mid PS"
     },
     "tracks": {
-      "explorer": "Explorateur",
       "adventurer": "Aventurier",
       "veteran": "Vétéran",
       "champion": "Champion",
