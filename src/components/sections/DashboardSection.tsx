@@ -166,8 +166,8 @@ export function DashboardSection({
   ], [t, maxIlvl, data.raids.length, data.upgradeTracks.length]);
 
   const isProfileIncomplete = useMemo(() => {
-    return currentIlvl === null || !classId || !specId;
-  }, [currentIlvl, classId, specId]);
+    return !classId || !specId;
+  }, [classId, specId]);
 
   return (
     <div className="space-y-4">
@@ -176,21 +176,8 @@ export function DashboardSection({
         {t("dashboard.intro")}
       </p>
 
-      {/* Season stats */}
-      <div className="flex flex-wrap gap-2">
-        {seasonStats.map(({ label, value }) => (
-          <span
-            key={label}
-            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium"
-          >
-            <span className="font-bold text-foreground">{value}</span>
-            <span className="text-muted-foreground">{label}</span>
-          </span>
-        ))}
-      </div>
-
       {/* Stat priority banner — shown when class + spec are selected */}
-      {currentIlvl !== null && classId && specId && (() => {
+      {classId && specId && (() => {
         const cls = CLASSES.find((c) => c.id === classId);
         const spec = cls?.specs.find((s) => s.id === specId);
         if (!cls || !spec) return null;
@@ -243,7 +230,7 @@ export function DashboardSection({
               ))}
             </p>
             <p className="text-xs text-muted-foreground/60 leading-tight">
-              Réferences :
+              {t("dashboard.references")}
             </p>
             <div className="flex gap-3 text-xs">
               <a href={wowheadUrl} target="_blank" rel="noopener noreferrer"
@@ -268,6 +255,20 @@ export function DashboardSection({
           {t("dashboard.completeProfile")}
         </div>
       )}
+
+      {/* Season stats */}
+      <div className="flex flex-wrap gap-2">
+        {seasonStats.map(({ label, value }) => (
+          <span
+            key={label}
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium"
+          >
+            <span className="font-bold text-foreground">{value}</span>
+            <span className="text-muted-foreground">{label}</span>
+          </span>
+        ))}
+      </div>
+
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {cards.map((card) => (
           <ActivityCardItem

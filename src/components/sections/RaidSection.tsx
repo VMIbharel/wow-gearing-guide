@@ -1,6 +1,13 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useI18n } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -38,6 +45,7 @@ interface Props {
 
 export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) {
   const { t } = useI18n();
+  const [activeTab, setActiveTab] = useState("");
 
   // Pre-sort boss groups once — raids data is static, sort never changes
   const sortedRaids = useMemo(() =>
@@ -53,6 +61,11 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
     })),
   [raids]);
 
+  // Initialize activeTab once we have difficulties
+  const defaultDifficulty = raids?.[0]?.difficulties[1]?.name ?? raids?.[0]?.difficulties[0]?.name ?? difficulties?.[1]?.name ?? difficulties?.[0]?.name ?? "";
+  const tabValue = activeTab || defaultDifficulty;
+  const setTabValue = (value: string) => setActiveTab(value);
+
   // If raids are provided, create tabs by difficulty
   if (raids && sortedRaids) {
     // Extract unique difficulties from all raids
@@ -60,8 +73,25 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
 
     return (
       <div>
-        <Tabs defaultValue={allDifficulties[1]?.name ?? allDifficulties[0]?.name}>
-          <TabsList>
+        <Tabs value={tabValue} onValueChange={setTabValue}>
+          {/* Mobile: Select */}
+          <div className="md:hidden shrink-0 pb-3">
+            <Select value={tabValue} onValueChange={setTabValue}>
+              <SelectTrigger className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {allDifficulties.map((d) => (
+                  <SelectItem key={d.name} value={d.name}>
+                    {d.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Desktop: TabsList */}
+          <TabsList className="max-md:hidden w-full flex-wrap border-b shrink-0 gap-y-1 [display:flex!important] h-[auto!important]">
             {allDifficulties.map((d) => (
               <TabsTrigger key={d.name} value={d.name}>
                 {d.name}
@@ -100,8 +130,18 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                                   <TableCell className="font-medium">{bg.bosses}</TableCell>
                                   <TableCell><IlvlText ilvl={bg.lootIlvl} /></TableCell>
                                   <TableCell className="flex gap-1 flex-wrap items-center">
-                                    {bg.crest && <CrestBadge name={bg.crest} />}
-                                    {bg.secondaryCrest && <CrestBadge name={bg.secondaryCrest} />}
+                                    {bg.crest && (
+                                      <>
+                                        <span className="text-xs font-semibold">{bg.crestAmount}</span>
+                                        <CrestBadge name={bg.crest} />
+                                      </>
+                                    )}
+                                    {bg.secondaryCrest && (
+                                      <>
+                                        <span className="text-xs font-semibold">{bg.secondaryCrestAmount}</span>
+                                        <CrestBadge name={bg.secondaryCrest} />
+                                      </>
+                                    )}
                                     {!bg.crest && !bg.secondaryCrest && "—"}
                                   </TableCell>
                                 </TableRow>
@@ -116,8 +156,18 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                                 <TableCell className="font-medium">{veryRare.bosses}</TableCell>
                                 <TableCell><IlvlText ilvl={veryRare.lootIlvl} /></TableCell>
                                 <TableCell className="flex gap-1 flex-wrap items-center">
-                                  {veryRare.crest && <CrestBadge name={veryRare.crest} />}
-                                  {veryRare.secondaryCrest && <CrestBadge name={veryRare.secondaryCrest} />}
+                                  {veryRare.crest && (
+                                    <>
+                                      <span className="text-xs font-semibold">{veryRare.crestAmount}</span>
+                                      <CrestBadge name={veryRare.crest} />
+                                    </>
+                                  )}
+                                  {veryRare.secondaryCrest && (
+                                    <>
+                                      <span className="text-xs font-semibold">{veryRare.secondaryCrestAmount}</span>
+                                      <CrestBadge name={veryRare.secondaryCrest} />
+                                    </>
+                                  )}
                                   {!veryRare.crest && !veryRare.secondaryCrest && "—"}
                                 </TableCell>
                               </TableRow>
@@ -146,8 +196,25 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
   // Original behavior with difficulties tabs
   return (
     <div>
-      <Tabs defaultValue={difficulties![1]?.name ?? difficulties![0]?.name}>
-        <TabsList>
+      <Tabs value={tabValue} onValueChange={setTabValue}>
+        {/* Mobile: Select */}
+        <div className="md:hidden shrink-0 pb-3">
+          <Select value={tabValue} onValueChange={setTabValue}>
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {difficulties!.map((d) => (
+                <SelectItem key={d.name} value={d.name}>
+                  {d.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Desktop: TabsList */}
+        <TabsList className="max-md:hidden w-full flex-wrap border-b shrink-0 gap-y-1 [display:flex!important] h-[auto!important]">
           {difficulties!.map((d) => (
             <TabsTrigger key={d.name} value={d.name}>
               {d.name}
@@ -177,8 +244,18 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
                       <TableCell className="font-medium">{bg.bosses}</TableCell>
                       <TableCell><IlvlText ilvl={bg.lootIlvl} /></TableCell>
                       <TableCell className="flex gap-1 flex-wrap items-center">
-                        {bg.crest && <CrestBadge name={bg.crest} />}
-                        {bg.secondaryCrest && <CrestBadge name={bg.secondaryCrest} />}
+                        {bg.crest && (
+                          <>
+                            <span className="text-xs font-semibold">{bg.crestAmount}</span>
+                            <CrestBadge name={bg.crest} />
+                          </>
+                        )}
+                        {bg.secondaryCrest && (
+                          <>
+                            <span className="text-xs font-semibold">{bg.secondaryCrestAmount}</span>
+                            <CrestBadge name={bg.secondaryCrest} />
+                          </>
+                        )}
                         {!bg.crest && !bg.secondaryCrest && "—"}
                       </TableCell>
                     </TableRow>

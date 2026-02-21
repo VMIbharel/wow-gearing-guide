@@ -8,12 +8,12 @@ import { IlvlText } from "../shared/IlvlText";
 import { cn } from "@/lib/utils";
 
 interface Dungeon {
-  level: string;
+  levelId: string;
   label: string;
   lootIlvl: number;
-  vaultIlvl: number;
-  crest: string;
-  crestAmount: number;
+  vaultIlvl: number | null;
+  crest: string | null;
+  crestAmount: number | null;
   affix: boolean;
 }
 
@@ -25,8 +25,8 @@ interface Props {
 
 type IlvlStatus = "below" | "above" | "none";
 
-function getIlvlStatus(rowIlvl: number, currentIlvl: number | null): IlvlStatus {
-  if (currentIlvl == null) return "none";
+function getIlvlStatus(rowIlvl: number | null, currentIlvl: number | null): IlvlStatus {
+  if (currentIlvl == null || rowIlvl == null) return "none";
   return rowIlvl < currentIlvl ? "below" : "above";
 }
 
@@ -35,18 +35,22 @@ const DungeonRow = memo(
     return (
       <TableRow
         className={cn(
-          currentIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
-          currentIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
+          currentIlvl != null && d.vaultIlvl != null && d.vaultIlvl < currentIlvl && "opacity-30",
+          currentIlvl != null && d.vaultIlvl != null && d.vaultIlvl >= currentIlvl && "bg-accent/50"
         )}
       >
         <TableCell className="font-medium">
           {d.label}{d.affix ? "*" : ""}
         </TableCell>
         <TableCell><IlvlText ilvl={d.lootIlvl} /></TableCell>
-        <TableCell><IlvlText ilvl={d.vaultIlvl} /></TableCell>
+        <TableCell>{d.vaultIlvl != null ? <IlvlText ilvl={d.vaultIlvl} /> : "—"}</TableCell>
         <TableCell className="flex gap-1 items-center">
-          <span className="text-xs font-semibold">{d.crestAmount}</span>
-          <CrestBadge name={d.crest} />
+          {d.crest && d.crestAmount != null ? (
+            <>
+              <span className="text-xs font-semibold">{d.crestAmount}</span>
+              <CrestBadge name={d.crest} />
+            </>
+          ) : "—"}
         </TableCell>
       </TableRow>
     );
@@ -73,7 +77,7 @@ export function DungeonTable({ dungeons, notes, currentIlvl }: Props) {
           </TableHeader>
           <TableBody>
             {dungeons.map((d) => (
-              <DungeonRow key={d.level} d={d} currentIlvl={currentIlvl} />
+              <DungeonRow key={d.levelId} d={d} currentIlvl={currentIlvl} />
             ))}
           </TableBody>
         </Table>

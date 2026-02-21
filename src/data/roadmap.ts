@@ -338,7 +338,7 @@ export const weeklyPhases: WeeklyPhase[] = [
     shortLabel: { fr: "S1", en: "S1" },
     date: "18 mars",
     startDate: "2026-03-18",
-    subtitle: { fr: "Semaine Mythic – pas de M+", en: "Mythic Week – no M+" },
+    subtitle: { fr: "Semaine Héroïque", en: "Heroic Week" },
     warning: {
       fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
       en: "Do NOT spend Heroic or Mythic crests",
@@ -393,22 +393,15 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "s1w1-craft-veteran",
         text: {
-          fr: "Avant le raid : crafter 3 à 5 pièces en 246 ilvl (60 écus Vétéran chacune) — bracelet/ceinture/bottes avec 2 Embellissements",
-          en: "Before raid: craft 3-5 pieces at 246 ilvl (60 Veteran Crests each) — bracers/belt/boots with 2 Embellishments",
+          fr: "Avant le raid : crafter 2 pièces à 246 ilvl avec 2 Embellissements (160 écus Vétéran au total)",
+          en: "Before raid: craft 2 pieces at 246 ilvl with 2 Embellishments (160 Veteran Crests total)",
         },
       },
       {
-        id: "s1w1-craft-adventurer",
+        id: "s1w1-spend-vet-champ-crests",
         text: {
-          fr: "Avant le raid : crafter les emplacements restants en 233 ilvl (60 écus Aventurier chacune)",
-          en: "Before raid: craft remaining slots at 233 ilvl (60 Adventurer Crests each)",
-        },
-      },
-      {
-        id: "s1w1-spend-normal-crests",
-        text: {
-          fr: "Dépenser les écus Normal et inférieures pour des améliorations temporaires (préférez les trinkets que vous remplacerez dans quelques semaines)",
-          en: "Spend any Normal difficulty or below crests on temporary upgrades (prefer trinkets)",
+          fr: "Avant le raid : dépenser tous vos écus Vétéran et Champion restants pour améliorer votre équipement",
+          en: "Before raid: spend all remaining Veteran and Champion Crests on gear upgrades",
         },
       },
       {
@@ -421,7 +414,9 @@ export const weeklyPhases: WeeklyPhase[] = [
     ],
     crestTracking: [
       { fr: "0/100 Héroïques dépensées", en: "0/100 Heroic spent" },
+      { fr: "0/100 Mythiques dépensées", en: "0/100 Mythic spent" },
     ],
+    endingIlvl: { fr: "Objectif : 4× 266 · 11× 269", en: "Target: 4× 266 · 11× 269" },
   },
   {
     id: "season-week-2",
@@ -430,10 +425,6 @@ export const weeklyPhases: WeeklyPhase[] = [
     date: "25 mars",
     startDate: "2026-03-25",
     subtitle: { fr: "Semaine Mythique – M+ ouvre", en: "Mythic Week – M+ opens" },
-    warning: {
-      fr: "Ne pas dépenser d'écus Héroïques ou Mythiques",
-      en: "Do NOT spend Heroic or Mythic Crests",
-    },
     items: [
       {
         id: "s1w2-lfr",
@@ -445,15 +436,11 @@ export const weeklyPhases: WeeklyPhase[] = [
       },
       {
         id: "s1w2-delves",
-        text: { fr: "Faire des Gouffres Abondants de haut niveau avec des clés", en: "Do high level Bountiful Delves with coffer keys, use map if possible" },
+        text: { fr: "Faire des Gouffres Abondants de haut niveau avec des clés (faire au moins un palier 11 pour la quête Clé Brisée)", en: "Do high level Bountiful Delves with coffer keys (do at least one t11 for the Cracked Keystone quest)" },
       },
       {
         id: "s1w2-prey",
         text: { fr: "Effectuer les Traques si elles donnent de bonnes récompenses", en: "If Prey gives useful rewards, do Prey" },
-      },
-      {
-        id: "s1w2-spend-normal-crests",
-        text: { fr: "Dépenser les écus Normal et inférieures pour des améliorations temporaires", en: "Spend Normal and below crests on temporary upgrades" },
       },
       {
         id: "s1w2-m-plus",
@@ -463,22 +450,29 @@ export const weeklyPhases: WeeklyPhase[] = [
         },
       },
       {
+        id: "s1w2-hero-upgrades",
+        text: {
+          fr: "Avant la progression Mythique : améliorer vos 11 items Héros 3/6 une fois chacun (266 → 269 ilvl) — 220 écus Héroïques au total",
+          en: "Before Mythic progression: upgrade all 11 Hero 3/6 items once each (266 → 269 ilvl) — 220 Heroic Crests total",
+        },
+      },
+      {
         id: "s1w2-raid",
         text: { fr: "Full clear Normal, Héroïque, et commencez la progression Mythique", en: "Full clear Normal, Heroic, and begin Mythic progression" },
       },
       {
         id: "s1w2-mythic-drop",
         text: {
-          fr: "Si vous obtenez un item Mythique par chance, vous pouvez l'améliorer deux fois sans impacter la suite",
-          en: "If lucky enough to get a Mythic item from raid, you can upgrade it twice without affecting advice below",
+          fr: "Si vous obtenez un item Mythique par chance, passez directement aux conseils d'amélioration de la semaine suivante",
+          en: "If lucky enough to get a Mythic item from raid, skip to next week's upgrade advice for it",
         },
       },
     ],
     crestTracking: [
-      { fr: "0/200 Héroïques dépensées", en: "0/200 Heroic spent" },
-      { fr: "0/100 Dorées dépensées", en: "0/100 Gilded spent" },
+      { fr: "220/220 Héroïques dépensées", en: "220/220 Heroic spent" },
+      { fr: "0/220 Mythiques dépensées", en: "0/220 Mythic spent" },
     ],
-    endingIlvl: { fr: "Objectif : 15× 266 ilvl", en: "Target: 15× 266 ilvl" },
+    endingIlvl: { fr: "Objectif : 4× 266 · 11× 269", en: "Target: 4× 266 · 11× 269" },
   },
   {
     id: "season-week-3",
@@ -488,8 +482,8 @@ export const weeklyPhases: WeeklyPhase[] = [
     startDate: "2026-04-01",
     subtitle: { fr: "Dernier Raid disponible", en: "Final Raid opens" },
     warning: {
-      fr: "Ne pas dépenser d'écus Héroïques avant le reset du raid",
-      en: "Do NOT spend Heroic crests until after reclear",
+      fr: "Ouvrir la Chambre Forte et crafter avant de dépenser des écus",
+      en: "Open vault and craft before spending Crests",
     },
     items: [
       {
@@ -517,8 +511,8 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "s1w3-heroic-upgrades",
         text: {
-          fr: "Avant la prog Mythique : améliorer autant de pièces Héroïques de 3/6 266 à 4/6 269 que possible (300 écus Héroïques – 30 par amélioration). Laisser un anneau, un trinket, ses slot seront à crafter dans 2 semaines",
-          en: "Before Mythic prog: upgrade as many Heroic items from 3/6 266 to 4/6 269 as possible (300 Heroic Crests – 30 each). Leave one ring, trinket, and the slot you'll craft in 2 weeks",
+          fr: "Héroïque : améliorer 2 items 4/6 269 → 6/6 276 (80 écus Héroïques)",
+          en: "Heroic: upgrade 2 of your 4/6 269 items to 6/6 276 (80 Heroic Crests)",
         },
       },
       {
@@ -526,18 +520,29 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: { fr: "Full clear Normal, Héroïque, et progress Mythique", en: "Full clear Normal, Heroic, and do Mythic progression" },
       },
       {
-        id: "s1w3-vault-upgrade",
+        id: "s1w3-myth-vault-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte trois fois, à 4/6 282 (60 écus Dorées)",
-          en: "Upgrade vault Myth item three times, to 4/6 282 (60 Gilded Crests)",
+          fr: "Mythique (si item Chambre Forte 1/6) : améliorez d'abord son équivalent Héroïque à 6/6 276 (20 écus Héroïques), puis améliorez le 1/6 272 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic (if vault item is 1/6): first upgrade its Heroic counterpart to 6/6 276 (20 Heroic Crests), then upgrade the 1/6 272 → 6/6 289 (80 Mythic Crests)",
+        },
+      },
+      {
+        id: "s1w3-myth-raid-upgrade",
+        text: {
+          fr: "Mythique : améliorer la pièce de raid 2/6 275 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic: upgrade your 2/6 275 Myth raid drop → 6/6 289 (80 Mythic Crests)",
+        },
+        note: {
+          fr: "En supposant que vous obtenez une pièce Mythique de raid lors des semaines 1-2",
+          en: "Assuming 1 Mythic raid piece obtained in weeks 1-2",
         },
       },
     ],
     crestTracking: [
-      { fr: "300/300 Héroïques dépensées", en: "300/300 Heroic spent" },
-      { fr: "120/200 Dorées dépensées", en: "120/200 Gilded spent" },
+      { fr: "320/320 Héroïques dépensées", en: "320/320 Heroic spent" },
+      { fr: "160/320 Mythiques dépensées", en: "160/320 Mythic spent" },
     ],
-    endingIlvl: { fr: "Objectif : 3× 266 · 10× 269 · 1× 282 · 1× 285 (crafté)", en: "Target: 3× 266 · 10× 269 · 1× 282 · 1× 285 (crafted)" },
+    endingIlvl: { fr: "Objectif : 3× 266 · 8× 269 · 2× 276h · 1× 285 (crafté) · 1× 289", en: "Target: 3× 266 · 8× 269 · 2× 276h · 1× 285 (crafted) · 1× 289" },
   },
   {
     id: "season-week-4",
@@ -555,50 +560,32 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: { fr: "Farmer des +12 pour les slots de Chambre Forte et les écus", en: "Farm +12s for vault slots and Crests" },
       },
       {
-        id: "s1w4-heroic-266-269",
+        id: "s1w4-heroic-upgrades",
         text: {
-          fr: "Héroïque : améliorer 2 pièces de 3/6 266 → 4/6 269 (60 écus). Préférer trinkets/anneaux difficiles à remplacer",
-          en: "Heroic: upgrade 2 items from 3/6 266 → 4/6 269 (60 Crests). Prefer trinkets/rings hard to replace",
+          fr: "Héroïque : améliorer 2 items 4/6 269 → 6/6 276 (80 écus Héroïques)",
+          en: "Heroic: upgrade 2 of your 4/6 269 items to 6/6 276 (80 Heroic Crests)",
         },
       },
       {
-        id: "s1w4-heroic-269-272",
+        id: "s1w4-myth-vault-upgrade",
         text: {
-          fr: "Héroïque : améliorer un item 4/6 269 → 5/6 272 (40 écus). Préférer trinket/anneau peu susceptible d'être remplacé",
-          en: "Heroic: upgrade one 4/6 269 item → 5/6 272 (40 Crests). Prefer trinket/ring unlikely to be replaced",
+          fr: "Mythique (si item Chambre Forte 1/6) : améliorez d'abord son équivalent Héroïque à 6/6 276 (20 écus Héroïques), puis améliorez le 1/6 272 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic (if vault item is 1/6): first upgrade its Heroic counterpart to 6/6 276 (20 Heroic Crests), then upgrade the 1/6 272 → 6/6 289 (80 Mythic Crests)",
         },
       },
       {
-        id: "s1w4-myth-upgrade-vault",
+        id: "s1w4-myth-raid-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte à 4/6 282 (60 écus Dorées)",
-          en: "Upgrade new vault Myth item to 4/6 282 (60 Gilded Crests)",
-        },
-      },
-      {
-        id: "s1w4-myth-upgrade-276",
-        text: {
-          fr: "Améliorer l'item Mythique de raid 2/6 276 à 4/6 282 (50 écus Dorées)",
-          en: "Upgrade 2/6 276 Myth raid item to 4/6 282 (50 Gilded Crests)",
-        },
-        note: {
-          fr: "En supposant que vous obtenez une pièce Mythique de raid lors des semaines 1-2",
-          en: "Assuming 1 Mythic raid piece obtained in weeks 1-2",
-        },
-      },
-      {
-        id: "s1w4-myth-upgrade-285",
-        text: {
-          fr: "Améliorer le meilleur item Mythique 4/6 → 5/6 285 (50 écus Dorées) uniquement s'il n'y a pas d'autres items à améliorer",
-          en: "Upgrade best Myth 4/6 → 5/6 285 (50 Gilded Crests) only if no other items to upgrade",
+          fr: "Mythique : améliorer la pièce de raid 2/6 275 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic: upgrade your 2/6 275 Myth raid drop → 6/6 289 (80 Mythic Crests)",
         },
       },
     ],
     crestTracking: [
-      { fr: "400/400 Héroïques dépensées", en: "400/400 Heroic spent" },
-      { fr: "280/300 Dorées dépensées", en: "280/300 Gilded spent" },
+      { fr: "420/400 Héroïques dépensées", en: "420/400 Heroic spent" },
+      { fr: "320/420 Mythiques dépensées", en: "320/420 Mythic spent" },
     ],
-    endingIlvl: { fr: "Objectif : 1× 266 · 10× 269 · 2× 282 · 1× 285 · 1× 285 (crafté)", en: "Target: 1× 266 · 10× 269 · 2× 282 · 1× 285 · 1× 285 (crafted)" },
+    endingIlvl: { fr: "Objectif : 2× 266 · 5× 269 · 4× 276h · 1× 285 (crafté) · 3× 289", en: "Target: 2× 266 · 5× 269 · 4× 276h · 1× 285 (crafted) · 3× 289" },
   },
   {
     id: "season-week-5",
@@ -618,30 +605,30 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "s1w5-craft",
         text: {
-          fr: "Crafter un deuxième item Mythique 5/6 285 (60 écus Mythique). Privilégiez un slot avec un item Héroïque",
-          en: "Craft second Mythic item at 5/6 285 (60 Myth Crests). Prefer a slot with a Heroic item",
+          fr: "Crafter un deuxième Embellissement à 285 ilvl Mythique (80 écus Mythiques)",
+          en: "Craft 2nd embellishment at 285 ilvl Mythic (80 Mythic Crests)",
         },
       },
       {
         id: "s1w5-heroic-upgrades",
         text: {
-          fr: "Héroïque : améliorer deux items 4/6 269 → 5/6 272 (80 écus). Évitez les slots à remplacer prochainement",
-          en: "Heroic: upgrade two 4/6 269 items → 5/6 272 (80 Crests). Avoid slots likely to be replaced in vault",
+          fr: "Héroïque : améliorer 2 items 4/6 269 → 6/6 276 (80 écus Héroïques)",
+          en: "Heroic: upgrade 2 of your 4/6 269 items to 6/6 276 (80 Heroic Crests)",
         },
       },
       {
         id: "s1w5-myth-vault-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte à 4/6 282 (60 écus Dorées)",
-          en: "Upgrade new vault Myth item to 4/6 282 (60 Gilded Crests)",
+          fr: "Mythique (si item Chambre Forte 1/6) : améliorez d'abord son équivalent Héroïque à 6/6 276 (20 écus Héroïques), puis améliorez le 1/6 272 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic (if vault item is 1/6): first upgrade its Heroic counterpart to 6/6 276 (20 Heroic Crests), then upgrade the 1/6 272 → 6/6 289 (80 Mythic Crests)",
         },
       },
     ],
     crestTracking: [
-      { fr: "480/500 Héroïques dépensées", en: "480/500 Heroic spent" },
-      { fr: "400/400 Dorées dépensées", en: "400/400 Gilded spent" },
+      { fr: "520/520 Héroïques dépensées", en: "520/520 Heroic spent" },
+      { fr: "480/520 Mythiques dépensées", en: "480/520 Mythic spent" },
     ],
-    endingIlvl: { fr: "Objectif : 7× 269 · 2× 272h · 3× 282 · 1× 285 · 2× 285 (craftés)", en: "Target: 7× 269 · 2× 272h · 3× 282 · 1× 285 · 2× 285 (crafted)" },
+    endingIlvl: { fr: "Objectif : 1× 266 · 2× 269 · 6× 276h · 2× 285 (craftés) · 4× 289", en: "Target: 1× 266 · 2× 269 · 6× 276h · 2× 285 (crafted) · 4× 289" },
   },
   {
     id: "season-week-6",
@@ -649,6 +636,7 @@ export const weeklyPhases: WeeklyPhase[] = [
     shortLabel: { fr: "S6", en: "S6" },
     date: "22 avr",
     startDate: "2026-04-22",
+    subtitle: { fr: "Fin des écus Héroïques", en: "Done with Heroic Crests" },
     items: [
       {
         id: "s1w6-vault",
@@ -659,42 +647,38 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: { fr: "Farmer des +12 pour les slots de Chambre Forte et les écus", en: "Farm +12s for vault slots and Crests" },
       },
       {
-        id: "s1w6-heroic-upgrades",
+        id: "s1w6-heroic-last",
         text: {
-          fr: "Héroïque : améliorer trois items 4/6 269 → 5/6 272 (120 écus). Évitez les slots à remplacer",
-          en: "Heroic: upgrade three 4/6 269 items → 5/6 272 (120 Crests). Avoid slots likely to be replaced",
+          fr: "Héroïque : améliorer votre dernier item 4/6 269 → 6/6 276 (40 écus Héroïques) — vous avez maintenant terminé les écus Héroïques",
+          en: "Heroic: upgrade your last 4/6 269 item to 6/6 276 (40 Heroic Crests) — you are now done with Heroic Crests",
         },
       },
       {
         id: "s1w6-myth-vault-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte à 4/6 282 (30 écus Dorées)",
-          en: "Upgrade new vault Myth item to 4/6 282 (30 Gilded Crests)",
+          fr: "Mythique (si item Chambre Forte 1/6) : améliorez d'abord son équivalent Héroïque à 6/6 276 (20 écus Héroïques), puis améliorez le 1/6 272 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic (if vault item is 1/6): first upgrade its Heroic counterpart to 6/6 276 (20 Heroic Crests), then upgrade the 1/6 272 → 6/6 289 (80 Mythic Crests)",
         },
       },
       {
         id: "s1w6-myth-raid-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de raid 3/6 279 à 4/6 282 (30 écus Dorées)",
-          en: "Upgrade 3/6 279 Myth raid item to 4/6 282 (30 Gilded Crests)",
-        },
-        note: {
-          fr: "En supposant que vous obtenez une pièce Mythique de raid 3/6 lors des 2 dernières semaines",
-          en: "Assuming 1 Mythic raid piece at 3/6 279 from the last 2 raid weeks",
+          fr: "Mythique : améliorer la pièce de raid 2/6 275 → 6/6 289 (80 écus Mythiques)",
+          en: "Mythic: upgrade your 2/6 275 Myth raid drop → 6/6 289 (80 Mythic Crests)",
         },
       },
     ],
     crestTracking: [
-      { fr: "600/600 Héroïques dépensées", en: "600/600 Heroic spent" },
-      { fr: "490/500 Dorées dépensées", en: "490/500 Gilded spent" },
+      { fr: "560/620 Héroïques dépensées — TERMINÉ", en: "560/620 Heroic spent — DONE" },
+      { fr: "620/620 Mythiques dépensées", en: "620/620 Mythic spent" },
     ],
-    endingIlvl: { fr: "Objectif : 2× 269 · 5× 272h · 6× 282 · 2× 285 (craftés)", en: "Target: 2× 269 · 5× 272h · 6× 282 · 2× 285 (crafted)" },
+    endingIlvl: { fr: "Objectif : 7× 276h · 2× 285 (craftés) · 1× 285 · 5× 289", en: "Target: 7× 276h · 2× 285 (crafted) · 1× 285 · 5× 289" },
   },
   {
-    id: "season-week-7",
-    title: { fr: "Semaine 7", en: "Week 7" },
-    shortLabel: { fr: "S7", en: "S7" },
-    date: "29 avr",
+    id: "season-week-7plus",
+    title: { fr: "Semaine 7+", en: "Week 7+" },
+    shortLabel: { fr: "S7+", en: "S7+" },
+    date: "29 avr+",
     startDate: "2026-04-29",
     items: [
       {
@@ -706,135 +690,31 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: { fr: "Farmer des +12 pour les slots de Chambre Forte et les écus", en: "Farm +12s for vault slots and Crests" },
       },
       {
-        id: "s1w7-craft",
-        text: {
-          fr: "Crafter un troisième item Mythique 5/6 285 (60 écus Mythique). Préférez un slot avec un item Héroïque",
-          en: "Craft third Mythic item at 5/6 285 (60 Myth Crests). Prefer a slot with a Heroic item",
-        },
-      },
-      {
-        id: "s1w7-heroic-last",
-        text: {
-          fr: "Héroïque : améliorer les 2 derniers items 4/6 269 → 5/6 272 (80 écus), ou 1 item à 276 si vous êtes sûr qu'il ne sera pas remplacé",
-          en: "Heroic: upgrade last two 4/6 269 items → 5/6 272 (80 Crests), or 1 item to 276 if it won't be replaced",
-        },
-      },
-      {
         id: "s1w7-myth-upgrade",
         text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte deux fois, à 3/6 279 (30 écus Dorées)",
-          en: "Upgrade vault Myth item two times, to 3/6 279 (30 Gilded Crests)",
+          fr: "Améliorer les items Mythiques dès que vous les obtenez, en visant directement 6/6 289 pour le saut de +4 ilvl",
+          en: "Upgrade Mythic items as you get them, preferring to jump them directly to 6/6 289 for the +4 ilvl jump",
         },
       },
-    ],
-    crestTracking: [
-      { fr: "680/700 Héroïques dépensées", en: "680/700 Heroic spent" },
-      { fr: "580/600 Dorées dépensées", en: "580/600 Gilded spent" },
-    ],
-    endingIlvl: { fr: "Objectif : 5× 272h · 1× 279 · 6× 282 · 3× 285 (craftés)", en: "Target: 5× 272h · 1× 279 · 6× 282 · 3× 285 (crafted)" },
-  },
-  {
-    id: "season-week-8",
-    title: { fr: "Semaine 8", en: "Week 8" },
-    shortLabel: { fr: "S8", en: "S8" },
-    date: "6 mai",
-    startDate: "2026-05-06",
-    subtitle: { fr: "Fin des écus Héroïques", en: "Done with Heroic Crests" },
-    items: [
       {
-        id: "s1w8-vault",
-        text: { fr: "Ouvrir la Chambre Forte (item Mythique 272+ ilvl)", en: "Open vault for a Myth track 272+ item" },
-      },
-      {
-        id: "s1w8-m-plus",
-        text: { fr: "Farmer des +12 pour les slots de Chambre Forte et les écus", en: "Farm +12s for vault slots and Crests" },
-      },
-      {
-        id: "s1w8-heroic-last",
+        id: "s1w7-no-craft",
         text: {
-          fr: "Héroïque : améliorer les 2 derniers items 5/6 272 → 6/6 276 (100 écus). Vous avez maintenant terminé les écus Héroïques",
-          en: "Heroic: upgrade last two 5/6 272 items → 6/6 276 (100 Crests). You are now done with Heroic Crests",
-        },
-        note: {
-          fr: "Certains joueurs finiront semaine 7, d'autres semaine 9 selon la RNG",
-          en: "Some players may finish on week 7 or 9 depending on RNG",
+          fr: "Ne craftez pas si vous pouvez obtenir des items de Chambre Forte à plus de 1/6 — priorisez les upgrades directs",
+          en: "Do not craft if you can get vault items higher than 1/6 — prioritize direct upgrades instead",
         },
       },
       {
-        id: "s1w8-myth-upgrade-new",
-        text: {
-          fr: "Améliorer l'item Mythique de la Chambre Forte à 2/6 276 (10 écus Dorées)",
-          en: "Upgrade vault Myth item to 2/6 276 (10 Gilded Crests)",
-        },
-      },
-      {
-        id: "s1w8-myth-upgrade-279",
-        text: {
-          fr: "Améliorer trois items Mythique 2/6 276 à 3/6 279 (60 écus Dorées au total)",
-          en: "Upgrade three Myth 2/6 276 items to 3/6 279 (60 Gilded Crests total)",
-        },
-      },
-      {
-        id: "s1w8-myth-upgrade-282",
-        text: {
-          fr: "Améliorer un item Mythique 3/6 279 à 4/6 282 (30 écus Dorées)",
-          en: "Upgrade one Myth 3/6 279 item to 4/6 282 (30 Gilded Crests)",
-        },
-      },
-    ],
-    crestTracking: [
-      { fr: "780/800 Héroïques dépensées — TERMINÉ", en: "780/800 Heroic spent — DONE" },
-      { fr: "680/700 Dorées dépensées", en: "680/700 Gilded spent" },
-    ],
-    endingIlvl: { fr: "Objectif : 2× 276h · 3× 279 · 7× 282 · 3× 285 (craftés)", en: "Target: 2× 276h · 3× 279 · 7× 282 · 3× 285 (crafted)" },
-  },
-  {
-    id: "season-weeks-9plus",
-    title: { fr: "Semaine 9+", en: "Weeks 9+" },
-    shortLabel: { fr: "S9+", en: "S9+" },
-    date: "13 mai+",
-    startDate: "2026-05-13",
-    items: [
-      {
-        id: "s1w9-craft-slots",
-        text: {
-          fr: "Crafter des emplacements en 5/6m toutes les deux semaines si ça économise des écus",
-          en: "Craft slots at 5/6m every other week if it saves Crests",
-        },
-      },
-      {
-        id: "s1w9-get-282",
-        text: {
-          fr: "Amener tous les emplacements non-craftés à 4/6 282 avant de passer à la suite",
-          en: "Get all non-crafted slots to 4/6 282 before upgrading further",
-        },
-      },
-      {
-        id: "s1w9-upgrade-289",
-        text: {
-          fr: "Améliorer un item par semaine vers 6/6 289 (le saut de +4 ilvl de 5/6 à 6/6 est très intéressant)",
-          en: "Upgrade one item per week toward 6/6 289 (the +4 ilvl jump from 5/6 to 6/6 is very worthwhile)",
-        },
-      },
-      {
-        id: "s1w9-sim",
+        id: "s1w7-sim",
         text: {
           fr: "Simuler votre personnage chaque semaine avant de dépenser des écus",
           en: "Sim your character weekly before spending Crests",
         },
       },
       {
-        id: "s1w9-1h-swap",
+        id: "s1w7-1h-swap",
         text: {
-          fr: "Envisager le swap vers 1H + OH crafté si vos sims le recommandent (coûte une semaine complète de écus)",
-          en: "Consider swapping to 1H + crafted OH if sims recommend it (costs a full week of Crests)",
-        },
-      },
-      {
-        id: "s1w9-turbo",
-        text: {
-          fr: "Se préparer à d'éventuels Turbo Boost (7/8 et 8/8) comme dans les saisons précédentes de TWW",
-          en: "Prepare for potential Turbo Boost upgrades (7/8 and 8/8) like in previous TWW seasons",
+          fr: "Envisager le swap vers 1H + bouclier/OH crafté si vos sims le recommandent",
+          en: "Consider swapping to 1H + crafted OH if sims recommend it",
         },
       },
     ],

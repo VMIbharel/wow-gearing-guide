@@ -13,6 +13,7 @@
     "craft": "Craft",
     "traque": "Traque",
     "pvp": "JcJ",
+    "outdoor": "Extérieur",
     "info": "Info"
   },
   "table": {
@@ -27,18 +28,21 @@
     "type": "Type",
     "tier": "Palier",
     "rank": "Rang",
-    "ilvl": "niv"
+    "ilvl": "niv",
+    "gold": "Or",
+    "activity": "Activité"
   },
   "sections": {
     "dashboard": "Tableau de bord",
     "weekly": "Roadmap de saison",
     "upgradeTracks": "Pistes d'amélioration",
     "raid": "Raid",
-    "dungeons": "Donjons (Mythique+)",
+    "dungeons": "Donjons",
     "delves": "Gouffres",
     "craft": "Artisanat",
     "traque": "Contrats de Traque",
     "pvp": "JcJ",
+    "outdoor": "Activités en extérieur",
     "info": "Informations"
   },
   "roadmap": {
@@ -49,10 +53,12 @@
   "tabs": {
     "all": "Tous",
     "bountifulDelves": "Gouffres abondants",
+    "classicDelves": "Gouffres classiques",
     "bountyMaps": "Cartes aux trésors"
   },
   "info": {
     "source": "Source :",
+    "links": "Liens utiles :",
     "version": "Version :",
     "lastUpdated": "Dernière mise à jour :",
     "season": "Saison :",
@@ -93,8 +99,9 @@
   },
   "dashboard": {
     "prompt": "Sélectionnez votre niveau d'objet pour voir les activités recommandées",
-    "completeProfile": "Veuillez renseigner l'ensemble de vos informations pour afficher la priorité des stats",
-    "intro": "Sélectionnez votre niveau d'objet actuel pour voir les prochains paliers à viser dans chaque activité. Cliquez sur une carte pour explorer les récompenses détaillées.",
+    "completeProfile": "Veuillez renseigner votre classe et votre spécialisation pour afficher la priorité des stats",
+    "intro": "Votre guide d'équipement pour la saison WoW en cours. Renseignez votre profil pour voir vos priorités de stats et les activités recommandées pour votre niveau d'objet.",
+    "references": "Références :",
     "seasonLabel": "Saison en bref",
     "statMaxIlvl": "ilvl max",
     "statRaids": "Raids",
@@ -121,22 +128,24 @@
     "roadmapSub": "Suivez votre progression semaine par semaine",
     "roadmapPhase": "Phase actuelle",
     "roadmapProgress": "{done}/{total} tâches",
-    "tracksSub": "{count} pistes · Explorateur → Mythe",
+    "tracksSub": "{count} pistes · Aventurier → Mythe",
     "statPriority": "Priorité des stats",
-    "guides": "Guides"
+    "guides": "Guides",
+    "outdoor": "Extérieur",
+    "outdoorSub": "Événements · Trésors · Caches"
   },
   "game": {
     "season": {
-      "full": "Midnight - Pré-saison",
+      "full": "Midnight",
       "short": "Mid PS"
     },
     "tracks": {
-      "explorer": "Explorateur",
       "adventurer": "Aventurier",
       "veteran": "Vétéran",
       "champion": "Champion",
       "hero": "Héros",
-      "myth": "Mythe"
+      "myth": "Mythe",
+      "costNote": "{crests} écus + {gold}g par amélioration"
     },
     "crests": {
       "adventurer": "Aventurier",
@@ -186,6 +195,12 @@
       "aspirant": "Fabriqué (Aspirant)",
       "gladiator": "Fabriqué (Gladiateur)"
     },
+    "outdoorTypes": {
+      "event": "Événements",
+      "treasure": "Trésors / Quêtes",
+      "lootCache": "Cache de butin",
+      "weeklyEvent": "Événement hebdomadaire"
+    },
     "notes": {
       "raid": [
         "Les récompenses de Grande Chambre forte des raids évoluent en niveau d'objet selon le boss le plus difficile tué cette semaine par difficulté"
@@ -199,13 +214,15 @@
         "Les cartes de butin d'archéologue se débloquent au niveau 2 du Périple de gouffre",
         "Vous pouvez obtenir 1 carte par semaine",
         "Les trésors cachés ne nécessitent pas de clés",
-        "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine"
+        "Les gouffres abondant de palier 11 ont un coffre doré pillable 3 fois par semaine",
+        "Les gouffres classiques ne donnent pas accès à la Grande Chambre forte"
       ],
       "craft": [],
       "traque": [
         "Vous pouvez effectuer un maximum de 4 contrats par palier de difficulté par semaine",
         "Les récompenses de la Grande Chambre forte évoluent selon la difficulté la plus élevée complétée"
-      ]
+      ],
+      "outdoor": []
     }
   }
 }

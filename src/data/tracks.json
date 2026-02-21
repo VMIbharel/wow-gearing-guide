@@ -1,19 +1,13 @@
 {
   "upgradeTracks": [
     {
-      "trackId": "explorer",
-      "ranks": 6,
-      "ilvls": [208, 212, 215, 217, 220, 224],
-      "crest": null
-    },
-    {
       "trackId": "adventurer",
       "ranks": 6,
       "ilvls": [220, 224, 227, 230, 233, 237],
       "crest": "adventurer",
       "crestFromRank": 2,
-      "secondaryCrest": "veteran",
-      "secondaryCrestFromRank": 6
+      "crestPerRank": 20,
+      "goldPerRank": 10
     },
     {
       "trackId": "veteran",
@@ -21,8 +15,8 @@
       "ilvls": [233, 237, 240, 243, 246, 250],
       "crest": "veteran",
       "crestFromRank": 2,
-      "secondaryCrest": "champion",
-      "secondaryCrestFromRank": 6
+      "crestPerRank": 20,
+      "goldPerRank": 20
     },
     {
       "trackId": "champion",
@@ -30,8 +24,8 @@
       "ilvls": [246, 250, 253, 256, 259, 263],
       "crest": "champion",
       "crestFromRank": 2,
-      "secondaryCrest": "hero",
-      "secondaryCrestFromRank": 6
+      "crestPerRank": 20,
+      "goldPerRank": 30
     },
     {
       "trackId": "hero",
@@ -39,15 +33,17 @@
       "ilvls": [259, 263, 266, 269, 272, 276],
       "crest": "hero",
       "crestFromRank": 2,
-      "secondaryCrest": "myth",
-      "secondaryCrestFromRank": 6
+      "crestPerRank": 20,
+      "goldPerRank": 40
     },
     {
       "trackId": "myth",
       "ranks": 6,
       "ilvls": [272, 276, 279, 282, 285, 289],
       "crest": "myth",
-      "crestFromRank": 2
+      "crestFromRank": 2,
+      "crestPerRank": 20,
+      "goldPerRank": 50
     }
   ]
 }

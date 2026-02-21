@@ -1,6 +1,6 @@
 {
-  "version": "v01",
-  "lastUpdated": "2026-18-02",
+  "version": "v02",
+  "lastUpdated": "2026-02-21",
   "crests": [
     { "name": "adventurer", "color": "green" },
     { "name": "veteran", "color": "blue" },

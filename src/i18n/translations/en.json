@@ -13,6 +13,7 @@
     "craft": "Craft",
     "traque": "Hunt",
     "pvp": "PvP",
+    "outdoor": "Outdoor",
     "info": "Info"
   },
   "table": {
@@ -27,18 +28,21 @@
     "type": "Type",
     "tier": "Tier",
     "rank": "Rank",
-    "ilvl": "ilvl"
+    "ilvl": "ilvl",
+    "gold": "Gold",
+    "activity": "Activity"
   },
   "sections": {
     "dashboard": "Dashboard",
     "weekly": "Season Roadmap",
     "upgradeTracks": "Upgrade Tracks",
     "raid": "Raid",
-    "dungeons": "Dungeons (Mythic+)",
+    "dungeons": "Dungeons",
     "delves": "Delves",
     "craft": "Crafting",
     "traque": "Hunt Contracts",
     "pvp": "PvP",
+    "outdoor": "Outdoor Activities",
     "info": "Information"
   },
   "roadmap": {
@@ -49,10 +53,12 @@
   "tabs": {
     "all": "All",
     "bountifulDelves": "Bountiful Delves",
+    "classicDelves": "Classic Delves",
     "bountyMaps": "Bounty Maps"
   },
   "info": {
     "source": "Source:",
+    "links": "Useful Links:",
     "version": "Version:",
     "lastUpdated": "Last Updated:",
     "season": "Season:",
@@ -93,8 +99,9 @@
   },
   "dashboard": {
     "prompt": "Select your item level to see recommended activities",
-    "completeProfile": "Please fill in all your information to display stat priority",
-    "intro": "Select your current item level to see the next gear thresholds to aim for in each activity. Click a card to explore detailed rewards.",
+    "completeProfile": "Please fill in your class and specialization to display stat priority",
+    "intro": "Your gearing guide for the current WoW season. Fill in your profile to see your stat priority and recommended activities for your item level.",
+    "references": "References:",
     "seasonLabel": "Season at a glance",
     "statMaxIlvl": "Max ilvl",
     "statRaids": "Raids",
@@ -121,22 +128,24 @@
     "roadmapSub": "Track your weekly progression through the season",
     "roadmapPhase": "Current phase",
     "roadmapProgress": "{done}/{total} tasks",
-    "tracksSub": "{count} tracks · Explorer → Myth",
+    "tracksSub": "{count} tracks · Adventurer → Myth",
     "statPriority": "Stat Priority",
-    "guides": "Guides"
+    "guides": "Guides",
+    "outdoor": "Outdoor",
+    "outdoorSub": "Events · Treasures · Caches"
   },
   "game": {
     "season": {
-      "full": "Midnight - Pre-season",
+      "full": "Midnight",
       "short": "Mid PS"
     },
     "tracks": {
-      "explorer": "Explorer",
       "adventurer": "Adventurer",
       "veteran": "Veteran",
       "champion": "Champion",
       "hero": "Hero",
-      "myth": "Myth"
+      "myth": "Myth",
+      "costNote": "{crests} crests + {gold}g per upgrade"
     },
     "crests": {
       "adventurer": "Adventurer",
@@ -186,6 +195,12 @@
       "aspirant": "Crafted (Aspirant)",
       "gladiator": "Crafted (Gladiator)"
     },
+    "outdoorTypes": {
+      "event": "Events",
+      "treasure": "Treasures / Quests",
+      "lootCache": "Loot Cache",
+      "weeklyEvent": "Weekly Event"
+    },
     "notes": {
       "raid": [
         "Great Vault rewards from raids scale in ilvl based on the hardest boss killed that week per difficulty"
@@ -199,13 +214,15 @@
         "Delver's Bounty maps unlock at level 2 of the Delver's Journey",
         "You can get 1 map per week",
         "Hidden Troves don't need keys",
-        "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week"
+        "Tier 11 Bountiful Delves have a Gilded Stash that is lootable 3 times a week",
+        "Classic Delves do not grant access to the Great Vault"
       ],
       "craft": [],
       "traque": [
         "You can complete a maximum of 4 contracts per difficulty tier per week",
         "Weekly Vault rewards scale based on the highest difficulty completed"
-      ]
+      ],
+      "outdoor": []
     }
   }
 }
