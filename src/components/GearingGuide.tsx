@@ -19,6 +19,7 @@ import { LoadingScreen } from "./layout/LoadingScreen";
 import { InfoSection } from "./sections/InfoSection";
 
 export interface UpgradeTrack {
+  trackId: string;
   name: string;
   ranks: number;
   ilvls: number[];

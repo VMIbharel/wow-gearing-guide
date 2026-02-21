@@ -3,6 +3,8 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useCallback,
+  useMemo,
   type ReactNode,
 } from "react";
 import type { Language, NestedKeyOf } from "./types";
@@ -60,8 +62,8 @@ export function I18nProvider({ children }: I18nProviderProps): React.JSX.Element
     document.documentElement.lang = lang;
   };
 
-  // Translation function with nested key support
-  const t = (key: TranslationKey): string => {
+  // Translation function with nested key support - memoized to prevent unnecessary re-renders
+  const t = useCallback((key: TranslationKey): string => {
     const keys = (key as string).split(".");
     let value: any = translations[language];
 
@@ -80,10 +82,12 @@ export function I18nProvider({ children }: I18nProviderProps): React.JSX.Element
     }
 
     return value ?? key;
-  };
+  }, [language]);
+
+  const contextValue = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={contextValue}>
       {children}
     </I18nContext.Provider>
   );
@@ -153,10 +157,10 @@ export function useGearingData() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    // Reset to show loading state while translations update
-    setData(null);
-    setData(buildTranslatedData(t));
-  }, [language, t]);
+    // Build translated data when language changes
+    const translatedData = buildTranslatedData(t);
+    setData(translatedData);
+  }, [language]);
 
   return data;
 }

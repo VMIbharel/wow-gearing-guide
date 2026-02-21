@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  TableBody, TableCell, TableHead, TableHeader, TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { CrestBadge } from "../shared/CrestBadge";
 import { IlvlText } from "../shared/IlvlText";
@@ -24,23 +24,23 @@ interface Props {
 interface AllTracksRow {
   ilvl: number;
   crestNames: string[];
-  ranksByTrack: { [trackName: string]: number | null };
+  ranksByTrack: { [trackId: string]: number | null };
 }
 
 function getDefaultTrack(tracks: UpgradeTrack[], currentIlvl: number | null): string {
-  if (currentIlvl === null) return "All";
+  if (currentIlvl === null) return "all";
 
   for (const track of tracks) {
     const minIlvl = track.ilvls[0];
     const maxIlvl = track.ilvls[track.ilvls.length - 1];
     if (currentIlvl >= minIlvl && currentIlvl <= maxIlvl) {
-      return track.name;
+      return track.trackId;
     }
   }
 
   return currentIlvl > tracks[tracks.length - 1].ilvls[0]
-    ? tracks[tracks.length - 1].name
-    : tracks[0].name;
+    ? tracks[tracks.length - 1].trackId
+    : tracks[0].trackId;
 }
 
 function getCrestsForRank(track: UpgradeTrack, rank: number): string[] {
@@ -57,7 +57,7 @@ function getCrestsForRank(track: UpgradeTrack, rank: number): string[] {
 }
 
 function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
-  const ilvlMap = new Map<number, { crestNames: string[]; ranksByTrack: { [trackName: string]: number | null } }>();
+  const ilvlMap = new Map<number, { crestNames: string[]; ranksByTrack: { [trackId: string]: number | null } }>();
 
   for (const track of tracks) {
     for (let rankIndex = 0; rankIndex < track.ilvls.length; rankIndex++) {
@@ -75,14 +75,14 @@ function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
           entry.crestNames.push(crest);
         }
       }
-      entry.ranksByTrack[track.name] = rank;
+      entry.ranksByTrack[track.trackId] = rank;
     }
   }
 
   for (const entry of ilvlMap.values()) {
     for (const track of tracks) {
-      if (!(track.name in entry.ranksByTrack)) {
-        entry.ranksByTrack[track.name] = null;
+      if (!(track.trackId in entry.ranksByTrack)) {
+        entry.ranksByTrack[track.trackId] = null;
       }
     }
   }
@@ -107,9 +107,9 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="All">{t("tabs.all")}</SelectItem>
+            <SelectItem value="all">{t("tabs.all")}</SelectItem>
             {tracks.map((track) => (
-              <SelectItem key={track.name} value={track.name}>
+              <SelectItem key={track.trackId} value={track.trackId}>
                 <span
                   className="inline-block w-2 h-2 rounded-full mr-2"
                   style={{ backgroundColor: `var(--tier-${getIlvlTier(track.ilvls[0])})` }}
@@ -124,11 +124,11 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
 
       {/* Desktop: TabsList */}
       <TabsList className="max-md:hidden w-full flex-wrap border-b shrink-0 gap-y-1 [display:flex!important] h-[auto!important]">
-        <TabsTrigger value="All">
+        <TabsTrigger value="all">
           {t("tabs.all")}
         </TabsTrigger>
         {tracks.map((track) => (
-          <TabsTrigger key={track.name} value={track.name}>
+          <TabsTrigger key={track.trackId} value={track.trackId}>
             <span
               className="inline-block w-2 h-2 rounded-full mr-2"
               style={{ backgroundColor: `var(--tier-${getIlvlTier(track.ilvls[0])})` }}
@@ -140,15 +140,15 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
       </TabsList>
 
       {/* Onglet "All" */}
-      <TabsContent value="All" className="flex-1 min-h-0">
+      <TabsContent value="all" className="flex-1 min-h-0">
         <div className="h-full overflow-auto">
-          <table className="w-full caption-bottom text-sm">
+          <Table>
             <TableHeader className="table-header-sticky">
               <TableRow className="border-b">
                 <TableHead>{t("table.ilvl")}</TableHead>
                 <TableHead>{t("table.crests")}</TableHead>
                 {tracks.map((track) => (
-                  <TableHead key={track.name} className="text-center text-sm">
+                  <TableHead key={track.trackId} className="text-center text-sm">
                     {track.name}
                   </TableHead>
                 ))}
@@ -178,23 +178,23 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                     ) : "—"}
                   </TableCell>
                   {tracks.map((track) => (
-                    <TableCell key={track.name} className="text-center text-sm">
-                      {row.ranksByTrack[track.name] !== null ? row.ranksByTrack[track.name] : ""}
+                    <TableCell key={track.trackId} className="text-center text-sm">
+                      {row.ranksByTrack[track.trackId] !== null ? row.ranksByTrack[track.trackId] : ""}
                     </TableCell>
                   ))}
                 </TableRow>
                 );
               })}
             </TableBody>
-          </table>
+          </Table>
         </div>
       </TabsContent>
 
       {/* Onglets individuels par track */}
       {tracks.map((track) => (
-        <TabsContent key={track.name} value={track.name} className="flex-1 min-h-0">
+        <TabsContent key={track.trackId} value={track.trackId} className="flex-1 min-h-0">
           <div className="h-full overflow-auto scrollbar-sexy">
-            <table className="w-full caption-bottom text-sm">
+            <Table>
               <TableHeader className="table-header-sticky">
                 <TableRow className="border-b">
                   <TableHead>{t("table.ilvl")}</TableHead>
@@ -232,7 +232,7 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                   );
                 })}
               </TableBody>
-            </table>
+            </Table>
           </div>
         </TabsContent>
       ))}
