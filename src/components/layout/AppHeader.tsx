@@ -7,12 +7,11 @@ import { Logo } from "./Logo";
 import { Badge } from "@/components/ui/badge";
 
 interface AppHeaderProps {
-  season?: string;
   profile: CharacterProfile;
   onProfileUpdate: (updates: Partial<CharacterProfile>) => void;
 }
 
-export function AppHeader({ season, profile, onProfileUpdate }: AppHeaderProps) {
+export function AppHeader({ profile, onProfileUpdate }: AppHeaderProps) {
   const { t } = useI18n();
 
   return (
@@ -33,9 +32,6 @@ export function AppHeader({ season, profile, onProfileUpdate }: AppHeaderProps) 
                 alt={t("app.title")}
                 className="h-6 w-auto object-contain object-left dark:brightness-0 dark:invert"
               />
-              {season && (
-                <p className="text-xs text-muted-foreground truncate">{season}</p>
-              )}
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
