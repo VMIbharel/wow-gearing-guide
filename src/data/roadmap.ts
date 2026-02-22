@@ -140,9 +140,28 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "ea-dmf-exp",
         text: {
-          fr: "Foire de SombreLune ouvre dimanche : +10% d'expérience. Profitez-en pour monter en niveau plus vite",
+          fr: "Foire de SombreLune ouvre dimanche : +10% d'expérience. Profitez-en pour monter en niveau et réputation plus vite",
           en: "Darkmoon Faire opens Sunday for 10% more XP. Use the buff to level faster",
         },
+        note: {
+          fr: "Achetez le Chapeau de la Foire (10 tickets) chez Gelvas Grimegate — buff +10% XP/réputation utilisable partout, mais incompatible avec le buff Carrousel",
+          en: "Buy the Darkmoon Top Hat (10 tickets) from Gelvas Grimegate — +10% XP/reputation usable anywhere, but cannot stack with the Carousel buff",
+        },
+        links: [
+          { label: { fr: "Chapeau de la Foire (Wowhead)", en: "Darkmoon Top Hat (Wowhead)" }, path: "item=93730/darkmoon-top-hat" },
+          { label: { fr: "Gelvas Grimegate (vendeur)", en: "Gelvas Grimegate (vendor)" }, path: "npc=15303/gelvas-grimegate" },
+        ],
+      },
+      {
+        id: "ea-guild-banner",
+        text: {
+          fr: "Si vous jouez en guilde : achetez la Bannière de coopération chez le vendeur de guilde (Orgrimmar ou Hurlevent) — posez-la au sol pour donner +5% XP/réputation aux membres de guilde à moins de 100m pendant 15 min",
+          en: "If in a guild: buy the Banner of Cooperation from the guild vendor (Orgrimmar or Stormwind) — place on ground to give +5% XP/reputation to guild members within 100 yards for 15 min",
+        },
+        links: [
+          { label: { fr: "Goram (Orgrimmar – Horde)", en: "Goram (Orgrimmar – Horde)" }, path: "npc=44566/goram" },
+          { label: { fr: "Bannière de coopération (Wowhead)", en: "Banner of Cooperation (Wowhead)" }, path: "item=63359/banner-of-cooperation" },
+        ],
       },
       {
         id: "ea-weekly-events",
@@ -187,14 +206,24 @@ export const weeklyPhases: WeeklyPhase[] = [
         },
       },
       {
+        id: "ps1-guild-banner",
+        text: {
+          fr: "Si vous jouez en guilde : utilisez la Bannière de coopération (+5% XP/réputation pour les membres de guilde à portée) pour accélérer la montée en Renommée",
+          en: "If in a guild: use the Banner of Cooperation (+5% XP/reputation for nearby guild members) to speed up Renown grinding",
+        },
+        links: [
+          { label: { fr: "Bannière de coopération (Wowhead)", en: "Banner of Cooperation (Wowhead)" }, path: "item=63359/banner-of-cooperation" },
+        ],
+      },
+      {
         id: "ps1-voidspire-renown",
         text: {
           fr: "Monter la Renommée de La Singularité à rang 7 → trinket Champion 1/6 gratuit",
           en: "The Singularity renown to rank 7 → free 1/6 Champion trinket",
         },
         note: {
-          fr: "Utilisez le buff de la Foire de SombreLune pour aller plus vite",
-          en: "Use Darkmoon Faire buff to speed this up",
+          fr: "Utilisez le Chapeau de la Foire de SombreLune (10 tickets chez Gelvas Grimegate, +10% réputation) pour aller plus vite",
+          en: "Use the Darkmoon Top Hat (10 tickets from Gelvas Grimegate, +10% reputation) to speed this up",
         },
       },
       {
