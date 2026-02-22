@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { useI18n } from "@/i18n";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -6,6 +6,8 @@ import {
 import { CrestBadge } from "../shared/CrestBadge";
 import { IlvlText } from "../shared/IlvlText";
 import { cn } from "@/lib/utils";
+import { getSpecGuide } from "@/data/specItems";
+import { SpecItemsCard } from "@/components/ui/SpecItemsCard";
 
 interface Dungeon {
   levelId: string;
@@ -21,6 +23,8 @@ interface Props {
   dungeons: Dungeon[];
   notes: string[];
   currentIlvl: number | null;
+  classId?: string | null;
+  specId?: string | null;
 }
 
 type IlvlStatus = "below" | "above" | "none";
@@ -60,11 +64,24 @@ const DungeonRow = memo(
     getIlvlStatus(next.d.vaultIlvl, next.currentIlvl)
 );
 
-export function DungeonTable({ dungeons, notes, currentIlvl }: Props) {
+export function DungeonTable({ dungeons, notes, currentIlvl, classId, specId }: Props) {
   const { t } = useI18n();
+
+  const dungeonItems = useMemo(() => {
+    if (!classId || !specId) return null;
+    const guide = getSpecGuide(classId, specId);
+    if (!guide) return null;
+    const items = guide.keyItems.filter((i) => i.sourceType === "dungeon");
+    return items.length > 0 ? items : null;
+  }, [classId, specId]);
 
   return (
     <div>
+      {dungeonItems !== null && (
+        <div className="mb-4">
+          <SpecItemsCard items={dungeonItems} />
+        </div>
+      )}
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>

@@ -1,10 +1,13 @@
 import { memo, useMemo } from "react";
-import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck, Signpost } from "lucide-react";
+import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck, Signpost, Package, BookOpen } from "lucide-react";
 import { useI18n, useGearingData } from "@/i18n";
 import { IlvlText } from "@/components/shared/IlvlText";
 import { cn } from "@/lib/utils";
 import { weeklyPhases } from "@/data/roadmap";
 import { CLASSES } from "@/data/classes";
+import { getSpecGuide } from "@/data/specItems";
+import { SpecItemsCard } from "@/components/ui/SpecItemsCard";
+import { useWowheadInit } from "@/hooks/useWowheadInit";
 
 interface ActivityCard {
   id: string;
@@ -13,6 +16,7 @@ interface ActivityCard {
   sectionId: string;
   currentBestIlvl: number | null;
   nextIlvl: number | null;
+  keyItemIds?: number[];
 }
 
 interface DashboardSectionProps {
@@ -95,6 +99,10 @@ export function DashboardSection({
     return lastTrack?.ilvls.at(-1) ?? null;
   }, [data.upgradeTracks]);
 
+  const specGuide = useMemo(() =>
+    classId && specId ? getSpecGuide(classId, specId) : undefined,
+  [classId, specId]);
+
   const cards: ActivityCard[] = useMemo(() => {
     const raid = getBest(computeRaidIlvls(data.raids), currentIlvl);
     const dungeons = getBest(computeDungeonIlvls(data.dungeons), currentIlvl);
@@ -106,6 +114,15 @@ export function DashboardSection({
     const pvp = getBest(computePvpIlvls(data.pvp), currentIlvl);
     const craft = getBest(computeCraftIlvls(data.craft), currentIlvl);
 
+    const raidItemIds = specGuide?.keyItems
+      .filter((i) => i.sourceType === "raid")
+      .slice(0, 3)
+      .map((i) => i.wowheadId);
+    const dungeonItemIds = specGuide?.keyItems
+      .filter((i) => i.sourceType === "dungeon")
+      .slice(0, 3)
+      .map((i) => i.wowheadId);
+
     return [
       {
         id: "raid",
@@ -114,6 +131,7 @@ export function DashboardSection({
         sectionId: "raid",
         currentBestIlvl: raid.currentBestIlvl,
         nextIlvl: raid.nextIlvl,
+        keyItemIds: raidItemIds,
       },
       {
         id: "dungeons",
@@ -122,6 +140,7 @@ export function DashboardSection({
         sectionId: "dungeons",
         currentBestIlvl: dungeons.currentBestIlvl,
         nextIlvl: dungeons.nextIlvl,
+        keyItemIds: dungeonItemIds,
       },
       {
         id: "delves",
@@ -176,7 +195,7 @@ export function DashboardSection({
         {t("dashboard.intro")}
       </p>
 
-      {/* Stat priority banner — shown when class + spec are selected */}
+      {/* Recommandation — shown when class + spec are selected */}
       {classId && specId && (() => {
         const cls = CLASSES.find((c) => c.id === classId);
         const spec = cls?.specs.find((s) => s.id === specId);
@@ -188,63 +207,80 @@ export function DashboardSection({
         const icyVeinsRole = spec.role === "healer" ? "healing" : spec.role;
         const icyVeinsUrl = `https://www.icy-veins.com/wow/${specId}-${classId}-pve-${icyVeinsRole}-guide`;
         const archonUrl = `https://www.archon.gg/wow/builds/${specId}/${classId}/mythic-plus/overview/10/all-dungeons/this-week`;
+        const specGuide = getSpecGuide(classId, specId);
         return (
-          <div className="rounded-lg border bg-card px-4 py-3 text-sm space-y-2">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div>
-                <div className="flex items-center gap-2 mb-0.5">
-                  <Signpost className="w-4 h-4 text-muted-foreground shrink-0" />
-                  <span className="text-xs font-medium text-muted-foreground">
-                    {t("dashboard.statPriority")}
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground/60 leading-tight pl-6">
-                  {lang === "fr" ? cls.fr : cls.en}
-                  {" · "}
-                  {lang === "fr" ? spec.fr : spec.en}
-                </p>
-              </div>
-            </div>
-            {/* Mobile : liste numérotée */}
-            <ol className="space-y-1 sm:hidden">
-              {statKeys.map((k, i) => (
-                <li key={k} className="flex items-center gap-2 text-xs">
-                  <span className="text-muted-foreground w-4 shrink-0 text-right">{i + 1}.</span>
-                  <span className={i === 0 ? "font-semibold text-primary" : "text-foreground"}>
-                    {t(k as any)}
-                  </span>
-                </li>
-              ))}
-            </ol>
-            {/* Desktop : ligne avec ">" */}
-            <p className="hidden sm:block font-mono text-xs text-foreground/80 tracking-wide">
-              {statKeys.map((k, i) => (
-                <span key={k}>
-                  <span className={i === 0 ? "text-primary font-semibold" : ""}>
-                    {t(k as any)}
-                  </span>
-                  {i < statKeys.length - 1 && (
-                    <span className="text-muted-foreground mx-1">{">"}</span>
-                  )}
-                </span>
-              ))}
-            </p>
+          <div className="rounded-lg border bg-card px-4 py-3 text-sm space-y-4">
             <p className="text-xs text-muted-foreground/60 leading-tight">
-              {t("dashboard.references")}
+              {lang === "fr" ? cls.fr : cls.en}
+              {" · "}
+              {lang === "fr" ? spec.fr : spec.en}
             </p>
-            <div className="flex gap-3 text-xs">
-              <a href={wowheadUrl} target="_blank" rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                WoWHead
-              </a>
-              <a href={icyVeinsUrl} target="_blank" rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                Icy Veins
-              </a>
-              <a href={archonUrl} target="_blank" rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                Archon
-              </a>
+
+            {/* Sous-section : Stats priority */}
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <Signpost className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                <span className="text-xs font-semibold text-foreground">{t("dashboard.statPriority")}</span>
+              </div>
+              {/* Mobile : liste numérotée */}
+              <ol className="space-y-1 sm:hidden pl-5">
+                {statKeys.map((k, i) => (
+                  <li key={k} className="flex items-center gap-2 text-xs">
+                    <span className="text-muted-foreground w-4 shrink-0 text-right">{i + 1}.</span>
+                    <span className={i === 0 ? "font-semibold text-primary" : "text-foreground"}>
+                      {t(k as any)}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              {/* Desktop : ligne avec ">" */}
+              <p className="hidden sm:block font-mono text-xs text-foreground/80 tracking-wide pl-5">
+                {statKeys.map((k, i) => (
+                  <span key={k}>
+                    <span className={i === 0 ? "text-primary font-semibold" : ""}>
+                      {t(k as any)}
+                    </span>
+                    {i < statKeys.length - 1 && (
+                      <span className="text-muted-foreground mx-1">{">"}</span>
+                    )}
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            {/* Sous-section : Items clés */}
+            {specGuide && (
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <Package className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                  <span className="text-xs font-semibold text-foreground">{t("dashboard.keyItems")}</span>
+                </div>
+                <div className="pl-5">
+                  <SpecItemsCard items={specGuide.keyItems} showWarning />
+                </div>
+              </div>
+            )}
+
+            {/* Sous-section : Guides */}
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                <span className="text-xs font-semibold text-foreground">{t("dashboard.guides")}</span>
+              </div>
+              <div className="flex gap-3 text-xs pl-5">
+                <a href={wowheadUrl} target="_blank" rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                  WoWHead
+                </a>
+                <a href={icyVeinsUrl} target="_blank" rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                  Icy Veins
+                </a>
+                <a href={archonUrl} target="_blank" rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                  Archon
+                </a>
+              </div>
             </div>
           </div>
         );
@@ -393,6 +429,8 @@ const ActivityCardItem = memo(function ActivityCardItem({
       : null;
   const Icon = card.icon;
 
+  useWowheadInit([card.keyItemIds]);
+
   return (
     <button
       onClick={() => onNavigate(card.sectionId)}
@@ -443,6 +481,25 @@ const ActivityCardItem = memo(function ActivityCardItem({
         <div className="text-xs text-muted-foreground">
           <p className="mb-0.5">{t("dashboard.currentBest")}</p>
           <IlvlText ilvl={card.currentBestIlvl!} className="font-mono" />
+        </div>
+      )}
+
+      {/* Key item icons — shown when spec items are available for this activity */}
+      {card.keyItemIds && card.keyItemIds.length > 0 && (
+        <div className="flex items-center gap-1 mt-2 pt-2 border-t border-border/50">
+          {card.keyItemIds.map((id) => (
+            <a
+              key={id}
+              href={`https://www.wowhead.com/item=${id}`}
+              data-wowhead={`item=${id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="shrink-0 text-[0px]"
+            >
+              {id}
+            </a>
+          ))}
         </div>
       )}
     </button>

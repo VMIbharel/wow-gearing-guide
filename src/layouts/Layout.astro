@@ -68,6 +68,8 @@ const { title = "WoW Gearing Guide" } = Astro.props;
       content="Guide interactif pour optimiser la montée en item level dans World of Warcraft"
     />
     <title>{title}</title>
+    <script is:inline>window.whTooltips = { colorLinks: false, iconizeLinks: true, renameLinks: true };</script>
+    <script is:inline src="https://wow.zamimg.com/js/tooltips.js" async></script>
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <slot />
