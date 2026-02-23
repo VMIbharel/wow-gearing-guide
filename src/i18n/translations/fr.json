@@ -130,6 +130,9 @@
     "roadmapProgress": "{done}/{total} tâches",
     "tracksSub": "{count} pistes · Aventurier → Mythe",
     "statPriority": "Priorité des stats",
+    "keyItems": "Items clés",
+    "keyItemsWarning": "Ces données sont maintenues manuellement et peuvent être incomplètes ou décalées. Le méta évolue — apprenez à réfléchir au pourquoi de vos choix d'équipement !",
+    "keyItemsComingSoon": "Données à venir pour cette spécialisation.",
     "guides": "Guides",
     "outdoor": "Extérieur",
     "outdoorSub": "Événements · Trésors · Caches"

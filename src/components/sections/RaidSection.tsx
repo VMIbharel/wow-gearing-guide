@@ -1,4 +1,6 @@
 import { useState, useMemo } from "react";
+import { getSpecGuide } from "@/data/specItems";
+import { SpecItemsCard } from "@/components/ui/SpecItemsCard";
 import { useI18n } from "@/i18n";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -41,11 +43,21 @@ interface Props {
   raids?: Raid[];
   notes: string[];
   currentIlvl: number | null;
+  classId?: string | null;
+  specId?: string | null;
 }
 
-export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) {
+export function RaidSection({ difficulties, raids, notes, currentIlvl, classId, specId }: Props) {
   const { t } = useI18n();
   const [activeTab, setActiveTab] = useState("");
+
+  const raidItems = useMemo(() => {
+    if (!classId || !specId) return null;
+    const guide = getSpecGuide(classId, specId);
+    if (!guide) return null;
+    const items = guide.keyItems.filter((i) => i.sourceType === "raid");
+    return items.length > 0 ? items : null;
+  }, [classId, specId]);
 
   // Pre-sort boss groups once — raids data is static, sort never changes
   const sortedRaids = useMemo(() =>
@@ -73,6 +85,11 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
 
     return (
       <div>
+        {raidItems !== null && (
+          <div className="mb-4">
+            <SpecItemsCard items={raidItems} />
+          </div>
+        )}
         <Tabs value={tabValue} onValueChange={setTabValue}>
           {/* Mobile: Select */}
           <div className="md:hidden shrink-0 pb-3">
@@ -196,6 +213,11 @@ export function RaidSection({ difficulties, raids, notes, currentIlvl }: Props) 
   // Original behavior with difficulties tabs
   return (
     <div>
+      {raidItems !== null && (
+        <div className="mb-4">
+          <SpecItemsCard items={raidItems} />
+        </div>
+      )}
       <Tabs value={tabValue} onValueChange={setTabValue}>
         {/* Mobile: Select */}
         <div className="md:hidden shrink-0 pb-3">

@@ -130,6 +130,9 @@
     "roadmapProgress": "{done}/{total} tasks",
     "tracksSub": "{count} tracks · Adventurer → Myth",
     "statPriority": "Stat Priority",
+    "keyItems": "Key Items",
+    "keyItemsWarning": "This data is manually maintained and may be incomplete or out of date. The meta evolves — learn to think about why you need specific gear!",
+    "keyItemsComingSoon": "Data coming soon for this specialization.",
     "guides": "Guides",
     "outdoor": "Outdoor",
     "outdoorSub": "Events · Treasures · Caches"

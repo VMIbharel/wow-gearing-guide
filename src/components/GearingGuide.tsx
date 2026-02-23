@@ -202,6 +202,8 @@ function GearingGuideContent() {
                 raids={data.raids}
                 notes={data.raids[0]?.notes ?? []}
                 currentIlvl={currentIlvl}
+                classId={profile.classId}
+                specId={profile.specId}
               />
               </div>
             </div>
@@ -216,6 +218,8 @@ function GearingGuideContent() {
                 dungeons={data.dungeons}
                 notes={data.dungeonNotes}
                 currentIlvl={currentIlvl}
+                classId={profile.classId}
+                specId={profile.specId}
               />
               </div>
             </div>
