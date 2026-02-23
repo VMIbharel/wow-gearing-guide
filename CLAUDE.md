@@ -11,13 +11,13 @@ WoW Gearing Guide — app web statique aidant les joueurs WoW a optimiser leur m
 - Tailwind CSS v4 (via @tailwindcss/vite, PAS @astrojs/tailwind)
 - shadcn/ui pour les composants React
 - TypeScript strict
-- Donnees en JSON (src/data/gearing.json), pas de BDD
+- Donnees en JSON + TypeScript (src/data/), pas de BDD
 
 ## Architecture
 
 - Pages `.astro` = layout et contenu statique
 - Composants interactifs = fichiers `.tsx` React dans src/components/
-- Monter les islands React avec `client:load` dans les pages Astro
+- Monter les islands React avec `client:only="react"` dans les pages Astro
 - Composants shadcn dans src/components/ui/ (geres par CLI, ne pas editer manuellement)
 - Alias : `@/*` → `./src/*`
 
@@ -39,17 +39,29 @@ WoW Gearing Guide — app web statique aidant les joueurs WoW a optimiser leur m
 ## Fichiers
 
 - Pages : src/pages/*.astro
-- Composants React : src/components/*.tsx
-- Composants shadcn : src/components/ui/*.tsx
-- Donnees : src/data/*.json
+- Layout Astro : src/layouts/Layout.astro
+- Composants React :
+  - src/components/layout/ — AppHeader, CharacterSelector, SectionNav, ThemeToggle, LanguageSelector, …
+  - src/components/sections/ — DashboardSection, RaidSection, DungeonTable, DelvesSection, CraftSection, PvpTable, RoadmapSection, …
+  - src/components/dashboard/ — ActivityCardItem, RoadmapCard, SpecRecommendationCard, TracksCard
+  - src/components/shared/ — CrestBadge, IlvlText
+  - src/components/ui/ — composants shadcn (geres par CLI, ne pas editer manuellement)
+- i18n : src/i18n/ (traductions en.json / fr.json, provider React, types)
+- Hooks : src/hooks/ — useCharacterProfile, useWeeklyChecklist, useWowheadInit
+- Donnees : src/data/ (activities.json, tracks.json, season.json, classes.ts, roadmap.ts, specItems.ts)
 - Styles : src/styles/global.css
-- Utilitaires : src/lib/utils.ts
+- Utilitaires : src/lib/utils.ts, src/lib/dashboard-utils.ts
 
 ## Tailwind v4
 
 - Plugin Vite configure dans astro.config.mjs
 - CSS utilise `@import "tailwindcss"` (pas les directives @tailwind)
 - Variables de theme definies avec @theme inline dans global.css
+
+## Analytics
+
+- @vercel/analytics et @vercel/speed-insights integres dans src/layouts/Layout.astro
+- Aucune config supplementaire requise (auto-injectes au build)
 
 ## Skills disponibles (.agents/skills/)
 
