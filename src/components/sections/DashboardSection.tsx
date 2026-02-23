@@ -1,23 +1,21 @@
-import { memo, useMemo } from "react";
-import { Landmark, Castle, Pickaxe, Target, Swords, Hammer, ChevronRight, Map, CalendarCheck, Signpost, Package, BookOpen } from "lucide-react";
+import { useMemo } from "react";
+import { Landmark, Castle, Pickaxe, Target, Swords, Hammer } from "lucide-react";
 import { useI18n, useGearingData } from "@/i18n";
-import { IlvlText } from "@/components/shared/IlvlText";
-import { cn } from "@/lib/utils";
-import { weeklyPhases } from "@/data/roadmap";
-import { CLASSES } from "@/data/classes";
+import {
+  type ActivityCard,
+  getBest,
+  computeRaidIlvls,
+  computeDungeonIlvls,
+  computeDelveIlvls,
+  computeTraqueIlvls,
+  computePvpIlvls,
+  computeCraftIlvls,
+} from "@/lib/dashboard-utils";
 import { getSpecGuide } from "@/data/specItems";
-import { SpecItemsCard } from "@/components/ui/SpecItemsCard";
-import { useWowheadInit } from "@/hooks/useWowheadInit";
-
-interface ActivityCard {
-  id: string;
-  icon: React.ComponentType<{ className?: string }>;
-  labelKey: string;
-  sectionId: string;
-  currentBestIlvl: number | null;
-  nextIlvl: number | null;
-  keyItemIds?: number[];
-}
+import { ActivityCardItem } from "@/components/dashboard/ActivityCardItem";
+import { RoadmapCard } from "@/components/dashboard/RoadmapCard";
+import { TracksCard } from "@/components/dashboard/TracksCard";
+import { SpecRecommendationCard } from "@/components/dashboard/SpecRecommendationCard";
 
 interface DashboardSectionProps {
   currentIlvl: number | null;
@@ -28,62 +26,6 @@ interface DashboardSectionProps {
   specId?: string | null;
 }
 
-function getBest(ilvls: number[], currentIlvl: number | null) {
-  if (ilvls.length === 0) return { currentBestIlvl: null, nextIlvl: null };
-
-  const sorted = [...new Set(ilvls)].sort((a, b) => a - b);
-  const maxAbsolute = sorted[sorted.length - 1];
-
-  if (currentIlvl === null) {
-    // No ilvl selected: show absolute max as next tier
-    return { currentBestIlvl: null, nextIlvl: maxAbsolute };
-  }
-
-  // Find the next tier ABOVE current ilvl
-  const above = sorted.filter((v) => v > currentIlvl);
-
-  if (above.length === 0) {
-    // Already at max or beyond
-    return { currentBestIlvl: maxAbsolute, nextIlvl: null };
-  }
-
-  // There's a next tier to reach
-  const nextIlvl = above[0]; // first tier above currentIlvl
-  const currentBestIlvl = maxAbsolute; // for secondary display
-
-  return { currentBestIlvl, nextIlvl };
-}
-
-function computeRaidIlvls(raids: any[]): number[] {
-  return raids.flatMap((r) =>
-    r.difficulties.flatMap((d: any) => d.bossGroups.map((bg: any) => bg.lootIlvl))
-  );
-}
-
-function computeDungeonIlvls(dungeons: any[]): number[] {
-  return dungeons
-    .filter((d) => d.vaultIlvl != null)
-    .map((d) => d.vaultIlvl as number);
-}
-
-function computeDelveIlvls(bountiful: any[], maps: any[]): number[] {
-  const bountifulIlvls = bountiful.map((d) => d.vaultIlvl);
-  const mapIlvls = maps.map((m) => m.lootIlvl);
-  return [...bountifulIlvls, ...mapIlvls];
-}
-
-function computeTraqueIlvls(traque: any[]): number[] {
-  return traque.map((r) => r.weeklyChestIlvl);
-}
-
-function computePvpIlvls(pvp: any[]): number[] {
-  return pvp.map((p) => p.ilvl);
-}
-
-function computeCraftIlvls(craft: any[]): number[] {
-  return craft.map((c) => c.maxIlvl);
-}
-
 export function DashboardSection({
   currentIlvl,
   data,
@@ -92,7 +34,7 @@ export function DashboardSection({
   classId,
   specId,
 }: DashboardSectionProps) {
-  const { t, language } = useI18n();
+  const { t } = useI18n();
 
   const maxIlvl = useMemo(() => {
     const lastTrack = data.upgradeTracks.at(-1);
@@ -124,58 +66,14 @@ export function DashboardSection({
       .map((i) => i.wowheadId);
 
     return [
-      {
-        id: "raid",
-        icon: Landmark,
-        labelKey: "dashboard.raid",
-        sectionId: "raid",
-        currentBestIlvl: raid.currentBestIlvl,
-        nextIlvl: raid.nextIlvl,
-        keyItemIds: raidItemIds,
-      },
-      {
-        id: "dungeons",
-        icon: Castle,
-        labelKey: "dashboard.dungeons",
-        sectionId: "dungeons",
-        currentBestIlvl: dungeons.currentBestIlvl,
-        nextIlvl: dungeons.nextIlvl,
-        keyItemIds: dungeonItemIds,
-      },
-      {
-        id: "delves",
-        icon: Pickaxe,
-        labelKey: "dashboard.delves",
-        sectionId: "delves",
-        currentBestIlvl: delves.currentBestIlvl,
-        nextIlvl: delves.nextIlvl,
-      },
-      {
-        id: "traque",
-        icon: Target,
-        labelKey: "dashboard.traque",
-        sectionId: "traque",
-        currentBestIlvl: traque.currentBestIlvl,
-        nextIlvl: traque.nextIlvl,
-      },
-      {
-        id: "pvp",
-        icon: Swords,
-        labelKey: "dashboard.pvp",
-        sectionId: "pvp",
-        currentBestIlvl: pvp.currentBestIlvl,
-        nextIlvl: pvp.nextIlvl,
-      },
-      {
-        id: "craft",
-        icon: Hammer,
-        labelKey: "dashboard.craft",
-        sectionId: "craft",
-        currentBestIlvl: craft.currentBestIlvl,
-        nextIlvl: craft.nextIlvl,
-      },
+      { id: "raid", icon: Landmark, labelKey: "dashboard.raid", sectionId: "raid", ...raid, keyItemIds: raidItemIds },
+      { id: "dungeons", icon: Castle, labelKey: "dashboard.dungeons", sectionId: "dungeons", ...dungeons, keyItemIds: dungeonItemIds },
+      { id: "delves", icon: Pickaxe, labelKey: "dashboard.delves", sectionId: "delves", ...delves },
+      { id: "traque", icon: Target, labelKey: "dashboard.traque", sectionId: "traque", ...traque },
+      { id: "pvp", icon: Swords, labelKey: "dashboard.pvp", sectionId: "pvp", ...pvp },
+      { id: "craft", icon: Hammer, labelKey: "dashboard.craft", sectionId: "craft", ...craft },
     ];
-  }, [currentIlvl, data]);
+  }, [currentIlvl, data, specGuide]);
 
   const seasonStats = useMemo(() => [
     { label: t("dashboard.statMaxIlvl"), value: maxIlvl ?? "—" },
@@ -184,9 +82,7 @@ export function DashboardSection({
     { label: t("dashboard.statActivities"), value: 6 },
   ], [t, maxIlvl, data.raids.length, data.upgradeTracks.length]);
 
-  const isProfileIncomplete = useMemo(() => {
-    return !classId || !specId;
-  }, [classId, specId]);
+  const isProfileIncomplete = !classId || !specId;
 
   return (
     <div className="space-y-4">
@@ -196,95 +92,9 @@ export function DashboardSection({
       </p>
 
       {/* Recommandation — shown when class + spec are selected */}
-      {classId && specId && (() => {
-        const cls = CLASSES.find((c) => c.id === classId);
-        const spec = cls?.specs.find((s) => s.id === specId);
-        if (!cls || !spec) return null;
-        const lang = language as "en" | "fr";
-        const primaryKey = `stats.${spec.primaryStat}` as const;
-        const statKeys = [primaryKey, ...spec.statPriority.map((s) => `stats.${s}` as const)];
-        const wowheadUrl = `https://www.wowhead.com/guide/classes/${classId}/${specId}/overview`;
-        const icyVeinsRole = spec.role === "healer" ? "healing" : spec.role;
-        const icyVeinsUrl = `https://www.icy-veins.com/wow/${specId}-${classId}-pve-${icyVeinsRole}-guide`;
-        const archonUrl = `https://www.archon.gg/wow/builds/${specId}/${classId}/mythic-plus/overview/10/all-dungeons/this-week`;
-        const specGuide = getSpecGuide(classId, specId);
-        return (
-          <div className="rounded-lg border bg-card px-4 py-3 text-sm space-y-4">
-            <p className="text-xs text-muted-foreground/60 leading-tight">
-              {lang === "fr" ? cls.fr : cls.en}
-              {" · "}
-              {lang === "fr" ? spec.fr : spec.en}
-            </p>
-
-            {/* Sous-section : Stats priority */}
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <Signpost className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-                <span className="text-xs font-semibold text-foreground">{t("dashboard.statPriority")}</span>
-              </div>
-              {/* Mobile : liste numérotée */}
-              <ol className="space-y-1 sm:hidden pl-5">
-                {statKeys.map((k, i) => (
-                  <li key={k} className="flex items-center gap-2 text-xs">
-                    <span className="text-muted-foreground w-4 shrink-0 text-right">{i + 1}.</span>
-                    <span className={i === 0 ? "font-semibold text-primary" : "text-foreground"}>
-                      {t(k as any)}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-              {/* Desktop : ligne avec ">" */}
-              <p className="hidden sm:block font-mono text-xs text-foreground/80 tracking-wide pl-5">
-                {statKeys.map((k, i) => (
-                  <span key={k}>
-                    <span className={i === 0 ? "text-primary font-semibold" : ""}>
-                      {t(k as any)}
-                    </span>
-                    {i < statKeys.length - 1 && (
-                      <span className="text-muted-foreground mx-1">{">"}</span>
-                    )}
-                  </span>
-                ))}
-              </p>
-            </div>
-
-            {/* Sous-section : Items clés */}
-            {specGuide && (
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <Package className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-                  <span className="text-xs font-semibold text-foreground">{t("dashboard.keyItems")}</span>
-                </div>
-                <div className="pl-5">
-                  <SpecItemsCard items={specGuide.keyItems} showWarning />
-                </div>
-              </div>
-            )}
-
-            {/* Sous-section : Guides */}
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-                <span className="text-xs font-semibold text-foreground">{t("dashboard.guides")}</span>
-              </div>
-              <div className="flex gap-3 text-xs pl-5">
-                <a href={wowheadUrl} target="_blank" rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                  WoWHead
-                </a>
-                <a href={icyVeinsUrl} target="_blank" rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                  Icy Veins
-                </a>
-                <a href={archonUrl} target="_blank" rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground underline underline-offset-2">
-                  Archon
-                </a>
-              </div>
-            </div>
-          </div>
-        );
-      })()}
+      {classId && specId && (
+        <SpecRecommendationCard classId={classId} specId={specId} />
+      )}
 
       {isProfileIncomplete && (
         <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 text-center">
@@ -323,185 +133,3 @@ export function DashboardSection({
     </div>
   );
 }
-
-function RoadmapCard({ checked, onNavigate }: { checked: Record<string, boolean>; onNavigate: (sectionId: string) => void }) {
-  const { t, language } = useI18n();
-
-  const { currentPhase, done, total, pct } = useMemo(() => {
-    const today = new Date().toISOString().slice(0, 10);
-    const idx = weeklyPhases.reduce((acc, phase, i) =>
-      phase.startDate <= today ? i : acc, 0);
-    const phase = weeklyPhases[idx];
-    const doneCount = phase.items.filter((item) => checked[item.id]).length;
-    const totalCount = phase.items.length;
-    return {
-      currentPhase: phase,
-      done: doneCount,
-      total: totalCount,
-      pct: totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0,
-    };
-  }, [checked]);
-
-  return (
-    <button
-      onClick={() => onNavigate("weekly")}
-      className="group rounded-xl border bg-card text-left p-4 transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-        <CalendarCheck className="w-4 h-4 text-muted-foreground shrink-0" />
-          <span className="text-xs font-medium text-muted-foreground truncate">
-            {t("nav.weekly")}
-          </span>
-        </div>
-        <ChevronRight className="w-3 h-3 text-muted-foreground/40 shrink-0 mt-0.5 group-hover:text-muted-foreground transition-colors" />
-      </div>
-      <p className="text-xs text-muted-foreground/60 mt-1 mb-3 leading-tight">
-        {t("dashboard.roadmapSub")}
-      </p>
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xs text-muted-foreground">{t("dashboard.roadmapPhase")}</span>
-          <span className="text-xs font-medium text-foreground truncate max-w-[60%] text-right">
-            {currentPhase.title[language as "fr" | "en"] ?? currentPhase.title.en}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
-            <div
-              className="h-full rounded-full bg-primary transition-all"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-          <span className="text-xs text-muted-foreground shrink-0">
-            {t("dashboard.roadmapProgress")
-              .replace("{done}", String(done))
-              .replace("{total}", String(total))}
-          </span>
-        </div>
-      </div>
-    </button>
-  );
-}
-
-function TracksCard({
-  data,
-  onNavigate,
-}: {
-  data: ReturnType<typeof useGearingData>;
-  onNavigate: (sectionId: string) => void;
-}) {
-  const { t } = useI18n();
-
-  return (
-    <button
-      onClick={() => onNavigate("tracks")}
-      className="group rounded-xl border bg-card text-left p-4 transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-    >
-      <div className="flex items-center gap-2 mb-1">
-        <Map className="w-4 h-4 text-muted-foreground shrink-0" />
-        <span className="text-xs font-medium text-muted-foreground truncate flex-1">
-          {t("nav.tracks")}
-        </span>
-        <ChevronRight className="w-3 h-3 text-muted-foreground/40 shrink-0 group-hover:text-muted-foreground transition-colors" />
-      </div>
-      <p className="text-xs text-muted-foreground/60 leading-tight">
-        {t("dashboard.tracksSub").replace("{count}", String(data.upgradeTracks.length))}
-      </p>
-    </button>
-  );
-}
-
-const ActivityCardItem = memo(function ActivityCardItem({
-  card,
-  currentIlvl,
-  onNavigate,
-}: {
-  card: ActivityCard;
-  currentIlvl: number | null;
-  onNavigate: (sectionId: string) => void;
-}) {
-  const { t } = useI18n();
-  const hasAccess = card.currentBestIlvl !== null;
-  const gap =
-    card.nextIlvl != null && currentIlvl != null
-      ? card.nextIlvl - currentIlvl
-      : null;
-  const Icon = card.icon;
-
-  useWowheadInit([card.keyItemIds]);
-
-  return (
-    <button
-      onClick={() => onNavigate(card.sectionId)}
-      className={cn(
-        "group rounded-xl border bg-card text-left p-4 transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        !hasAccess && currentIlvl !== null && "opacity-50"
-      )}
-    >
-      {/* Header row: icon + activity name + chevron */}
-      <div className="flex items-center gap-2 mb-1">
-        <Icon className="w-4 h-4 text-muted-foreground shrink-0" />
-        <span className="text-xs font-medium text-muted-foreground truncate flex-1">
-          {t(card.labelKey as any)}
-        </span>
-        <ChevronRight className="w-3 h-3 text-muted-foreground/40 shrink-0 group-hover:text-muted-foreground transition-colors" />
-      </div>
-      {/* Subtitle */}
-      <p className="text-xs text-muted-foreground/60 mb-3 leading-tight">
-        {t(`dashboard.${card.id}Sub` as any)}
-      </p>
-
-      {/* Next tier to accomplish — large and colored */}
-      <div className="mb-2">
-        <p className="text-xs text-muted-foreground mb-0.5">
-          {currentIlvl === null ? t("dashboard.maxAvailable") : t("dashboard.nextTier")}
-        </p>
-        {card.nextIlvl !== null ? (
-          <>
-            <IlvlText
-              ilvl={card.nextIlvl}
-              className="text-2xl font-mono font-bold"
-            />
-            {gap !== null && gap > 0 && (
-              <p className="text-xs text-muted-foreground/70 mt-0.5">
-                {t("dashboard.gap").replace("{gap}", String(gap))}
-              </p>
-            )}
-          </>
-        ) : (
-          <span className="text-2xl font-mono font-bold text-primary">
-            {t("dashboard.maxReached")}
-          </span>
-        )}
-      </div>
-
-      {/* Current best (secondary info) */}
-      {hasAccess && card.nextIlvl !== null && (
-        <div className="text-xs text-muted-foreground">
-          <p className="mb-0.5">{t("dashboard.currentBest")}</p>
-          <IlvlText ilvl={card.currentBestIlvl!} className="font-mono" />
-        </div>
-      )}
-
-      {/* Key item icons — shown when spec items are available for this activity */}
-      {card.keyItemIds && card.keyItemIds.length > 0 && (
-        <div className="flex items-center gap-1 mt-2 pt-2 border-t border-border/50">
-          {card.keyItemIds.map((id) => (
-            <a
-              key={id}
-              href={`https://www.wowhead.com/item=${id}`}
-              data-wowhead={`item=${id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="shrink-0 text-[0px]"
-            >
-              {id}
-            </a>
-          ))}
-        </div>
-      )}
-    </button>
-  );
-});
