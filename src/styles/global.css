@@ -62,6 +62,11 @@
   --tier-gold: oklch(0.48 0.15 75);
   --tier-gold-bg: oklch(0.92 0.04 75);
 
+  /* Currency colors (WoW: gold/silver/bronze) - Light Mode */
+  --currency-gold: oklch(0.78 0.14 75);
+  --currency-silver: oklch(0.72 0.02 260);
+  --currency-bronze: oklch(0.70 0.10 55);
+
   /* Light Mode: Sunwell Radiance - tons dorés/chauds */
   --background: oklch(0.98 0.015 85);        /* Crème doré très clair */
   --foreground: oklch(0.20 0.02 60);         /* Brun foncé chaud */
@@ -110,6 +115,11 @@
   --tier-orange-bg: oklch(0.28 0.06 55);
   --tier-gold: oklch(0.78 0.14 75);
   --tier-gold-bg: oklch(0.28 0.06 75);
+
+  /* Currency colors (WoW: gold/silver/bronze) - Dark Mode */
+  --currency-gold: oklch(0.78 0.14 75);
+  --currency-silver: oklch(0.72 0.02 260);
+  --currency-bronze: oklch(0.70 0.10 55);
 
   /* Dark Mode: Void Arcana - tons violets/bleus */
   --background: oklch(0.18 0.04 285);         /* Violet void très sombre */

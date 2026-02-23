@@ -148,7 +148,8 @@
       "champion": "Champion",
       "hero": "Hero",
       "myth": "Myth",
-      "costNote": "{crests} crests + {gold}g per upgrade"
+      "costNoteCrests": "crests",
+      "costNotePerUpgrade": "per upgrade"
     },
     "crests": {
       "adventurer": "Adventurer",

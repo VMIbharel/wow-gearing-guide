@@ -12,6 +12,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { CrestBadge } from "../shared/CrestBadge";
+import { CurrencyIcon } from "../shared/CurrencyIcon";
 import { IlvlText } from "../shared/IlvlText";
 import { cn, getIlvlTier } from "@/lib/utils";
 import type { UpgradeTrack } from "../GearingGuide";
@@ -23,7 +24,6 @@ interface Props {
 
 interface AllTracksRow {
   ilvl: number;
-  crests: { name: string; amount: number | null }[];
   ranksByTrack: { [trackId: string]: number | null };
 }
 
@@ -57,42 +57,29 @@ function getCrestsForRank(track: UpgradeTrack, rank: number): string[] {
 }
 
 function buildAllTracksData(tracks: UpgradeTrack[]): AllTracksRow[] {
-  const ilvlMap = new Map<number, { crestMap: Map<string, number | null>; ranksByTrack: { [trackId: string]: number | null } }>();
+  const ilvlMap = new Map<number, { [trackId: string]: number | null }>();
 
   for (const track of tracks) {
-    for (let rankIndex = 0; rankIndex < track.ilvls.length; rankIndex++) {
-      const rank = rankIndex + 1;
-      const ilvl = track.ilvls[rankIndex];
-      const crests = getCrestsForRank(track, rank);
-
+    for (let i = 0; i < track.ilvls.length; i++) {
+      const ilvl = track.ilvls[i];
+      const rank = i + 1;
       if (!ilvlMap.has(ilvl)) {
-        ilvlMap.set(ilvl, { crestMap: new Map(), ranksByTrack: {} });
+        ilvlMap.set(ilvl, {});
       }
-
-      const entry = ilvlMap.get(ilvl)!;
-      for (const crest of crests) {
-        if (!entry.crestMap.has(crest)) {
-          entry.crestMap.set(crest, track.crestPerRank ?? null);
-        }
-      }
-      entry.ranksByTrack[track.trackId] = rank;
+      ilvlMap.get(ilvl)![track.trackId] = rank;
     }
   }
 
   for (const entry of ilvlMap.values()) {
     for (const track of tracks) {
-      if (!(track.trackId in entry.ranksByTrack)) {
-        entry.ranksByTrack[track.trackId] = null;
+      if (!(track.trackId in entry)) {
+        entry[track.trackId] = null;
       }
     }
   }
 
   return Array.from(ilvlMap.entries())
-    .map(([ilvl, data]) => ({
-      ilvl,
-      crests: Array.from(data.crestMap.entries()).map(([name, amount]) => ({ name, amount })),
-      ranksByTrack: data.ranksByTrack,
-    }))
+    .map(([ilvl, ranksByTrack]) => ({ ilvl, ranksByTrack }))
     .sort((a, b) => a.ilvl - b.ilvl);
 }
 
@@ -143,14 +130,13 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
         ))}
       </TabsList>
 
-      {/* Onglet "All" */}
+      {/* "All" tab — tableau sans colonne Écus partagée */}
       <TabsContent value="all" className="flex-1 min-h-0">
         <div className="h-full overflow-auto">
           <Table>
             <TableHeader className="table-header-sticky">
               <TableRow className="border-b">
                 <TableHead>{t("table.ilvl")}</TableHead>
-                <TableHead>{t("table.crests")}</TableHead>
                 {tracks.map((track) => (
                   <TableHead key={track.trackId} className="text-center text-sm">
                     {track.name}
@@ -171,27 +157,37 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                       isHighlighted && "bg-accent/50 hover:bg-accent/70"
                     )}
                   >
-                  <TableCell>
-                    <IlvlText ilvl={row.ilvl} />
-                  </TableCell>
-                  <TableCell>
-                    {row.crests.length > 0 ? (
-                      <div className="flex gap-1 flex-wrap items-center">
-                        {row.crests.map((c) => (
-                          <div key={c.name} className="flex gap-1 items-center">
-                            {c.amount != null && <span className="text-xs font-semibold">{c.amount}</span>}
-                            <CrestBadge name={c.name} />
-                          </div>
-                        ))}
-                      </div>
-                    ) : "—"}
-                  </TableCell>
-                  {tracks.map((track) => (
-                    <TableCell key={track.trackId} className="text-center text-sm">
-                      {row.ranksByTrack[track.trackId] !== null ? row.ranksByTrack[track.trackId] : ""}
+                    <TableCell>
+                      <IlvlText ilvl={row.ilvl} />
                     </TableCell>
-                  ))}
-                </TableRow>
+                    {tracks.map((track) => {
+                      const rank = row.ranksByTrack[track.trackId];
+                      if (rank === null) {
+                        return <TableCell key={track.trackId} />;
+                      }
+                      const crests = getCrestsForRank(track, rank);
+                      const hasGold = track.goldPerRank != null && track.goldPerRank > 0;
+                      return (
+                        <TableCell key={track.trackId} className="text-center">
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="text-sm font-bold">{rank}</span>
+                            {hasGold && (
+                              <span className="text-xs text-muted-foreground flex items-center gap-0.5">
+                                {track.goldPerRank} <CurrencyIcon type="gold" />
+                              </span>
+                            )}
+                            {crests.length > 0 && (
+                              <div className="flex gap-0.5 flex-wrap justify-center items-center">
+                                {crests.map((c) => (
+                                  <CrestBadge key={c} name={c} amount={track.crestPerRank ?? undefined} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
                 );
               })}
             </TableBody>
@@ -203,10 +199,10 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
       {tracks.map((track) => (
         <TabsContent key={track.trackId} value={track.trackId} className="flex-1 min-h-0 flex flex-col">
           {(track.crestPerRank != null && track.crestPerRank > 0) || (track.goldPerRank != null && track.goldPerRank > 0) ? (
-            <p className="text-xs text-muted-foreground mb-2 shrink-0">
-              {t("game.tracks.costNote" as any)
-                .replace("{crests}", String(track.crestPerRank ?? 0))
-                .replace("{gold}", String(track.goldPerRank ?? 0))}
+            <p className="text-xs text-muted-foreground mb-2 shrink-0 flex items-center gap-1 flex-wrap">
+              {track.crestPerRank ?? 0} {t("game.tracks.costNoteCrests" as any)}
+              {" + "}
+              {track.goldPerRank ?? 0} <CurrencyIcon type="gold" /> {t("game.tracks.costNotePerUpgrade" as any)}
             </p>
           ) : null}
           <div className="flex-1 min-h-0 overflow-auto scrollbar-sexy">
@@ -250,9 +246,11 @@ export function UpgradeTracksSection({ tracks, currentIlvl }: Props) {
                         ) : "—"}
                       </TableCell>
                       <TableCell className="text-sm">
-                        {track.goldPerRank != null && track.goldPerRank > 0
-                          ? `${track.goldPerRank}g`
-                          : "—"}
+                        {track.goldPerRank != null && track.goldPerRank > 0 ? (
+                          <span className="flex items-center gap-0.5">
+                            {track.goldPerRank} <CurrencyIcon type="gold" />
+                          </span>
+                        ) : "—"}
                       </TableCell>
                       <TableCell>{rank}</TableCell>
                     </TableRow>
