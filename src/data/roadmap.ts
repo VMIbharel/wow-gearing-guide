@@ -138,19 +138,25 @@ export const weeklyPhases: WeeklyPhase[] = [
         },
       },
       {
-        id: "ea-dmf-exp",
+        id: "ea-rested-xp",
         text: {
-          fr: "Foire de SombreLune ouvre dimanche : +10% d'expérience. Profitez-en pour monter en niveau et réputation plus vite",
-          en: "Darkmoon Faire opens Sunday for 10% more XP. Use the buff to level faster",
+          fr: "Se déconnecter dans une auberge entre les sessions pour accumuler de l'XP de repos",
+          en: "Log out in an inn between sessions to accumulate rested XP",
         },
-        note: {
-          fr: "Achetez le Chapeau de la Foire (10 tickets) chez Gelvas Grimegate — buff +10% XP/réputation utilisable partout, mais incompatible avec le buff Carrousel",
-          en: "Buy the Darkmoon Top Hat (10 tickets) from Gelvas Grimegate — +10% XP/reputation usable anywhere, but cannot stack with the Carousel buff",
+      },
+      {
+        id: "ea-warmode",
+        text: {
+          fr: "Activer le Mode Guerre pour un bonus d'XP supplémentaire pendant la montée en niveau",
+          en: "Enable Warmode for an additional XP bonus while leveling",
         },
-        links: [
-          { label: { fr: "Chapeau de la Foire (Wowhead)", en: "Darkmoon Top Hat (Wowhead)" }, path: "item=93730/darkmoon-top-hat" },
-          { label: { fr: "Gelvas Grimegate (vendeur)", en: "Gelvas Grimegate (vendor)" }, path: "npc=15303/gelvas-grimegate" },
-        ],
+      },
+      {
+        id: "ea-rares-treasures",
+        text: {
+          fr: "Tuer les rares et collecter les trésors des zones pour progresser la Renommée",
+          en: "Kill zone rares and collect treasures to progress Renown",
+        },
       },
       {
         id: "ea-guild-banner",
@@ -166,8 +172,8 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "ea-weekly-events",
         text: {
-          fr: "Compléter les événements hebdomadaires disponibles",
-          en: "Complete weekly events if available",
+          fr: "Compléter les événements de zone disponibles : Soirée de Saltheril, Événement d'Abondance, Légendes des Haranir, Assaut de Stormarion",
+          en: "Complete weekly zone events: Saltheril's Soiree, Abundance Event, Legends of the Haranir, Stormarion Assault",
         },
       },
       {
@@ -175,13 +181,6 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: {
           fr: "Effectuer les Traques si elles donnent de bonnes récompenses",
           en: "Level Prey if possible (Nightmare Prey may give Champion items)",
-        },
-      },
-      {
-        id: "ea-renown-craft",
-        text: {
-          fr: "Optimisation bonus : minimisez les quêtes secondaires avant dimanche pour profiter du bonus de +10% de Renommée de la Foire de SombreLune",
-          en: "Crafters/min-maxers: minimize side quests before Sunday to gain DMF's 10% Renown bonus",
         },
       },
     ],
@@ -220,10 +219,6 @@ export const weeklyPhases: WeeklyPhase[] = [
         text: {
           fr: "Monter la Renommée de La Singularité à rang 7 → trinket Champion 1/6 gratuit",
           en: "The Singularity renown to rank 7 → free 1/6 Champion trinket",
-        },
-        note: {
-          fr: "Utilisez le Chapeau de la Foire de SombreLune (10 tickets chez Gelvas Grimegate, +10% réputation) pour aller plus vite",
-          en: "Use the Darkmoon Top Hat (10 tickets from Gelvas Grimegate, +10% reputation) to speed this up",
         },
       },
       {
@@ -303,13 +298,6 @@ export const weeklyPhases: WeeklyPhase[] = [
       en: "Do not spend any Crests",
     },
     items: [
-      {
-        id: "ps2-dmf-renown",
-        text: {
-          fr: "Profitez du buff de la Foire de SombreLune pour améliorer la Renommée si vous êtes artisan",
-          en: "Use Darkmoon Faire buff to raise Renown if you're a crafter",
-        },
-      },
       {
         id: "ps2-delves",
         text: {
@@ -525,8 +513,8 @@ export const weeklyPhases: WeeklyPhase[] = [
       {
         id: "s1w3-craft-weapon",
         text: {
-          fr: "Crafter une arme Mythique 2M (5/6 285) avec 60 écus Mythique",
-          en: "Craft a 2H Mythic weapon (5/6 285) for 60 Myth Crests",
+          fr: "Crafter une arme 2M Mythique (5/6 285) avec 2 éclats et 80 écus Mythiques",
+          en: "Craft a 2H Mythic weapon (5/6 285) using 2 sparks and 80 Mythic Crests",
         },
       },
       {
